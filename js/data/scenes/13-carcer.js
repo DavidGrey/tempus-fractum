@@ -6,6 +6,7 @@
 //   gate           Chapter II: the gate guard
 //   gate-emperor   Chapter II: "Imperator sum!"
 //   forum          Chapter III: the market (Iulia and Lucius call the soldiers)
+//   forum-confessed Chapter III: "Fur sum!" (I am a thief!) at the pickpocket
 //   domus          Chapter V: Aurelius decides you stole his ring
 //   curia          Chapter VI: Cornelius loses patience
 //   treason        Chapter VI: "Imperium peto!"
@@ -33,6 +34,10 @@ export default {
         {
           if: { choice: { jailedFrom: 'forum' } },
           narration: 'The watchmen drag you out of the Forum, past a crowd of jeering shoppers, and down the worn steps of the city prison.',
+        },
+        {
+          if: { choice: { jailedFrom: 'forum-confessed' } },
+          narration: '“Fur sum” doesn’t mean “Thief!” It means “I am a thief!” The soldiers are very happy to take you at your word. To shout “Stop, thief!”, say “Siste, fur!”',
         },
         {
           if: { choice: { jailedFrom: 'domus' } },

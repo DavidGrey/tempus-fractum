@@ -110,6 +110,8 @@
  *
  * @typedef {Object} Choice
  * @property {string} [say]
+ * @property {boolean} [fatal]    With `strike`: an instant game over. The mistake is recorded for the
+ *   review, and `next` (which should lead to a defeat) is followed even if the meter ran out.
  * @property {string} [meaning]    English for a `say` line; shown in the game-over review when it was a wrong answer.
  * @property {{latin?: string, translation?: string, vocab?: Array<[string, string]>}} [review]
  *   What the game-over review shows for this mistake, instead of the current node's line.

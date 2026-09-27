@@ -371,6 +371,8 @@ export default {
       onEnter: { removeItems: 'denarii', setFlags: 'pickpocketed' },
       choices: [
         { say: 'Siste, fur!', next: 'caught' },
+        // Instant game over: "I am a thief!" instead of "Stop, thief!"
+        { say: 'Fur sum!', meaning: 'I am a thief!', strike: 'market', fatal: true, next: 'confessed' },
         { action: 'Shout “Stop, thief!”', next: 'not_understood' },
         { action: 'Chase him', next: 'chase' },
       ],
@@ -385,6 +387,18 @@ export default {
       vocab: [['ignosce', 'forgive me!'], ['cibum valde cupio', 'I really want food']],
       onEnter: { addItems: 'denarii', setFlags: ['caughtMarcus', 'knowsMarcusName'] },
       next: 'boy',
+    },
+
+    confessed: {
+      character: null,
+      speaker: 'crowd',
+      narration: 'The whole Forum goes quiet. Everyone turns and stares at you. A woman clutches her purse. Somewhere in the crowd, the boy with your coins starts to laugh.',
+      latin: 'Tu fur es? Milites! Milites!',
+      translation: 'You’re a thief? Soldiers! Soldiers!',
+      vocab: [['tu… es', 'you are'], ['fur', 'thief'], ['milites', 'soldiers']],
+      onEnter: { recordChoice: { jailedFrom: 'forum-confessed' } },
+      continueText: 'Get dragged away',
+      next: { scene: 'carcer' },
     },
 
     not_understood: {

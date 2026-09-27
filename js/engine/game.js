@@ -205,7 +205,8 @@ export class Game {
 
     const notes = applyEffects(choice.effects, state);
     const outOfPatience = this.recordStrike(choice);
-    this.goTo(outOfPatience ?? choice.next, notes);
+    // A `fatal` choice goes to its own game-over scene even if it also emptied the meter.
+    this.goTo(choice.fatal ? choice.next : outOfPatience ?? choice.next, notes);
   }
 
   // ── Patience (strikes) ───────────────────────────────────────────────────

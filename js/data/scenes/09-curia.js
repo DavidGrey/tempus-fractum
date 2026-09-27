@@ -108,7 +108,7 @@ export default {
         { say: 'Machina mea fracta est.', next: 'machine' },
         { say: 'Fabros imperatoris peto.', effects: { trust: { senator: 1 } }, next: 'bold' },
         { say: 'Imperator amicus meus est.', meaning: 'The emperor is my friend.', once: true, strike: 'senator', next: 'not_friend' },
-        { say: 'Imperium peto!', meaning: 'I am seeking supreme power!', strike: 'senator', next: 'treason' },
+        { say: 'Imperium peto!', meaning: 'I am seeking supreme power!', strike: 'senator', fatal: true, next: 'treason' },
       ],
     },
 
