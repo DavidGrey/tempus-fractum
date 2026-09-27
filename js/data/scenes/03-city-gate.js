@@ -29,15 +29,6 @@ export default {
   character: 'guard',
   patience: [{ npc: 'guard', max: 3, fail: 'arrest' }],
 
-  props: [
-    {
-      id: 'dog',
-      image: 'assets/objects/guard-dog.webp',
-      label: 'Guard dog',
-      position: { left: '6%', bottom: '31.5%', width: '19%' },
-    },
-  ],
-
   start: 'approach',
 
   nodes: {
@@ -92,7 +83,6 @@ export default {
 
     dog_look: {
       character: null,
-      highlight: 'dog',
       narration: 'The dog is the size of a small pony. It watches you with small, suspicious eyes and gives a low growl.',
       variants: [
         {
@@ -206,7 +196,6 @@ export default {
 
     claims_dog: {
       speaker: 'guard',
-      highlight: 'dog',
       narration: 'The soldier points at the enormous dog. The dog shows its teeth.',
       latin: 'Canis? Ecce, canis verus! Timesne?',
       translation: 'A dog? Look, a real dog! Are you scared?',
@@ -414,7 +403,6 @@ export default {
     bone_chaos: {
       speaker: 'guard',
       pose: 'blocking',
-      highlight: 'dog',
       narration: [
         'You toss the bone. The dog lunges for it, the chain snaps tight, and the soldier is yanked off his feet.',
         'While he wrestles with the dog, you slip through the gate.',

@@ -23,7 +23,7 @@ Style: historically grounded Ancient Rome, painted illustration, warm natural co
 | `aula.webp` | Chapter VIII. The emperor's throne room: coloured marble, gilded ceiling, towering purple curtains, a raised throne at the far end. Right third fairly clear (the emperor stands there). |
 | `carcer.webp` | Game over, Chapters II–VII. A dark Roman prison cell: rough stone walls, a small barred window high up, straw on the floor, a clay water jug, chains on the wall. Gloomy but not gory. Right third fairly clear. |
 | `colosseum.webp` | Game over, Chapter VIII. The Colosseum seen from the arena floor: sand, towering tiers packed with a roaring crowd, the emperor's box. Harsh sunlight. Right third fairly clear (the lion stands there). |
-| `city-gate.webp` | Chapter II. A great stone gate in Rome's city wall, seen from the road outside. Leave the lower-left fairly plain (the guard dog sits there) and the right third uncluttered (the guard stands there). |
+| `city-gate.webp` | Chapter II. A great stone gate in Rome's city wall, seen from the road outside. The chained guard dog is painted in, up on the ledge left of the arch (clear of the dialogue box). Keep the right third uncluttered (the guard stands there). |
 
 ## Characters (`characters/`): transparent PNG, full or knee-length figure, roughly 1000×2000
 Characters stand on the right side of the screen, bottom-aligned.
@@ -68,7 +68,6 @@ Characters stand on the right side of the screen, bottom-aligned.
 |---|---|
 | `time-machine-broken.webp` | Scene prop, about 4:3. Door hanging crooked, bent frame. |
 | `time-machine-repaired.webp` | Epilogue scene prop, about 4:3. The same time machine as `time-machine-broken.webp`, fully repaired: door straight and closed, a shiny new bronze hinge, same angle. |
-| `guard-dog.webp` | Scene prop, about 4:3. Huge mastiff-type dog lying or sitting, chained, watchful. |
 | `broken-hinge.webp` | Bag icon, square |
 | `bread.webp` | Bag icon, square |
 | `bone.webp` | Bag icon, square |
