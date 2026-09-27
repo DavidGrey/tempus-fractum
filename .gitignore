@@ -1,0 +1,3 @@
+.DS_Store
+# Full-size PNG originals (the game uses the compressed .webp copies in assets/)
+art-originals/

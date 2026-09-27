@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tempus Fractum: A Latin Adventure</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <div id="app" class="app is-title">
+
+    <!-- Scene artwork -->
+    <main id="stage" class="stage" aria-hidden="true">
+      <div class="stage__bg"></div>
+      <div class="stage__props"></div>
+      <div class="stage__character"></div>
+      <div class="stage__vignette"></div>
+    </main>
+
+    <!-- Top bar -->
+    <header id="hud" class="hud">
+      <div class="hud__chapter" data-ref="chapter">
+        <span class="hud__numeral" data-ref="numeral"></span>
+        <span class="hud__latin" lang="la" data-ref="latin"></span>
+        <span class="hud__english" data-ref="english"></span>
+      </div>
+      <nav class="hud__actions">
+        <button class="hud-button" type="button" data-ref="inventory" title="Your bag (I)">
+          <span lang="la">Sacculus</span><span class="hud-button__en">Bag</span>
+          <span class="badge" data-ref="count" hidden>0</span>
+        </button>
+        <button class="hud-button" type="button" data-ref="menu" title="Menu (Esc)">Menu</button>
+      </nav>
+    </header>
+
+    <!-- Dialogue panel -->
+    <section id="dialogue" class="dialogue" aria-live="polite">
+      <div class="nameplate" data-ref="nameplate">
+        <span class="nameplate__name" lang="la" data-ref="name"></span>
+        <span class="nameplate__role" data-ref="role"></span>
+        <span class="patience" data-ref="patience" hidden></span>
+      </div>
+      <div class="dialogue__text" data-ref="text">
+        <p class="said" data-ref="said"></p>
+        <div class="narration" data-ref="narration"></div>
+        <p class="latin" lang="la" data-ref="latin"></p>
+        <button class="hint-toggle" type="button" data-ref="hintToggle" aria-expanded="false">
+          <span lang="la">Quid significat?</span> <span class="hint-toggle__en">Hint (H)</span>
+        </button>
+        <div class="hint" data-ref="hint" hidden>
+          <p class="hint__translation" data-ref="translation"></p>
+          <dl class="hint__vocab" data-ref="vocab"></dl>
+        </div>
+      </div>
+      <ol id="choices" class="choices" aria-label="Your response"></ol>
+    </section>
+
+    <!-- Bag drawer -->
+    <div id="drawer-backdrop" class="drawer-backdrop" hidden></div>
+    <aside id="inventory" class="drawer" aria-label="Your bag">
+      <header class="drawer__header">
+        <h2 class="drawer__title"><span lang="la">Sacculus</span> <span class="drawer__en">Your bag</span></h2>
+        <button class="icon-button" type="button" data-ref="close" aria-label="Close bag">✕</button>
+      </header>
+      <ul class="inventory__list" data-ref="list"></ul>
+    </aside>
+
+    <div id="toasts" class="toasts" aria-live="polite"></div>
+
+    <!-- Overlays -->
+    <div id="ending" class="overlay" hidden></div>
+    <div id="menu" class="overlay" hidden></div>
+
+    <div id="title" class="overlay overlay--title" hidden>
+      <div class="title-screen__bg" data-ref="bg"></div>
+      <div class="title-screen">
+        <p class="title-screen__kicker" data-ref="kicker"></p>
+        <h1 class="title-screen__name" lang="la" data-ref="name"></h1>
+        <p class="title-screen__tagline" data-ref="tagline"></p>
+        <div class="title-screen__actions">
+          <button class="btn btn--primary" type="button" data-ref="newGame">Incipe <small>New game</small></button>
+          <button class="btn" type="button" data-ref="continue" hidden>Perge <small>Continue</small></button>
+        </div>
+        <p class="title-screen__help">
+          Click a response or press <kbd>1</kbd>–<kbd>9</kbd> · <kbd>H</kbd> hint · <kbd>I</kbd> bag · <kbd>Esc</kbd> menu
+        </p>
+      </div>
+    </div>
+
+    <pre id="debug" class="debug" hidden></pre>
+  </div>
+</body>
+</html>
