@@ -276,9 +276,9 @@ export default {
     emperor_letter: {
       speaker: 'aurelius',
       pose: 'delighted',
-      latin: 'Ad imperatorem? Ha! Ego imperatorem non cognosco!',
-      translation: 'To the emperor? Ha! I don’t know the emperor!',
-      vocab: [['ad imperatorem', 'to the emperor'], ['cognosco', 'I know (a person)']],
+      latin: 'Ad imperatorem? Ha! Imperator me non cognoscit!',
+      translation: 'To the emperor? Ha! The emperor wouldn’t even recognise me!',
+      vocab: [['ad imperatorem', 'to the emperor'], ['cognoscit', 'recognises, knows (a person)']],
       choicesFrom: 'reward',
     },
 

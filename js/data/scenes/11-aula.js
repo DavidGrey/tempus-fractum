@@ -239,7 +239,7 @@ export default {
       narration: 'The emperor stares at you. Then a slow, delighted smile spreads across his face.',
       latin: 'Duo milia annorum?! … Optime!',
       translation: 'Two thousand years?! … Excellent!',
-      vocab: [['memorabitur', 'will be remembered (future passive)'], ['columna', 'column'], ['post duo milia annorum', 'after two thousand years'], ['stabit', 'will stand (future)']],
+      vocab: [['memorabitur', 'will be spoken of, remembered (future passive)'], ['columna', 'column'], ['post duo milia annorum', 'after two thousand years'], ['stabit', 'will stand (future)']],
       onEnter: { setFlags: 'toldColumn' },
       next: 'request',
     },

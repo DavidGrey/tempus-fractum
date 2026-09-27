@@ -95,9 +95,9 @@ export default {
       speaker: 'smith',
       pose: 'laughing',
       highlight: 'machine',
-      latin: 'Ecce! Cardo novus. Porta clauditur. Machina refecta est! Iter tuum longum et difficile erat.',
+      latin: 'Ecce! Cardo novus. Ianua clauditur. Machina refecta est! Iter tuum longum et difficile erat.',
       translation: 'Look! A new hinge. The door closes. The machine is repaired! Your journey was long and difficult.',
-      vocab: [['iter tuum', 'your journey'], ['longum et difficile', 'long and difficult'], ['cardo novus', 'a new hinge'], ['clauditur', 'closes, is closed (passive)'], ['refecta est', 'has been repaired (perfect passive)']],
+      vocab: [['iter tuum', 'your journey'], ['longum et difficile', 'long and difficult'], ['cardo novus', 'a new hinge'], ['ianua', 'door'], ['clauditur', 'closes, is closed (passive)'], ['refecta est', 'has been repaired (perfect passive)']],
       next: 'goodbye',
     },
 

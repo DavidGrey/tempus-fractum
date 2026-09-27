@@ -415,9 +415,9 @@ export default {
           if: { flags: 'robbedByMarcus' },
           pose: 'grinning',
           narration: 'It’s the boy who stole your coins! He is eating a sausage, probably bought with your money.',
-          latin: 'Eheu… Salve. Denarios tuos non habeo… iam.',
-          translation: 'Uh-oh… Hello. I don’t have your denarii… anymore.',
-          vocab: [['eheu', 'uh-oh, alas'], ['tuos', 'your'], ['iam', 'anymore, now']],
+          latin: 'Eheu… Salve. Denarios tuos… iam non habeo.',
+          translation: 'Uh-oh… Hello. Your denarii… I don’t have them anymore.',
+          vocab: [['eheu', 'uh-oh, alas'], ['tuos', 'your'], ['iam non', 'no longer, not anymore']],
           choices: [
             { say: 'Fur es!', next: 'boy_guilty' },
             { say: 'Ubi est faber?', next: 'boy_guilty' },

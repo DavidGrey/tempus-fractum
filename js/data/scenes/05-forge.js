@@ -159,7 +159,7 @@ export default {
       narration: 'He stops. He takes the hinge in his huge, scarred fingers and turns it over and over in the firelight.',
       latin: 'Mirum! Hoc metallum est durum… et leve. Quis hoc fecit?',
       translation: 'Amazing! This metal is hard… and light. Who made this?',
-      vocab: [['mirum', 'amazing'], ['hoc', 'this'], ['durum', 'hard'], ['leve', 'light (not heavy)'], ['fecit', 'made (perfect tense of facit)']],
+      vocab: [['mirum', 'amazing'], ['hoc', 'this'], ['durum', 'hard'], ['leve', 'light (not heavy)'], ['fecit', 'made (perfect tense of facere)']],
       choices: [
         { say: 'Nescio.', next: 'where' },
         { say: 'Ego feci!', strike: 'smith', next: 'lie' },
@@ -220,9 +220,9 @@ export default {
     verdict: {
       speaker: 'smith',
       narration: 'He sets the hinge down gently and wipes his hands on his leather apron.',
-      latin: 'Opus magnum et difficile est! Unus faber non satis est. Quinque fabri necesse sunt.',
+      latin: 'Opus magnum et difficile est! Unus faber non satis est. Quinque fabri necessarii sunt.',
       translation: 'It’s a big, difficult job! One smith isn’t enough. Five smiths are needed.',
-      vocab: [['opus', 'job, work'], ['difficile', 'difficult'], ['unus', 'one'], ['satis', 'enough'], ['quinque', 'five'], ['necesse sunt', 'are needed']],
+      vocab: [['opus', 'job, work'], ['difficile', 'difficult'], ['unus', 'one'], ['satis', 'enough'], ['quinque', 'five'], ['necessarii sunt', 'are needed, are necessary']],
       next: 'cannot_leave',
     },
 
@@ -302,9 +302,9 @@ export default {
     token: {
       speaker: 'smith',
       narration: 'He digs in a pouch and presses a small bronze disc into your hand. It is stamped with a hammer.',
-      latin: 'Ecce, tessera mea. Servi Aurelii me noscunt.',
-      translation: 'Here, my token. Aurelius’s household knows me.',
-      vocab: [['tessera', 'token'], ['servi', 'household slaves, servants'], ['noscunt', 'know, recognise']],
+      latin: 'Ecce, tessera mea. Servi Aurelii amici mei sunt.',
+      translation: 'Here, my token. Aurelius’s household are my friends.',
+      vocab: [['tessera', 'token'], ['servi', 'household slaves, servants'], ['amici mei', 'my friends']],
       onEnter: { addItems: 'smith-token' },
       next: 'to_aurelius',
     },
