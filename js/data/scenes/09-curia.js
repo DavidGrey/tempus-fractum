@@ -107,8 +107,8 @@ export default {
       choices: [
         { say: 'Machina mea fracta est.', next: 'machine' },
         { say: 'Fabros imperatoris peto.', effects: { trust: { senator: 1 } }, next: 'bold' },
-        { say: 'Imperator amicus meus est.', once: true, strike: 'senator', next: 'not_friend' },
-        { say: 'Imperium peto!', strike: 'senator', next: 'treason' },
+        { say: 'Imperator amicus meus est.', meaning: 'The emperor is my friend.', once: true, strike: 'senator', next: 'not_friend' },
+        { say: 'Imperium peto!', meaning: 'I am seeking supreme power!', strike: 'senator', next: 'treason' },
       ],
     },
 
@@ -120,9 +120,9 @@ export default {
       vocab: [['mirum', 'strange, amazing'], ['ab imperatore', 'from the emperor'], ['petes', 'you will ask for (future)']],
       choices: [
         { say: 'Quinque fabros petam.', effects: { trust: { senator: 1 } }, next: 'good_answer' },
-        { say: 'Pecuniam petam.', once: true, strike: 'senator', next: 'ask_money' },
-        { say: 'Nihil petam.', once: true, strike: 'senator', next: 'ask_nothing' },
-        { say: 'Palatium petam!', once: true, strike: 'senator', next: 'ask_palace' },
+        { say: 'Pecuniam petam.', meaning: 'I will ask for money.', once: true, strike: 'senator', next: 'ask_money' },
+        { say: 'Nihil petam.', meaning: 'I will ask for nothing.', once: true, strike: 'senator', next: 'ask_nothing' },
+        { say: 'Palatium petam!', meaning: 'I will ask for the palace!', once: true, strike: 'senator', next: 'ask_palace' },
       ],
     },
 
@@ -162,8 +162,8 @@ export default {
       vocab: [['imperatoris', 'of the emperor'], ['audax', 'bold'], ['quot?', 'how many?'], ['petes', 'you will ask for (future)']],
       choices: [
         { say: 'Quinque fabros petam.', effects: { trust: { senator: 1 } }, next: 'good_answer' },
-        { say: 'Centum fabros petam!', once: true, strike: 'senator', next: 'hundred' },
-        { say: 'Unum fabrum petam.', once: true, strike: 'senator', next: 'one' },
+        { say: 'Centum fabros petam!', meaning: 'I will ask for a hundred smiths!', once: true, strike: 'senator', next: 'hundred' },
+        { say: 'Unum fabrum petam.', meaning: 'I will ask for one smith.', once: true, strike: 'senator', next: 'one' },
       ],
     },
 
@@ -240,7 +240,7 @@ export default {
       choices: [
         { say: 'Longe, longe…', next: 'far' },
         { say: 'In futuro!', next: 'prophet' },
-        { say: 'Nescio.', strike: 'senator', next: 'dont_know' },
+        { say: 'Nescio.', meaning: 'I don’t know.', strike: 'senator', next: 'dont_know' },
       ],
     },
 
@@ -322,8 +322,8 @@ export default {
       ],
       choices: [
         { say: 'Ave, Imperator!', effects: { trust: { senator: 1 } }, next: 'ave' },
-        { say: 'Salve, amice!', once: true, strike: 'senator', next: 'too_familiar' },
-        { say: 'Heus tu!', once: true, strike: 'senator', next: 'hey_you' },
+        { say: 'Salve, amice!', meaning: 'Hello, friend!', once: true, strike: 'senator', next: 'too_familiar' },
+        { say: 'Heus tu!', meaning: 'Hey, you!', once: true, strike: 'senator', next: 'hey_you' },
         { action: 'Bow very low and say nothing', once: true, strike: 'senator', next: 'silent' },
       ],
     },

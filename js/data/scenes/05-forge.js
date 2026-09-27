@@ -74,8 +74,8 @@ export default {
         },
       ],
       choices: [
-        { say: 'Auxilium tuum volo.', once: true, strike: 'smith', next: 'busy_help' },
-        { say: 'Machina mea est fracta.', once: true, strike: 'smith', next: 'busy_broken' },
+        { say: 'Auxilium tuum volo.', meaning: 'I want your help.', once: true, strike: 'smith', next: 'busy_help' },
+        { say: 'Machina mea est fracta.', meaning: 'My machine is broken.', once: true, strike: 'smith', next: 'busy_broken' },
         { action: 'Show him the broken hinge', if: { hasItems: 'broken-hinge' }, next: 'examine' },
         { action: 'Wait patiently', once: true, next: 'wait' },
         { action: 'Pump the bellows for him', once: true, next: 'bellows' },
@@ -162,7 +162,7 @@ export default {
       vocab: [['mirum', 'amazing'], ['hoc', 'this'], ['durum', 'hard'], ['leve', 'light (not heavy)'], ['fecit', 'made (perfect tense of facere)']],
       choices: [
         { say: 'Nescio.', next: 'where' },
-        { say: 'Ego feci!', strike: 'smith', next: 'lie' },
+        { say: 'Ego feci!', meaning: 'I made it!', strike: 'smith', next: 'lie' },
         { say: 'Faber in patria mea.', next: 'homeland' },
       ],
     },

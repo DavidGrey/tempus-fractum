@@ -94,7 +94,7 @@ export default {
       vocab: [['dedit', 'gave (perfect)'], ['scriptum est', 'it is written'], ['mirus', 'strange'], ['hospes', 'guest'], ['tune es?', 'is it you?']],
       choices: [
         { say: 'Ita, ego sum.', next: 'search' },
-        { say: 'Minime!', once: true, strike: 'praetorian', next: 'not_me' },
+        { say: 'Minime!', meaning: 'Not at all! (No!)', once: true, strike: 'praetorian', next: 'not_me' },
       ],
     },
 
@@ -163,8 +163,8 @@ export default {
       vocab: [['metallum', 'metal'], ['hoc', 'this']],
       choices: [
         { say: 'Cardo fractus est.', next: 'hinge_ok' },
-        { say: 'Gladius est!', once: true, strike: 'praetorian', next: 'hinge_sword' },
-        { say: 'Nescio.', once: true, strike: 'praetorian', next: 'hinge_nescio' },
+        { say: 'Gladius est!', meaning: 'It’s a sword!', once: true, strike: 'praetorian', next: 'hinge_sword' },
+        { say: 'Nescio.', meaning: 'I don’t know.', once: true, strike: 'praetorian', next: 'hinge_nescio' },
       ],
       next: 'search_bone',
     },
@@ -207,7 +207,7 @@ export default {
       translation: 'And… a bone? Why do you have a bone?',
       vocab: [['os', 'bone'], ['cur?', 'why?']],
       choices: [
-        { say: 'Canis sum.', strike: 'praetorian', next: 'bone_dog' },
+        { say: 'Canis sum.', meaning: 'I am a dog.', strike: 'praetorian', next: 'bone_dog' },
         { say: 'Donum est.', next: 'bone_gift' },
       ],
       next: 'questions',
@@ -240,8 +240,8 @@ export default {
       vocab: [['dic mihi', 'tell me'], ['misit', 'sent (perfect)']],
       choices: [
         { say: 'Cornelius me misit.', effects: { trust: { praetorian: 1 } }, next: 'sent_right' },
-        { say: 'Aurelius me misit.', effects: { trust: { praetorian: -1 } }, strike: 'praetorian', next: 'sent_aurelius' },
-        { say: 'Imperator me misit!', effects: { trust: { praetorian: -1 } }, strike: 'praetorian', next: 'sent_liar' },
+        { say: 'Aurelius me misit.', meaning: 'Aurelius sent me.', effects: { trust: { praetorian: -1 } }, strike: 'praetorian', next: 'sent_aurelius' },
+        { say: 'Imperator me misit!', meaning: 'The emperor sent me!', effects: { trust: { praetorian: -1 } }, strike: 'praetorian', next: 'sent_liar' },
       ],
     },
 
@@ -279,9 +279,9 @@ export default {
       vocab: [['dixit', 'said (perfect)'], ['invenit', 'found (perfect)'], ['invenisti', 'you found (perfect)']],
       choices: [
         { say: 'In cavea picae.', effects: { trust: { praetorian: 1 } }, next: 'ring_right' },
-        { say: 'In culina.', effects: { trust: { praetorian: -1 } }, strike: 'praetorian', next: 'ring_wrong' },
-        { say: 'In balneis.', effects: { trust: { praetorian: -1 } }, strike: 'praetorian', next: 'ring_wrong' },
-        { say: 'In foro.', effects: { trust: { praetorian: -1 } }, strike: 'praetorian', next: 'ring_wrong' },
+        { say: 'In culina.', meaning: 'In the kitchen.', effects: { trust: { praetorian: -1 } }, strike: 'praetorian', next: 'ring_wrong' },
+        { say: 'In balneis.', meaning: 'In the baths.', effects: { trust: { praetorian: -1 } }, strike: 'praetorian', next: 'ring_wrong' },
+        { say: 'In foro.', meaning: 'In the Forum.', effects: { trust: { praetorian: -1 } }, strike: 'praetorian', next: 'ring_wrong' },
       ],
       next: 'verdict',
     },
@@ -364,8 +364,8 @@ export default {
       vocab: [['responsum', 'answer'], ['imperatori', 'to the emperor'], ['dices', 'you will say (future)']],
       choices: [
         { say: 'Ave, Imperator!', next: 'plead_ok' },
-        { say: 'Salve, amice!', strike: 'praetorian', next: 'turned_away' },
-        { say: 'Heus tu!', strike: 'praetorian', next: 'turned_away' },
+        { say: 'Salve, amice!', meaning: 'Hello, friend!', strike: 'praetorian', next: 'turned_away' },
+        { say: 'Heus tu!', meaning: 'Hey, you!', strike: 'praetorian', next: 'turned_away' },
       ],
     },
 

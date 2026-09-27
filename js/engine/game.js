@@ -229,6 +229,7 @@ export class Game {
       translation: node.translation ?? null,
       vocab: node.vocab ?? [],
       said: choice.say ?? choice.action,
+      saidMeaning: choice.say ? choice.meaning ?? null : null,
     });
     const rule = this.patienceRule(choice.strike);
     return rule && state.strikes[choice.strike] >= rule.max ? rule.fail : null;

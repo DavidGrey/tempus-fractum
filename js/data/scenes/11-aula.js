@@ -64,10 +64,10 @@ export default {
       narration: 'The whole hall falls silent. Every eye is on you. This is the moment Cornelius warned you about.',
       choices: [
         { say: 'Ave, Imperator!', effects: { trust: { emperor: 2 } }, next: 'greeted' },
-        { say: 'Salve!', strike: 'emperor', next: 'plain_salve' },
-        { say: 'Salve, amice!', effects: { trust: { emperor: -1 } }, strike: 'emperor', next: 'too_familiar' },
+        { say: 'Salve!', meaning: 'Hello!', strike: 'emperor', next: 'plain_salve' },
+        { say: 'Salve, amice!', meaning: 'Hello, friend!', effects: { trust: { emperor: -1 } }, strike: 'emperor', next: 'too_familiar' },
         { action: 'Bow low and say nothing', effects: { trust: { emperor: -1 } }, strike: 'emperor', next: 'silent' },
-        { say: 'Heus tu!', strike: 'emperor', next: 'hey_you' },
+        { say: 'Heus tu!', meaning: 'Hey, you!', strike: 'emperor', next: 'hey_you' },
       ],
     },
 
@@ -142,8 +142,8 @@ export default {
       vocab: [['narravit', 'told (perfect)'], ['de te', 'about you'], ['fabulam', 'story'], ['audire', 'to hear'], ['accidit', 'happened (perfect)']],
       choices: [
         { say: 'Machina mea fracta est, et Romam veni.', effects: { trust: { emperor: 1 } }, next: 'tell_story' },
-        { say: 'Canis sum.', strike: 'emperor', next: 'dog_finale' },
-        { say: 'Nihil accidit.', effects: { trust: { emperor: -1 } }, strike: 'emperor', next: 'nothing_happened' },
+        { say: 'Canis sum.', meaning: 'I am a dog.', strike: 'emperor', next: 'dog_finale' },
+        { say: 'Nihil accidit.', meaning: 'Nothing happened.', effects: { trust: { emperor: -1 } }, strike: 'emperor', next: 'nothing_happened' },
       ],
     },
 
@@ -215,8 +215,8 @@ export default {
           next: 'gift_hinge',
         },
         { say: 'Gratias maximas tibi agam!', next: 'thanks' },
-        { say: 'Pecuniam tibi dabo!', if: { hasItems: 'denarii' }, effects: { trust: { emperor: -1 } }, strike: 'emperor', next: 'money' },
-        { say: 'Nihil habeo.', effects: { trust: { emperor: -1 } }, strike: 'emperor', next: 'nothing' },
+        { say: 'Pecuniam tibi dabo!', meaning: 'I will give you money!', if: { hasItems: 'denarii' }, effects: { trust: { emperor: -1 } }, strike: 'emperor', next: 'money' },
+        { say: 'Nihil habeo.', meaning: 'I have nothing.', effects: { trust: { emperor: -1 } }, strike: 'emperor', next: 'nothing' },
       ],
     },
 
@@ -291,7 +291,7 @@ export default {
         { say: 'Romae manere volo.', next: 'stay' },
         // Only welcome once he likes you; before that it's a strike.
         { say: 'Veni mecum in futurum!', if: { minTrust: { emperor: 4 } }, once: true, next: 'come_with_me' },
-        { say: 'Veni mecum in futurum!', if: { maxTrust: { emperor: 3 } }, once: true, strike: 'emperor', next: 'come_with_me' },
+        { say: 'Veni mecum in futurum!', meaning: 'Come with me into the future!', if: { maxTrust: { emperor: 3 } }, once: true, strike: 'emperor', next: 'come_with_me' },
       ],
     },
 
@@ -317,8 +317,8 @@ export default {
       choices: [
         { action: 'Look to Senator Cornelius', if: { choice: { palaceAccess: 'sealed' } }, next: 'cornelius_vouches' },
         { say: 'Aurelius et Titus mihi credunt.', next: 'granted' },
-        { say: 'Aurelius et Titus me oderunt.', strike: 'emperor', next: 'dismissed' },
-        { say: 'Aurelius et Titus pisces sunt.', strike: 'emperor', next: 'dismissed' },
+        { say: 'Aurelius et Titus me oderunt.', meaning: 'Aurelius and Titus hate me.', strike: 'emperor', next: 'dismissed' },
+        { say: 'Aurelius et Titus pisces sunt.', meaning: 'Aurelius and Titus are fish.', strike: 'emperor', next: 'dismissed' },
       ],
     },
 

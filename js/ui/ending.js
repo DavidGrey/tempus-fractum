@@ -25,7 +25,8 @@ function review(mistakes) {
       el('li', { class: 'review__item' },
         m.latin && el('p', { class: 'review__latin', lang: 'la' }, m.latin),
         m.translation && el('p', { class: 'review__english' }, m.translation),
-        el('p', { class: 'review__said' }, 'You answered: ', el('q', { lang: 'la' }, m.said)),
+        el('p', { class: 'review__said' }, 'You answered: ', el('q', { lang: m.saidMeaning ? 'la' : 'en' }, m.said),
+          m.saidMeaning && el('span', { class: 'review__meaning' }, ` (${m.saidMeaning})`)),
       ))),
     words.size > 0 && el('ul', { class: 'chips review__words' }, ...[...words].slice(0, 8).map(([la, en]) =>
       el('li', { class: 'chip' }, el('span', { lang: 'la' }, la), ` · ${en}`))),

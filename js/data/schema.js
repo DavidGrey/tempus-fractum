@@ -110,6 +110,7 @@
  *
  * @typedef {Object} Choice
  * @property {string} [say]
+ * @property {string} [meaning]    English for a `say` line; shown in the game-over review when it was a wrong answer.
  * @property {string} [action]
  * @property {Target} next           Where the choice leads.
  * @property {Condition} [if]        Only offer the choice when this holds.

@@ -282,8 +282,8 @@ export default {
       choices: [
         { say: 'Ita!', effects: { recordChoice: { watchPrice: 5 } }, next: 'deal' },
         { say: 'Decem!', next: 'haggle' },
-        { say: 'Unum!', effects: { recordChoice: { watchPrice: 1 } }, strike: 'market', next: 'deal_one' },
-        { say: 'Viginti!', strike: 'market', next: 'offended' },
+        { say: 'Unum!', meaning: 'One!', effects: { recordChoice: { watchPrice: 1 } }, strike: 'market', next: 'deal_one' },
+        { say: 'Viginti!', meaning: 'Twenty!', strike: 'market', next: 'offended' },
         { say: 'Minime!', next: 'merchant' },
       ],
     },
@@ -371,7 +371,7 @@ export default {
       onEnter: { removeItems: 'denarii', setFlags: 'pickpocketed' },
       choices: [
         { say: 'Siste, fur!', next: 'caught' },
-        { action: 'Shout “Stop, thief!” in English', next: 'not_understood' },
+        { action: 'Shout “Stop, thief!”', next: 'not_understood' },
         { action: 'Chase him', next: 'chase' },
       ],
     },
