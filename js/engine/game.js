@@ -225,9 +225,9 @@ export class Game {
     const node = this.node;
     state.strikes[choice.strike] = (state.strikes[choice.strike] ?? 0) + 1;
     state.mistakes.push({
-      latin: node.latin ?? null,
-      translation: node.translation ?? null,
-      vocab: node.vocab ?? [],
+      latin: choice.review?.latin ?? node.latin ?? null,
+      translation: choice.review?.translation ?? node.translation ?? null,
+      vocab: choice.review?.vocab ?? node.vocab ?? [],
       said: choice.say ?? choice.action,
       saidMeaning: choice.say ? choice.meaning ?? null : null,
     });

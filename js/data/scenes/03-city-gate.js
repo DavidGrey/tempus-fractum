@@ -63,10 +63,31 @@ export default {
         },
       ],
       choices: [
-        { action: 'Walk up to the gate', next: 'halt' },
+        // Skipping the line costs a seal of patience before you've said a word.
+        {
+          action: 'Walk up to the gate',
+          strike: 'guard',
+          review: {
+            latin: 'Siste! Exspecta! Alii ante te sunt.',
+            translation: 'Stop! Wait! Other people are ahead of you.',
+            vocab: [['exspecta', 'wait!'], ['alii', 'others'], ['ante te', 'ahead of you']],
+          },
+          next: 'cut_line',
+        },
         { action: 'Wait in line and listen', once: true, next: 'line' },
         { action: 'Look at the dog', once: true, next: 'dog_look' },
       ],
+    },
+
+    cut_line: {
+      speaker: 'guard',
+      pose: 'blocking',
+      narration: 'You stride past the line of carts and travellers. People mutter angrily. The soldier steps into your path and plants his spear.',
+      latin: 'Siste! Exspecta! Alii ante te sunt.',
+      translation: 'Stop! Wait! Other people are ahead of you.',
+      vocab: [['siste', 'stop!'], ['exspecta', 'wait!'], ['alii', 'others'], ['ante te', 'ahead of you']],
+      continueText: 'Wait your turn, red-faced',
+      next: 'halt',
     },
 
     dog_look: {

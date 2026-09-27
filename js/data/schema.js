@@ -111,6 +111,9 @@
  * @typedef {Object} Choice
  * @property {string} [say]
  * @property {string} [meaning]    English for a `say` line; shown in the game-over review when it was a wrong answer.
+ * @property {{latin?: string, translation?: string, vocab?: Array<[string, string]>}} [review]
+ *   What the game-over review shows for this mistake, instead of the current node's line.
+ *   Useful for a bad `action` (e.g. cutting the line) whose lesson comes on the next node.
  * @property {string} [action]
  * @property {Target} next           Where the choice leads.
  * @property {Condition} [if]        Only offer the choice when this holds.
