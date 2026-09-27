@@ -10,7 +10,7 @@
 // Endings: home (success), stay in Rome after all (success), and, reached from the
 // throne room, the emperor coming with you (comic).
 
-const machine = { image: 'assets/objects/time-machine-broken.webp', label: 'Time machine (broken)', position: { left: '5%', bottom: '34%', width: '28%' } };
+const machine = { image: 'assets/objects/time-machine-broken.webp', label: 'Time machine (broken)', position: { left: '5%', bottom: '36.5%', width: '28%' } };
 
 /** @type {import('../schema.js').Scene} */
 export default {

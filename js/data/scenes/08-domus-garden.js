@@ -20,7 +20,7 @@ export default {
       id: 'magpie',
       image: 'assets/objects/magpie-cage.webp',
       label: 'Magpie in a cage',
-      position: { left: '6%', bottom: '34%', width: '17%' },
+      position: { left: '6%', bottom: '36.5%', width: '17%' },
     },
   ],
 

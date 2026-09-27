@@ -12,8 +12,12 @@
 
     <!-- Scene artwork -->
     <main id="stage" class="stage" aria-hidden="true">
-      <div class="stage__bg"></div>
-      <div class="stage__props"></div>
+      <!-- The painting and the objects on it share one 3:2 canvas, so objects stay put on
+           the painting whatever the screen's shape. -->
+      <div class="stage__canvas">
+        <div class="stage__bg"></div>
+        <div class="stage__props"></div>
+      </div>
       <div class="stage__character"></div>
       <div class="stage__vignette"></div>
     </main>

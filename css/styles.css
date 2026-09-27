@@ -68,6 +68,18 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 .stage { position: absolute; inset: 0; }
 
+/* Every background is 3:2. This canvas keeps that shape and covers the screen (like
+   background-size: cover), so props positioned on it stay on the same spot of the painting
+   on any screen shape: widescreen, 16:10, 4:3, or ultrawide. */
+.stage__canvas {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: max(100vw, 150vh);
+  aspect-ratio: 3 / 2;
+  transform: translate(-50%, -50%);
+}
+
 .stage__bg,
 .title-screen__bg {
   position: absolute;
@@ -108,6 +120,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 .stage__props,
 .stage__character { position: absolute; inset: 0; pointer-events: none; }
+.stage__props .placeholder__label { font-size: clamp(0.7rem, 0.9vw, 1.05rem); }
 
 .prop { position: absolute; transition: filter 400ms ease; }
 .prop img { display: block; width: 100%; height: auto; filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.35)); }

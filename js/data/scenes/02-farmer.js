@@ -24,7 +24,7 @@ export default {
       id: 'machine',
       image: 'assets/objects/time-machine-broken.webp',
       label: 'Time machine (broken)',
-      position: { left: '5%', bottom: '34%', width: '28%' },
+      position: { left: '5%', bottom: '36.5%', width: '28%' },
     },
   ],
 

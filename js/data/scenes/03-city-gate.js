@@ -34,7 +34,7 @@ export default {
       id: 'dog',
       image: 'assets/objects/guard-dog.webp',
       label: 'Guard dog',
-      position: { left: '2%', bottom: '28%', width: '19%' },
+      position: { left: '6%', bottom: '31.5%', width: '19%' },
     },
   ],
 

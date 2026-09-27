@@ -59,7 +59,8 @@
  * @property {string} image         e.g. 'assets/objects/time-machine-broken.webp'
  * @property {string} [label]       Shown on the placeholder until art exists.
  * @property {{left?: string, right?: string, bottom?: string, top?: string, width?: string}} position
- *                                  CSS positions as percentages of the screen.
+ *                                  CSS positions as percentages of the background painting
+ *                                  (so the prop stays on the same spot on any screen shape).
  * @property {Condition} [if]       Only draw the prop when this holds.
  */
 
