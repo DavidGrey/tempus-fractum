@@ -68,7 +68,8 @@ export function createDialogue(root, { onHint }) {
     replayAnimation(r.text, 'is-entering');
   }
 
-  // Patientia: one wax seal per remaining strike; lost ones crack.
+  // Patience meter: one gold seal per strike left; lost ones show a red ✕, and a
+  // "−1" pops up the moment one breaks.
   function renderPatience(p) {
     r.patience.hidden = !p;
     if (!p) {
@@ -77,9 +78,10 @@ export function createDialogue(root, { onHint }) {
     }
     const justLost = lastPatience?.npc === p.npc && p.left < lastPatience.left;
     r.patience.replaceChildren(
-      el('span', { class: 'patience__label', lang: 'la' }, 'Patientia'),
+      el('span', { class: 'patience__label' }, 'Patience'),
       ...Array.from({ length: p.max }, (_, i) =>
         el('span', { class: `seal${i < p.left ? '' : ' is-broken'}${justLost && i === p.left ? ' is-breaking' : ''}`, 'aria-hidden': 'true' })),
+      ...(justLost ? [el('span', { class: 'patience__loss', 'aria-hidden': 'true' }, '−1')] : []),
     );
     r.patience.setAttribute('aria-label', `Patience: ${p.left} of ${p.max}`);
     r.patience.classList.toggle('is-low', p.left <= 1);
