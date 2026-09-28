@@ -64,6 +64,7 @@ export const characters = {
     images: {
       default: 'assets/characters/boy.webp',
       grinning: 'assets/characters/boy-grinning.webp',
+      sulking: 'assets/characters/boy-sulking.webp',
     },
   },
 

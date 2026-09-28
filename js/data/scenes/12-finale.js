@@ -212,7 +212,7 @@ export default {
       variants: [
         {
           if: { flags: 'handedOverMarcus' },
-          pose: 'default',
+          pose: 'sulking',
           narration: 'Marcus hangs back at first. Then he shuffles to the front, not quite looking at you. Behind him, Titus, Gaius, and the smiths wait to say goodbye.',
           latin: 'Vale, peregrine. … Tibi ignosco.',
           translation: 'Goodbye, stranger. … I forgive you.',

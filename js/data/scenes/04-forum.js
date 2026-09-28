@@ -417,6 +417,7 @@ export default {
     handed_over: {
       character: 'boy',
       speaker: 'boy',
+      pose: 'sulking',
       narration: 'The baker drops your coins into your hand and hauls the boy off toward two soldiers. Over his shoulder, the boy shouts back at you:',
       latin: 'Minime! Quaeso! … Numquam tibi ignoscam!',
       translation: 'No! Please! … I’ll never forgive you!',
@@ -496,6 +497,7 @@ export default {
         },
         {
           if: { flags: 'handedOverMarcus', notVisited: 'forum.boy' },
+          pose: 'sulking',
           narration: 'The boy is back on the fountain, rubbing a sore ear. The soldiers let him go with a warning. He glares at you.',
           latin: 'Tu! Milites me ceperunt… propter te! Quid quaeris?',
           translation: 'You! The soldiers grabbed me… because of you! What are you looking for?',
@@ -548,7 +550,7 @@ export default {
       variants: [
         {
           if: { flags: 'handedOverMarcus', notVisited: 'forum.boy_deal' },
-          pose: 'default',
+          pose: 'sulking',
           latin: 'Viam scio. Sed pro te nihil gratis facio! Cibum aut denarios da!',
           translation: 'I know the way. But I do nothing for you for free! Give me food or coins!',
           vocab: [['pro te', 'for you'], ['nihil gratis', 'nothing for free'], ['aut', 'or'], ['da', 'give!']],
@@ -596,7 +598,7 @@ export default {
       variants: [
         {
           if: { flags: 'handedOverMarcus' },
-          pose: 'default',
+          pose: 'sulking',
           narration: 'He wolfs it down without a word of thanks.',
           latin: 'Hmph. Veni.',
           translation: 'Hmph. Come on.',

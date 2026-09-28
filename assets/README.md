@@ -45,6 +45,7 @@ Characters stand on the right side of the screen, bottom-aligned.
 | `merchant-amazed.webp` | amazed, staring at something held in his hands |
 | `boy.webp` | default: Marcus, a skinny barefoot street boy, about 11 |
 | `boy-grinning.webp` | cheeky grin |
+| `boy-sulking.webp` | arms crossed, scowling sideways, rubbing a sore ear (after being handed to the soldiers) |
 | `smith.webp` | default: Titus, a huge bearded blacksmith in a leather apron, arms crossed |
 | `smith-working.webp` | hammering at an anvil, not looking up |
 | `smith-examining.webp` | holding a small metal object up to the light, studying it closely |
