@@ -74,7 +74,8 @@ export function createEnding(root, { onRetry, onNewGame, onTitle, onContinue }) 
         ending.subtitle && el('p', { class: 'ending__subtitle' }, ending.subtitle),
         el('div', { class: 'ending__text' }, ...toArray(ending.text).map((t) => el('p', {}, t))),
         isDefeat && review(view.mistakes),
-        type === 'chapter' && view.mistakes.length > 0 && review(view.mistakes, 'You made it, but review these'),
+        (type === 'chapter' || type === 'success' || ending.final) && view.mistakes.length > 0
+          && review(view.mistakes, 'You made it, but review these'),
         !isDefeat && view.inventory.length > 0 && el('div', { class: 'ending__bag' },
           el('p', { class: 'ending__label' }, 'In your bag'),
           el('ul', { class: 'chips' }, ...view.inventory.map((item) =>

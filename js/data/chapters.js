@@ -9,6 +9,7 @@ export const chapters = {
   senator: { numeral: 'VI', latin: 'Senator', english: 'The Senator' },
   palace: { numeral: 'VII', latin: 'Palatium', english: 'The Palace' },
   emperor: { numeral: 'VIII', latin: 'Imperator', english: 'The Emperor' },
-  epilogue: { numeral: 'IX', latin: 'Epilogus', english: 'The Journey Home' },
+  // The epilogue has no quiz of its own, so its endings review Chapter VIII's mistakes.
+  epilogue: { numeral: 'IX', latin: 'Epilogus', english: 'The Journey Home', keepsMistakes: true },
 
 };

@@ -127,7 +127,7 @@ export class Game {
     if (scene.chapter && scene.chapter !== this.state.chapterId) {
       this.state.chapterId = scene.chapter;
       this.state.strikes = {};
-      this.state.mistakes = [];
+      if (!this.content.chapters[scene.chapter]?.keepsMistakes) this.state.mistakes = [];
       saveChapterCheckpoint(cloneState(this.state));
     }
 
