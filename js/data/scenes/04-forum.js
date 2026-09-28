@@ -397,9 +397,9 @@ export default {
       character: 'boy',
       speaker: 'baker',
       narration: 'The baker holds the squirming boy by the collar in one hand and your coins in the other. The boy is skin and bone. He looks at the coins, then at you.',
-      latin: 'Fur parvus! Ecce, denarii tui. Ad milites eum duco?',
+      latin: 'Fur parvus! Ecce, denarii tui. Ad milites eum ducam?',
       translation: 'A little thief! Here are your denarii. Shall I take him to the soldiers?',
-      vocab: [['fur parvus', 'a little thief'], ['denarii tui', 'your coins'], ['ad milites', 'to the soldiers'], ['eum duco', 'I take him']],
+      vocab: [['fur parvus', 'a little thief'], ['denarii tui', 'your coins'], ['ad milites', 'to the soldiers'], ['eum ducam?', 'shall I take him? (subjunctive)']],
       choices: [
         {
           say: 'Ita! Ad milites!',

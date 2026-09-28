@@ -12,8 +12,14 @@
 // over for today. Strikes: "Coquus anulum habet!", "Syra anulum habet!", and
 // "Anulus in balneis erat!" (Syra's clue says he went to the baths WITHOUT it).
 //
-// Aurelius trust: +1 entered with the smith's token, +1 explaining "Pica anulum
-// habebat!" in Latin, −1 accusing the cook, −1 asking for money as your reward.
+// The dilemma, when you hand over the ring ("Quis eum habebat?"):
+//   "Pica anulum habebat!"     the truth: +1, and Syra is cleared (helped: maid)
+//   "Ego anulum inveni!"       take the credit: +2 (a warm letter is almost certain), but
+//                              the cook blames Syra; own up (−1, Syra cleared) or say
+//                              nothing (syraBlamed: she's punished, and the chapter card says so)
+//
+// Aurelius trust: +1 entered with the smith's token, +1 the truth about the magpie or +2
+// taking the credit, −1 owning up afterwards, −1 accusing the cook, −1 asking for money.
 // Trust 1+ gets a warmer letter to the senator (letterTone: 'warm'), for Chapter VI.
 
 /** @type {import('../schema.js').Scene} */
@@ -156,12 +162,6 @@ export default {
       vocab: [['invenisti', 'you found (perfect tense)']],
       choices: [
         { action: 'Give him the ring', if: { hasItems: 'anulus' }, effects: { removeItems: 'anulus' }, next: 'delighted' },
-        {
-          say: 'Pica anulum habebat!',
-          if: { hasItems: 'anulus' },
-          effects: { removeItems: 'anulus', trust: { aurelius: 1 } },
-          next: 'explained',
-        },
         { say: 'Coquus anulum habet!', meaning: 'The cook has the ring!', if: { lacksItems: 'anulus' }, once: true, strike: 'aurelius', next: 'accuse_cook' },
         { say: 'Syra anulum habet!', meaning: 'Syra has the ring!', if: { lacksItems: 'anulus' }, once: true, strike: 'aurelius', next: 'accuse_syra' },
         { say: 'Anulus in balneis erat!', meaning: 'The ring was in the baths!', if: { lacksItems: 'anulus' }, once: true, strike: 'aurelius', next: 'wrong_baths' },
@@ -228,23 +228,90 @@ export default {
       next: 'hub',
     },
 
-    explained: {
-      speaker: 'aurelius',
-      pose: 'delighted',
-      narration: 'You hold up the ring and explain about the magpie. Aurelius stares at you, then bursts out laughing.',
-      latin: 'Pica?! Pica mea anulum habebat? Ha! Anulus meus!',
-      translation: 'The magpie?! My magpie had the ring? Ha! My ring!',
-      vocab: [['habebat', 'had, was keeping (imperfect)']],
-      next: 'reward',
-    },
-
     delighted: {
       speaker: 'aurelius',
       pose: 'delighted',
-      narration: 'Aurelius snatches the ring and slides it onto his finger.',
-      latin: 'Anulus meus! Gratias tibi ago!',
-      translation: 'My ring! Thank you!',
-      vocab: [['gratias tibi ago', 'I thank you (literally, “I give thanks to you”)']],
+      narration: 'Aurelius snatches the ring and slides it onto his finger. Then he looks at you sharply.',
+      latin: 'Anulus meus! Gratias tibi ago! Sed… quis eum habebat?',
+      translation: 'My ring! Thank you! But… who had it?',
+      vocab: [['gratias tibi ago', 'I thank you (literally, “I give thanks to you”)'], ['eum', 'it (the ring)'], ['habebat', 'had (imperfect)']],
+      choices: [
+        { say: 'Pica anulum habebat!', effects: { trust: { aurelius: 1 } }, next: 'explained' },
+        { say: 'Ego anulum inveni! Difficile erat!', effects: { trust: { aurelius: 2 } }, next: 'credit' },
+      ],
+    },
+
+    // The truth: the magpie. It clears Syra.
+    explained: {
+      speaker: 'aurelius',
+      pose: 'delighted',
+      narration: 'You explain about the magpie. Aurelius stares at you, then bursts out laughing.',
+      latin: 'Pica?! Pica mea anulum habebat? Ha! Et Syra innocens est!',
+      translation: 'The magpie?! My magpie had the ring? Ha! So Syra is innocent!',
+      vocab: [['habebat', 'had, was keeping (imperfect)'], ['innocens', 'innocent']],
+      next: 'syra_thanks',
+    },
+
+    syra_thanks: {
+      character: 'maid',
+      speaker: 'maid',
+      narration: 'Across the atrium, Syra catches your eye.',
+      latin: 'Gratias tibi ago!',
+      translation: 'Thank you!',
+      vocab: [['gratias tibi ago', 'I thank you']],
+      onEnter: { helped: 'maid' },
+      next: 'reward',
+    },
+
+    // The dilemma: take the credit (a warmer letter), and Syra takes the blame.
+    credit: {
+      speaker: 'aurelius',
+      pose: 'delighted',
+      narration: 'Aurelius beams at you.',
+      latin: 'Tu anulum invenisti? Fidelis et sapiens es!',
+      translation: 'You found the ring? You’re loyal and wise!',
+      vocab: [['invenisti', 'you found (perfect)'], ['fidelis', 'loyal'], ['sapiens', 'wise']],
+      next: 'cook_mutters',
+    },
+
+    cook_mutters: {
+      character: 'cook',
+      speaker: 'cook',
+      narration: 'From the kitchen doorway, the cook mutters, just loud enough:',
+      latin: 'Hmm… sed quis anulum ceperat? Syra heri in horto erat…',
+      translation: 'Hmm… but who had taken the ring? Syra was in the garden yesterday…',
+      vocab: [['ceperat', 'had taken (pluperfect)'], ['heri', 'yesterday'], ['in horto', 'in the garden']],
+      next: 'syra_suspected',
+    },
+
+    syra_suspected: {
+      speaker: 'aurelius',
+      narration: 'Aurelius’s smile fades. He turns to Syra, who has gone pale. She looks at you.',
+      latin: 'Syra? … Syra, veni huc!',
+      translation: 'Syra? … Syra, come here!',
+      vocab: [['veni huc', 'come here!']],
+      choices: [
+        { say: 'Syra innocens est! Pica anulum habebat.', effects: { trust: { aurelius: -1 } }, next: 'owned_up' },
+        { action: 'Say nothing', next: 'syra_blamed' },
+      ],
+    },
+
+    owned_up: {
+      speaker: 'aurelius',
+      narration: 'Aurelius stares at you. Then, slowly, he starts to laugh.',
+      latin: 'Pica?! … Ha! Pica mea! Bene: verum dixisti, tandem.',
+      translation: 'The magpie?! … Ha! My magpie! Good: you told the truth, at last.',
+      vocab: [['verum', 'the truth'], ['dixisti', 'you said, you told (perfect)'], ['tandem', 'at last']],
+      next: 'syra_thanks',
+    },
+
+    syra_blamed: {
+      speaker: 'aurelius',
+      narration: 'You say nothing. Syra drops her dusting cloth and walks slowly toward the kitchen. She doesn’t look at you.',
+      latin: 'Syra, hodie in culina cum coquo laborabis!',
+      translation: 'Syra, today you will work in the kitchen with the cook!',
+      vocab: [['hodie', 'today'], ['in culina', 'in the kitchen'], ['cum coquo', 'with the cook'], ['laborabis', 'you will work (future)']],
+      onEnter: { setFlags: 'syraBlamed' },
       next: 'reward',
     },
 
@@ -332,6 +399,23 @@ export default {
         ],
         next: { scene: 'curia' },
       },
+      variants: [
+        {
+          if: { flags: 'syraBlamed' },
+          ending: {
+            id: 'chapter-5-complete',
+            type: 'chapter',
+            title: 'Finis Capituli V',
+            subtitle: 'End of Chapter V',
+            text: [
+              'You step out into the evening with a sealed letter in your bag. Aurelius has promised you Titus, but five smiths need an order from someone far more powerful.',
+              'As the door closes behind you, you hear a clatter of pots from the kitchen, and the cook shouting at Syra.',
+              'Senator Cornelius sees the emperor every day. Tomorrow, you will see Senator Cornelius.',
+            ],
+            next: { scene: 'curia' },
+          },
+        },
+      ],
     },
   },
 };

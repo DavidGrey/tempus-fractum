@@ -10,7 +10,9 @@
 //   goodbye: high trust earns a cloak; saying you're a dog earns "Vale, canis!"
 //
 // Trust: +1 each for Salve, Quis es, Viator sum, asking for help, and Gratias;
-// -1 for asking for his horse. A trust of 3 or more earns the cloak.
+// -1 for asking for his horse. A trust of 3 or more earns the cloak at goodbye, unless you
+// already asked for food: "Cibum volo" is a dilemma, bread OR the cloak ("panem aut
+// pallium?"). Either way you leave with at most one of the two.
 
 /** @type {import('../schema.js').Scene} */
 export default {
@@ -209,21 +211,43 @@ export default {
       next: 'what_want',
     },
 
+    // The dilemma: he can spare one thing. Bread feeds someone (you, a guard, a hungry
+    // boy); the cloak makes you look far less strange (it helps at the city gate).
     food: {
       speaker: 'farmer',
-      narration: 'He rummages in a sack on the horse’s back and hands you a round, flat loaf.',
-      latin: 'Cibum? Ecce, panis!',
-      translation: 'Food? Here, bread!',
-      vocab: [['cibum', 'food (accusative)'], ['ecce', 'look! here!'], ['panis', 'bread']],
+      narration: 'He rummages in a sack on the horse’s back, pulls out a round, flat loaf, then looks at your strange clothes and pulls out a rough wool cloak too. He holds up one in each hand.',
+      latin: 'Cibum? Panem habeo… et pallium. Sed unum tantum tibi do: panem aut pallium?',
+      translation: 'Food? I have bread… and a cloak. But I’ll only give you one: the bread or the cloak?',
+      vocab: [['panem', 'bread (accusative)'], ['pallium', 'cloak'], ['unum tantum', 'only one'], ['tibi do', 'I give you'], ['aut', 'or']],
       variants: [
         {
           if: { flags: 'saidDog' },
-          latin: 'Cibum? Canis cibum vult! Ecce, panis!',
-          translation: 'Food? The dog wants food! Here, bread!',
-          vocab: [['canis', 'dog'], ['vult', 'wants'], ['panis', 'bread']],
+          latin: 'Cibum? Canis cibum vult! Panem habeo… et pallium. Sed unum tantum tibi do: panem aut pallium?',
+          translation: 'Food? The dog wants food! I have bread… and a cloak. But I’ll only give you one: the bread or the cloak?',
+          vocab: [['canis', 'dog'], ['vult', 'wants'], ['panem', 'bread (accusative)'], ['pallium', 'cloak'], ['unum tantum', 'only one'], ['aut', 'or']],
         },
       ],
-      onEnter: { addItems: 'bread', setFlags: 'askedForFood' },
+      onEnter: { setFlags: 'askedForFood' },
+      choices: [
+        { say: 'Panem volo.', effects: { addItems: 'bread' }, next: 'took_bread' },
+        { say: 'Pallium volo.', effects: { addItems: 'cloak' }, next: 'took_cloak' },
+      ],
+    },
+
+    took_bread: {
+      speaker: 'farmer',
+      latin: 'Ecce, panis! Bonus est.',
+      translation: 'Here, bread! It’s good.',
+      vocab: [['ecce', 'here!'], ['panis', 'bread'], ['bonus', 'good']],
+      next: 'what_want',
+    },
+
+    took_cloak: {
+      speaker: 'farmer',
+      narration: 'He throws the cloak over your shoulders and steps back to look.',
+      latin: 'Ecce, pallium! Nunc paene Romanus es.',
+      translation: 'Here, a cloak! Now you’re almost a Roman.',
+      vocab: [['pallium', 'cloak'], ['nunc', 'now'], ['paene', 'almost']],
       next: 'what_want',
     },
 
@@ -279,7 +303,7 @@ export default {
       vocab: [['vale', 'goodbye'], ['viator', 'traveller'], ['via', 'road'], ['longa', 'long']],
       variants: [
         {
-          if: { minTrust: { farmer: 3 }, choice: { introducedAs: 'roman' } },
+          if: { minTrust: { farmer: 3 }, choice: { introducedAs: 'roman' }, notFlags: 'askedForFood' },
           narration: 'Before he goes, he pulls a rough wool cloak from the horse’s pack and throws it over your shoulders.',
           latin: 'Tunica tua est mira. Ecce, pallium! Nunc Romanus es!',
           translation: 'Your tunic is strange. Here, a cloak! Now you are a Roman!',
@@ -287,7 +311,7 @@ export default {
           onEnter: { addItems: 'cloak' },
         },
         {
-          if: { minTrust: { farmer: 3 } },
+          if: { minTrust: { farmer: 3 }, notFlags: 'askedForFood' },
           narration: 'Before he goes, he pulls a rough wool cloak from the horse’s pack and throws it over your shoulders.',
           latin: 'Tunica tua est mira. Ecce, pallium! Vale, amice!',
           translation: 'Your tunic is strange. Here, a cloak! Goodbye, friend!',

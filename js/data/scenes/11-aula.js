@@ -215,6 +215,12 @@ export default {
     bargain: {
       speaker: 'emperor',
       narration: 'He folds his arms and studies you.',
+      variants: [
+        {
+          if: { hasItems: 'broken-hinge' },
+          narration: 'He folds his arms and studies you. His eyes keep drifting to the strange hinge in your bag. You remember Titus: “Serva eum!”',
+        },
+      ],
       latin: 'Si fabros tibi dabo, quid mihi dabis?',
       translation: 'If I give you smiths, what will you give me?',
       vocab: [['si', 'if'], ['dabo', 'I will give (future)'], ['dabis', 'you will give (future)']],
@@ -223,7 +229,7 @@ export default {
         {
           say: 'Cardinem meum tibi dabo.',
           if: { hasItems: 'broken-hinge' },
-          effects: { trust: { emperor: 1 }, recordChoice: { giftToEmperor: 'hinge' } },
+          effects: { removeItems: 'broken-hinge', trust: { emperor: 1 }, recordChoice: { giftToEmperor: 'hinge' } },
           next: 'gift_hinge',
         },
         { say: 'Gratias maximas tibi agam!', next: 'thanks' },

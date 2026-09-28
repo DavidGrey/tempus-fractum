@@ -297,7 +297,7 @@ export default {
       translation: 'Aurelius’s house is on the Esquiline Hill.',
       vocab: [['villa', 'house'], ['Aurelii', 'of Aurelius'], ['in colle', 'on the hill']],
       variants: [{ if: { minTrust: { smith: 1 } }, next: 'token' }],
-      next: 'to_aurelius',
+      next: 'keep_hinge',
     },
 
     token: {
@@ -307,6 +307,17 @@ export default {
       translation: 'Here, my token. Aurelius’s household are my friends.',
       vocab: [['tessera', 'token'], ['servi', 'household slaves, servants'], ['amici mei', 'my friends']],
       onEnter: { addItems: 'smith-token' },
+      next: 'keep_hinge',
+    },
+
+    // Sets up a trade-off in Chapter VIII: the emperor would love the hinge as a gift.
+    keep_hinge: {
+      speaker: 'smith',
+      pose: 'examining',
+      narration: 'He hands the broken hinge back to you, carefully.',
+      latin: 'Ecce, cardo tuus. Serva eum! Sine eo, novum cardinem facere difficile est.',
+      translation: 'Here’s your hinge. Keep it safe! Without it, making a new hinge is difficult.',
+      vocab: [['cardo / cardinem', 'hinge'], ['serva', 'keep! look after!'], ['sine eo', 'without it'], ['novum', 'new'], ['facere', 'to make'], ['difficile', 'difficult']],
       next: 'to_aurelius',
     },
 

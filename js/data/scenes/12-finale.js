@@ -10,7 +10,8 @@
 //
 // Payoffs: Gaius remembers whether you said you were a dog; Titus turns out to be his
 // son ("Filius et filia mea in urbe habitant" in Chapter I, hinted at the forge); if you
-// gave the hinge to the emperor, Titus has to work from memory; telling Trajan about his
+// gave the hinge to the emperor, Titus has to work from memory and the door squeals all
+// the way home (Titus warned you in Chapter IV: "Serva eum!"); telling Trajan about his
 // column changes the final line.
 //
 // Endings: home (success), stay in Rome after all (success), and, reached from the
@@ -161,7 +162,7 @@ export default {
       variants: [
         {
           if: { choice: { giftToEmperor: 'hinge' } },
-          narration: 'For a whole day the smiths hammer, file, and fit. Sparks fly. The old hinge is in the emperor’s collection now, so Titus forges a new one from memory. At sunset he swings the heavy door shut, and it closes with a soft, perfect click.',
+          narration: 'For a whole day the smiths hammer, file, and fit. Sparks fly. The old hinge is in the emperor’s collection now, so Titus has to forge a new one from memory. At sunset he swings the heavy door shut. It sticks. He kicks it. It shuts, with a horrible squeal.',
         },
       ],
       onEnter: { setFlags: 'machineRepaired' },
@@ -176,6 +177,14 @@ export default {
       latin: 'Ecce! Cardo novus. Ianua clauditur. Machina refecta est! Iter tuum longum et difficile erat.',
       translation: 'Look! A new hinge. The door closes. The machine is repaired! Your journey was long and difficult.',
       vocab: [['iter tuum', 'your journey'], ['longum et difficile', 'long and difficult'], ['cardo novus', 'a new hinge'], ['ianua', 'door'], ['clauditur', 'closes, is closed (passive)'], ['refecta est', 'has been repaired (perfect passive)']],
+      variants: [
+        {
+          if: { choice: { giftToEmperor: 'hinge' } },
+          latin: 'Ecce! Cardo novus… non perfectus, sed ianua clauditur. Fortasse. Iter tuum longum et difficile erat.',
+          translation: 'Look! A new hinge… not perfect, but the door closes. Probably. Your journey was long and difficult.',
+          vocab: [['cardo novus', 'a new hinge'], ['non perfectus', 'not perfect'], ['ianua', 'door'], ['clauditur', 'closes, is closed (passive)'], ['fortasse', 'probably, perhaps']],
+        },
+      ],
       next: 'iulia',
     },
 
@@ -278,7 +287,36 @@ export default {
           'You will never think of Latin as a “dead” language again.',
         ],
       },
+      // Giving the hinge to the emperor (Chapter VIII) has a price: a squeaky trip home.
       variants: [
+        {
+          if: { choice: { giftToEmperor: 'hinge' }, flags: 'toldColumn' },
+          ending: {
+            id: 'home',
+            type: 'success',
+            title: 'Finis',
+            subtitle: 'You Made It Home!',
+            text: [
+              'There is a hum, a flash of light, a sound like a thousand bees… and, all the way through time, a horrible squeal from Titus’s new hinge.',
+              'It takes three kicks to open the door. You are home, in your own time. Your clothes smell of forge smoke, and there is Roman dust on your shoes.',
+              'On a whim, you look up Trajan’s Column. It is still standing, just as you promised him. Somewhere in a museum, maybe, is a very strange hinge.',
+            ],
+          },
+        },
+        {
+          if: { choice: { giftToEmperor: 'hinge' } },
+          ending: {
+            id: 'home',
+            type: 'success',
+            title: 'Finis',
+            subtitle: 'You Made It Home!',
+            text: [
+              'There is a hum, a flash of light, a sound like a thousand bees… and, all the way through time, a horrible squeal from Titus’s new hinge.',
+              'It takes three kicks to open the door. You are home, in your own time. Your clothes smell of forge smoke, and there is Roman dust on your shoes.',
+              'You will never think of Latin as a “dead” language again. Or of hinges as boring.',
+            ],
+          },
+        },
         {
           if: { flags: 'toldColumn' },
           ending: {
