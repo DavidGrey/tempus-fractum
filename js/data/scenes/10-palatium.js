@@ -13,11 +13,12 @@
 //                          and carry the emperor's wine upstairs ("scalas ascende!")
 //   the throne-room door → the officer from the gate, dripping on the marble
 //
-// Chapter VI pays off at the throne-room door:
-//   senator's tablet  → straight in
-//   predictedRain     → "Vates sum! Tempestatem praedixi." gets you straight in; at the
-//                       gate, the officer also whispers where the servants go in
-//   the list          → "Who sent you?", the list, and "Ubi anulum invenisti?" (Chapter V)
+// Chapter VI pays off at the throne-room door. Every route ends with the same check,
+// "Ubi anulum invenisti?" (Chapter V); what you bring decides how you get there:
+//   senator's tablet  → the seal answers "who sent you?"; straight to the ring question
+//   predictedRain     → "Vates sum! Tempestatem praedixi." does the same; at the gate,
+//                       the officer also whispers where the servants go in
+//   the list          → "Who sent you?", the list, then the ring question
 // Refused? If you fed Marcus in Chapter III, he vouches for you (he works in the palace
 // kitchens); or plead with "Ave, Imperator!" (Chapter VI's lesson).
 //
@@ -335,10 +336,10 @@ export default {
       speaker: 'praetorian',
       pose: 'approving',
       narration: 'He looks at the seal, then at the jug, and shakes his head.',
-      latin: 'Signum Cornelii… et vinum imperatoris! Ha! Audax es. Intra!',
-      translation: 'Cornelius’s seal… and the emperor’s wine! Ha! You’re bold. Go in!',
-      vocab: [['signum', 'seal'], ['audax', 'bold'], ['intra', 'go in!']],
-      next: 'warning',
+      latin: 'Signum Cornelii… et vinum imperatoris! Ha! Audax es. Sed signa falsa multa sunt. Unum rogo:',
+      translation: 'Cornelius’s seal… and the emperor’s wine! Ha! You’re bold. But there are lots of fake seals. I’ll ask one thing:',
+      vocab: [['signum', 'seal'], ['audax', 'bold'], ['signa falsa', 'fake seals'], ['unum rogo', 'I ask one thing']],
+      next: 'ring_question',
     },
 
     door_prophet: {
@@ -346,10 +347,10 @@ export default {
       speaker: 'praetorian',
       pose: 'approving',
       narration: 'He takes a step back.',
-      latin: 'Vere vates es! Tempestatem praedixisti, et nunc hic es! … Intra, vates. Sed vinum imperatori da!',
-      translation: 'You really are a prophet! You predicted the storm, and now here you are! … Go in, prophet. But give the emperor his wine!',
-      vocab: [['vere', 'truly, really'], ['praedixisti', 'you predicted (perfect)'], ['nunc', 'now'], ['imperatori', 'to the emperor'], ['da', 'give!']],
-      next: 'warning',
+      latin: 'Vere vates es! Tempestatem praedixisti, et nunc hic es! … Sed vates multi mendaces sunt. Unum rogo:',
+      translation: 'You really are a prophet! You predicted the storm, and now here you are! … But lots of prophets are liars. I’ll ask one thing:',
+      vocab: [['vere', 'truly, really'], ['praedixisti', 'you predicted (perfect)'], ['nunc', 'now'], ['mendaces', 'liars'], ['unum rogo', 'I ask one thing']],
+      next: 'ring_question',
     },
 
     door_lie: {

@@ -1,6 +1,8 @@
 // SCENE 6: AURELIUS'S DOOR (Chapter V, part 1 of 3)
 // Getting past the doorkeeper (ianitor):
-//   smith's token (Chapter IV)  → straight in, and Aurelius starts out trusting you (+1)
+//   smith's token (Chapter IV)  → straight in
+//   "Ecce, denarius!"           → a coin buys your way in (why the coins you got back by
+//                                 handing Marcus to the soldiers in Chapter III are worth keeping)
 //   "Cliens sum."               → come back in the morning; slip in with the salutatio
 //                                 (Roman clients greeting their patron at dawn)
 //   "Aurelius amicus meus est!" → "Mendax es!" (liar)
@@ -46,6 +48,7 @@ export default {
       ],
       choices: [
         { action: 'Show him the smith’s token', if: { hasItems: 'smith-token' }, next: 'token' },
+        { say: 'Ecce, denarius!', if: { hasItems: 'denarii' }, effects: { removeItems: 'denarii', recordChoice: { enteredDomusBy: 'coin' } }, next: 'coin' },
         { say: 'Aurelium videre volo.', once: true, next: 'see_aurelius' },
         { say: 'Titus faber me misit.', once: true, next: 'titus_sent' },
         { say: 'Cliens sum.', next: 'client' },
@@ -60,7 +63,17 @@ export default {
       latin: 'Tessera Titi! Titus amicus domus est. Intra!',
       translation: 'Titus’s token! Titus is a friend of this house. Come in!',
       vocab: [['tessera', 'token'], ['Titi', 'of Titus'], ['amicus domus', 'a friend of the house'], ['intra', 'come in!']],
-      onEnter: { trust: { aurelius: 1 }, recordChoice: { enteredDomusBy: 'token' } },
+      onEnter: { recordChoice: { enteredDomusBy: 'token' } },
+      continueText: 'Step inside',
+      next: { scene: 'domus-atrium' },
+    },
+
+    coin: {
+      speaker: 'doorkeeper',
+      narration: 'He bites the coin, glances up and down the street, and tucks it into his tunic.',
+      latin: 'Denarius? … Hmm. Intra. Sed tace: dominus non scit!',
+      translation: 'A denarius? … Hmm. Come in. But keep quiet: the master doesn’t know!',
+      vocab: [['intra', 'come in!'], ['tace', 'keep quiet!'], ['dominus', 'the master'], ['scit', 'knows']],
       continueText: 'Step inside',
       next: { scene: 'domus-atrium' },
     },

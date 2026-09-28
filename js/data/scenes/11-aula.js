@@ -14,16 +14,20 @@
 // "Heus tu!" goes straight to the lions.
 //
 // Emperor favour ("emperor" trust):
-//   greeting      "Ave, Imperator!" +2, "Salve!" 0, "Salve, amice!" −1, silent bow −1,
-//                 "Heus tu!" → thrown out (comic ending)
+//   greeting      "Ave, Imperator!" +1, "Salve!" 0, "Salve, amice!" −1, silent bow −1,
+//                 "Heus tu!" → the lions
 //   storm prophet +1 (predictedRain in Chapter VI)
 //   what happened +1 correct, −1 "Nihil accidit"; "Canis sum" is a free joke, and +1 if
 //                 it's the running joke from Chapter I (saidDog)
-//   the hinge     +1
-//   what will you give me?  +2 story of the future, +1 the hinge as a gift, 0 thanks,
+//   what will you give me?  +2 the hinge as a gift, +1 story of the future, 0 thanks,
 //                 −1 money, −1 nothing
-// Favour 4+ → he agrees at once. Otherwise "Cur tibi credam?": Cornelius vouches (if you
-// have his sealed tablet), or you must pick the right Latin sentence.
+// The trade-off: a good class reaches 3. Favour 4 (the hinge, or the prophecy) unlocks
+// "Veni mecum in futurum!" and ten smiths instead of five, but Titus warned "Serva eum!",
+// and without the old hinge the repaired door squeals all the way home.
+//
+// Everyone is asked "Cur tibi credam?" and must pick the right Latin sentence. With
+// Cornelius's sealed tablet, a wrong answer still costs a seal, but Cornelius steps in
+// and says the right sentence for you.
 //
 // Endings: success → the finale (12-finale.js); "Aurum volo!" (rich but stranded);
 // "Romae manere volo." (Roman citizen, a happy alternative); "Veni mecum in futurum!"
@@ -64,7 +68,7 @@ export default {
       character: null,
       narration: 'The whole hall falls silent. Every eye is on you. This is the moment Cornelius warned you about.',
       choices: [
-        { say: 'Ave, Imperator!', effects: { trust: { emperor: 2 } }, next: 'greeted' },
+        { say: 'Ave, Imperator!', effects: { trust: { emperor: 1 } }, next: 'greeted' },
         { say: 'Salve!', meaning: 'Hello!', strike: 'emperor', next: 'plain_salve' },
         { say: 'Salve, amice!', meaning: 'Hello, friend!', effects: { trust: { emperor: -1 } }, strike: 'emperor', next: 'too_familiar' },
         { action: 'Bow low and say nothing', effects: { trust: { emperor: -1 } }, strike: 'emperor', next: 'silent' },
@@ -199,7 +203,6 @@ export default {
       latin: 'Hoc metallum numquam vidi!',
       translation: 'I have never seen this metal!',
       vocab: [['metallum', 'metal'], ['numquam', 'never'], ['vidi', 'I have seen (perfect)']],
-      onEnter: { trust: { emperor: 1 } },
       next: 'bargain',
     },
 
@@ -225,11 +228,11 @@ export default {
       translation: 'If I give you smiths, what will you give me?',
       vocab: [['si', 'if'], ['dabo', 'I will give (future)'], ['dabis', 'you will give (future)']],
       choices: [
-        { say: 'Fabulam futuri tibi narrabo!', effects: { trust: { emperor: 2 } }, next: 'future_story' },
+        { say: 'Fabulam futuri tibi narrabo!', effects: { trust: { emperor: 1 } }, next: 'future_story' },
         {
           say: 'Cardinem meum tibi dabo.',
           if: { hasItems: 'broken-hinge' },
-          effects: { removeItems: 'broken-hinge', trust: { emperor: 1 }, recordChoice: { giftToEmperor: 'hinge' } },
+          effects: { removeItems: 'broken-hinge', trust: { emperor: 2 }, recordChoice: { giftToEmperor: 'hinge' } },
           next: 'gift_hinge',
         },
         { say: 'Gratias maximas tibi agam!', next: 'thanks' },
@@ -264,10 +267,11 @@ export default {
 
     gift_hinge: {
       speaker: 'emperor',
-      pose: 'curious',
-      latin: 'Donum mirum! Gratias.',
-      translation: 'A marvellous gift! Thank you.',
-      vocab: [['donum', 'gift'], ['mirum', 'marvellous, strange']],
+      pose: 'laughing',
+      narration: 'He holds the hinge up for the whole court to see. The courtiers applaud politely. Somewhere far away, you imagine Titus wincing.',
+      latin: 'Donum mirum! Nemo Romae tale donum habet!',
+      translation: 'A marvellous gift! Nobody in Rome has a gift like this!',
+      vocab: [['donum', 'gift'], ['mirum', 'marvellous, strange'], ['Romae', 'in Rome (locative)'], ['tale', 'such, like this']],
       next: 'request',
     },
 
@@ -323,17 +327,10 @@ export default {
         {
           if: { minTrust: { emperor: 4 } },
           pose: 'laughing',
-          narration: 'He doesn’t even hesitate.',
-          latin: 'Bene! Quinque fabros tibi dabo… immo decem! Ite, machinam reficite! Titus vos ducet!',
-          translation: 'Good! I will give you five smiths… no, ten! Go, repair the machine! Titus will lead you!',
-          vocab: [['dabo', 'I will give (future)'], ['immo', 'no, rather'], ['ite', 'go! (to several people)'], ['reficite', 'repair! (to several people)'], ['vos ducet', 'will lead you all (future)']],
-          choices: [],
-          continueText: 'Bow and thank him',
-          next: { scene: 'finale' },
+          narration: 'He is smiling now. But he is still the emperor, and he still asks.',
         },
       ],
       choices: [
-        { action: 'Look to Senator Cornelius', if: { choice: { palaceAccess: 'sealed' } }, next: 'cornelius_vouches' },
         { say: 'Aurelius et Titus mihi credunt.', next: 'granted' },
         { say: 'Aurelius et Titus me oderunt.', meaning: 'Aurelius and Titus hate me.', once: true, strike: 'emperor', next: 'they_hate_you' },
         // Near miss: sounds like the right answer, but the trust runs the wrong way.
@@ -342,6 +339,7 @@ export default {
     },
 
     you_trust_them: {
+      variants: [{ if: { choice: { palaceAccess: 'sealed' } }, choicesFrom: null, continueText: 'Cornelius steps forward…', next: 'cornelius_vouches' }],
       speaker: 'emperor',
       pose: 'stern',
       narration: 'The emperor raises an eyebrow.',
@@ -351,13 +349,15 @@ export default {
       choicesFrom: 'decision',
     },
 
+    // The sealed tablet (Chapter VI) pays off: Cornelius rescues a wrong answer by saying
+    // the right sentence himself.
     cornelius_vouches: {
       speaker: 'senator',
       character: 'senator',
-      narration: 'Cornelius steps out from among the courtiers.',
-      latin: 'Imperator, hic hospes fidelis est. Ego pro hospite spondeo.',
-      translation: 'Emperor, this guest is trustworthy. I vouch for them.',
-      vocab: [['fidelis', 'loyal, trustworthy'], ['pro hospite', 'for the guest'], ['spondeo', 'I vouch, I guarantee']],
+      narration: 'Before the emperor can answer, Cornelius steps out from among the courtiers and bows.',
+      latin: 'Imperator, hic hospes verba confundit. Aurelius et Titus ei credunt. Et ego pro hospite spondeo.',
+      translation: 'Emperor, this guest is mixing up the words. Aurelius and Titus trust them. And I vouch for the guest.',
+      vocab: [['verba confundit', 'is mixing up the words'], ['ei credunt', 'trust him/her (credo + dative)'], ['pro hospite', 'for the guest'], ['spondeo', 'I vouch, I guarantee']],
       next: 'granted',
     },
 
@@ -367,12 +367,24 @@ export default {
       latin: 'Bene. Quinque fabros tibi dabo. Ite, machinam reficite! Titus vos ducet!',
       translation: 'Very well. I will give you five smiths. Go, repair the machine! Titus will lead you!',
       vocab: [['credunt', 'they believe, trust'], ['dabo', 'I will give (future)'], ['ite', 'go! (to several people)'], ['reficite', 'repair! (to several people)'], ['vos ducet', 'will lead you all (future)']],
+      variants: [
+        {
+          if: { minTrust: { emperor: 4 } },
+          pose: 'laughing',
+          narration: 'The emperor laughs.',
+          latin: 'Bene! Quinque fabros tibi dabo… immo decem! Ite, machinam reficite! Titus vos ducet!',
+          translation: 'Good! I will give you five smiths… no, ten! Go, repair the machine! Titus will lead you!',
+          vocab: [['dabo', 'I will give (future)'], ['immo', 'no, rather'], ['ite', 'go! (to several people)'], ['reficite', 'repair! (to several people)'], ['vos ducet', 'will lead you all (future)']],
+          onEnter: { setFlags: 'tenSmiths' },
+        },
+      ],
       continueText: 'Bow and thank him',
       next: { scene: 'finale' },
     },
 
     // A wrong answer costs a seal like any other; the meter decides when it's the lions.
     they_hate_you: {
+      variants: [{ if: { choice: { palaceAccess: 'sealed' } }, choicesFrom: null, continueText: 'Cornelius steps forward…', next: 'cornelius_vouches' }],
       speaker: 'emperor',
       pose: 'stern',
       narration: 'The emperor raises an eyebrow. Somewhere, Cornelius puts his head in his hands.',

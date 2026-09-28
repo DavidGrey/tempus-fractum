@@ -20,8 +20,11 @@
 //
 // Cornelius trust: +1 warm letter, +1 "Fabros imperatoris peto", +1 "Quinque",
 // +1 flattering prophecy, +1 "Ave, Imperator!"; −1 for each wrong answer.
-// Trust 2+: a tablet with his seal (palaceAccess: 'sealed'); otherwise your name
-// on the Praetorians' list (palaceAccess: 'list'). Chapter VII reads this.
+// Trust 3+: a tablet with his seal (palaceAccess: 'sealed'); otherwise your name
+// on the Praetorians' list (palaceAccess: 'list'). A flawless interview gets there on its
+// own; the warm letter from Chapter V leaves room for one slip. Chapters VII and VIII
+// read this: the tablet answers "who sent you?" at the throne-room door, and Cornelius
+// rescues a wrong answer in front of the emperor.
 
 /** @type {import('../schema.js').Scene} */
 export default {
@@ -380,7 +383,7 @@ export default {
       onEnter: { grantAuthorizations: 'senator-list', recordChoice: { palaceAccess: 'list' } },
       variants: [
         {
-          if: { minTrust: { senator: 2 } },
+          if: { minTrust: { senator: 3 } },
           narration: 'He takes a wax tablet from his secretary, writes a few lines, and presses his own ring into the wax.',
           latin: 'Cras ad Palatium veni. Ecce, tabula cum signo meo. Praetoriani te intrare sinent.',
           translation: 'Come to the Palatine tomorrow. Here is a tablet with my seal. The Praetorians will let you in.',

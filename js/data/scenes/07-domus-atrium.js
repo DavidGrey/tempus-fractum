@@ -13,14 +13,16 @@
 // "Anulus in balneis erat!" (Syra's clue says he went to the baths WITHOUT it).
 //
 // The dilemma, when you hand over the ring ("Quis eum habebat?"):
-//   "Pica anulum habebat!"     the truth: +1, and Syra is cleared (helped: maid)
-//   "Ego anulum inveni!"       take the credit: +2 (a warm letter is almost certain), but
-//                              the cook blames Syra; own up (−1, Syra cleared) or say
-//                              nothing (syraBlamed: she's punished, and the chapter card says so)
+//   "Pica anulum habebat!"     the truth: +1, and Syra is cleared (helped: maid), but the
+//                              letter to the senator is a plain one
+//   "Ego anulum inveni!"       take the credit: +2, a warm letter, but the cook blames Syra;
+//                              own up (−1, plain letter, Syra cleared) or say nothing
+//                              (syraBlamed: she's punished, and the chapter card says so)
 //
-// Aurelius trust: +1 entered with the smith's token, +1 the truth about the magpie or +2
-// taking the credit, −1 owning up afterwards, −1 accusing the cook, −1 asking for money.
-// Trust 1+ gets a warmer letter to the senator (letterTone: 'warm'), for Chapter VI.
+// Aurelius trust: +1 the truth about the magpie or +2 taking the credit, −1 owning up
+// afterwards, −1 accusing the cook, −1 asking for money.
+// Trust 2+ gets a warmer letter to the senator (letterTone: 'warm'). In Chapter VI that's
+// +1 with Cornelius, which makes his sealed tablet (and his help in Chapter VIII) easier.
 
 /** @type {import('../schema.js').Scene} */
 export default {
@@ -231,7 +233,10 @@ export default {
     delighted: {
       speaker: 'aurelius',
       pose: 'delighted',
-      narration: 'Aurelius snatches the ring and slides it onto his finger. Then he looks at you sharply.',
+      narration: [
+        'Aurelius snatches the ring and slides it onto his finger. Then he looks at you sharply.',
+        'You can see him thinking: whoever found this ring deserves a very good letter to the senator.',
+      ],
       latin: 'Anulus meus! Gratias tibi ago! Sed… quis eum habebat?',
       translation: 'My ring! Thank you! But… who had it?',
       vocab: [['gratias tibi ago', 'I thank you (literally, “I give thanks to you”)'], ['eum', 'it (the ring)'], ['habebat', 'had (imperfect)']],
@@ -376,7 +381,7 @@ export default {
       onEnter: { addItems: 'epistula', grantAuthorizations: 'aurelius-letter', recordChoice: { letterTone: 'plain' } },
       variants: [
         {
-          if: { minTrust: { aurelius: 1 } },
+          if: { minTrust: { aurelius: 2 } },
           narration: 'He writes quickly on a sheet of papyrus, pauses, smiles, and adds a few more lines about you. Then he rolls it up and presses his ring into a blob of hot wax to seal it.',
           onEnter: { addItems: 'epistula', grantAuthorizations: 'aurelius-letter', recordChoice: { letterTone: 'warm' } },
         },

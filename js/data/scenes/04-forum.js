@@ -24,8 +24,9 @@
 //   ask "Viginti!" (20)  → the merchant is offended and later offers only three
 //   count coins openly   → Marcus snatches them; "Siste, fur!" gets him caught,
 //                          English or chasing him does not
-//   the caught thief     → a dilemma: hand him to the soldiers (coins back, but Marcus
-//                          is bitter: no free guide, no palace vouching, a cool goodbye)
+//   the caught thief     → a dilemma: hand him to the soldiers (coins back plus the baker's
+//                          loaf, so you can pay the bitter Marcus in bread and keep the coins
+//                          for Aurelius's doorkeeper; but no palace vouching, a cool goodbye)
 //                          or "Ignosco tibi" (lose the coins, gain a loyal friend)
 //   Subura alone         → one warning, then a failure ending
 
@@ -397,13 +398,13 @@ export default {
       character: 'boy',
       speaker: 'baker',
       narration: 'The baker holds the squirming boy by the collar in one hand and your coins in the other. The boy is skin and bone. He looks at the coins, then at you.',
-      latin: 'Fur parvus! Ecce, denarii tui. Ad milites eum ducam?',
-      translation: 'A little thief! Here are your denarii. Shall I take him to the soldiers?',
-      vocab: [['fur parvus', 'a little thief'], ['denarii tui', 'your coins'], ['ad milites', 'to the soldiers'], ['eum ducam?', 'shall I take him? (subjunctive)']],
+      latin: 'Fur parvus! Ecce, denarii tui. Ad milites eum ducam? Si ita, panem tibi do!',
+      translation: 'A little thief! Here are your denarii. Shall I take him to the soldiers? If so, I’ll give you a loaf!',
+      vocab: [['fur parvus', 'a little thief'], ['denarii tui', 'your coins'], ['ad milites', 'to the soldiers'], ['eum ducam?', 'shall I take him? (subjunctive)'], ['si ita', 'if so, if yes'], ['panem tibi do', 'I give you bread']],
       choices: [
         {
           say: 'Ita! Ad milites!',
-          effects: { addItems: 'denarii', setFlags: 'handedOverMarcus' },
+          effects: { addItems: ['denarii', 'bread'], setFlags: 'handedOverMarcus' },
           next: 'handed_over',
         },
         {
@@ -418,7 +419,7 @@ export default {
       character: 'boy',
       speaker: 'boy',
       pose: 'sulking',
-      narration: 'The baker drops your coins into your hand and hauls the boy off toward two soldiers. Over his shoulder, the boy shouts back at you:',
+      narration: 'The baker drops your coins and a warm loaf into your hands and hauls the boy off toward two soldiers. Over his shoulder, the boy shouts back at you:',
       latin: 'Minime! Quaeso! … Numquam tibi ignoscam!',
       translation: 'No! Please! … I’ll never forgive you!',
       vocab: [['quaeso', 'please'], ['numquam', 'never'], ['tibi ignoscam', 'I will forgive you (ignosco + dative)']],

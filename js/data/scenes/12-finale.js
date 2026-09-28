@@ -47,6 +47,15 @@ export default {
         'Three days later, a strange procession marches out along the road from Rome: imperial smiths with a cart full of tools, bellows, and a small anvil. At their head, grinning, strides Titus.',
         'Marcus runs alongside, carrying a basket of bread for everyone.',
       ],
+      variants: [
+        {
+          if: { flags: 'tenSmiths' },
+          narration: [
+            'Three days later, a strange procession marches out along the road from Rome: ten imperial smiths with two carts full of tools, bellows, and a small anvil. At their head, grinning, strides Titus.',
+            'Marcus runs alongside, carrying a basket of bread for everyone.',
+          ],
+        },
+      ],
       continueText: 'March out through the city gate',
       next: 'gate_guard',
     },
