@@ -183,7 +183,7 @@ export class Game {
       ? this.buildNode(sceneId, sourceId, this.pickVariant(sceneId, sourceId))
       : node;
 
-    const available = (source?.choices ?? [])
+    const available = this.orderChoices(source?.choices ?? [], `${sceneId}.${sourceId}`)
       .map((choice) => ({ ...choice, key: `${sceneId}.${sourceId}.${choice.id || choice.say || choice.action}` }))
       .filter((choice) => check(choice.if, this.state))
       .filter((choice) => !(choice.once && this.state.chosen.includes(choice.key)));
@@ -192,6 +192,28 @@ export class Game {
       return [{ action: node.continueText || 'Continue', next: node.next, isContinue: true, key: null }];
     }
     return available;
+  }
+
+  /**
+   * When a node has a wrong answer (a `strike`), shuffle its Latin answers among their
+   * own slots so the right one isn't always first. Actions keep their places. The order
+   * depends only on this playthrough's seed and the node, so it holds steady while the
+   * class votes and on retries, and changes with each new game.
+   */
+  orderChoices(choices, nodeKey) {
+    if (!choices.some((c) => c.strike)) return choices;
+    const slots = choices.flatMap((c, i) => (c.say ? [i] : []));
+    const says = slots.map((i) => choices[i]);
+    let h = this.state.seed ?? 0;
+    for (const ch of nodeKey) h = Math.imul(h ^ ch.charCodeAt(0), 2654435761) >>> 0;
+    for (let i = says.length - 1; i > 0; i--) {
+      h = Math.imul(h ^ (h >>> 15), 2246822507) >>> 0;
+      const j = h % (i + 1);
+      [says[i], says[j]] = [says[j], says[i]];
+    }
+    const ordered = [...choices];
+    slots.forEach((slot, n) => { ordered[slot] = says[n]; });
+    return ordered;
   }
 
   choose(index) {

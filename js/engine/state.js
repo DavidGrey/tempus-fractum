@@ -25,6 +25,7 @@ export function createInitialState() {
     chosen: [],           // keys of choices already picked (for `once` choices)
     endings: [],          // ending ids reached this playthrough
     lastSaid: null,       // Latin the player just said (echoed above the NPC's reply)
+    seed: Math.floor(Math.random() * 2 ** 31), // this playthrough's answer order (see Game.orderChoices)
 
     chapterId: null,      // chapter currently being played (for "resume next class")
     strikes: {},          // bad answers this chapter, per patience meter, e.g. { guard: 2 }
