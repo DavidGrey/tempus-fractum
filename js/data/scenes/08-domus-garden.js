@@ -2,7 +2,10 @@
 // The ring is in the pet magpie's cage. Magpies were kept as talking birds in
 // Rome; this one repeats whatever it hears ("Anulus!", "Da mihi!", "Fur!").
 //
-// Getting the ring (always possible):
+// Seeing the ring needs a clue from the atrium: the cook's "the magpie eats my honey"
+// (suspectMagpie), or the maid's "the ring was on the table" plus the feathers on it.
+//
+// Getting the ring (always possible once you've seen it):
 //   offer a shiny coin (denarii)   → trade
 //   offer an apple (poma)          → trade
 //   reach into the cage            → pecked, but you get it
@@ -38,7 +41,7 @@ export default {
       ],
       choices: [
         { action: 'Search the fountain', once: true, next: 'fountain' },
-        { action: 'Look under the marble table', once: true, next: 'table' },
+        { action: 'Look under the marble table', next: 'table' },
         { action: 'Look at the bird', if: { lacksItems: 'anulus' }, next: 'magpie' },
         { action: 'Go back inside', next: { scene: 'domus-atrium', node: 'hub' } },
       ],
@@ -56,26 +59,38 @@ export default {
         {
           if: { flags: 'ringInGarden' },
           narration: 'The servant said the ring was on this table. It isn’t here now. But there are black-and-white feathers scattered all over the marble…',
+          onEnter: { setFlags: 'suspectMagpie' },
         },
       ],
       next: 'garden',
     },
 
+    // The ring only shows up once the witnesses have given you a reason to suspect the
+    // bird: the cook's honey thief, or the maid's table plus the feathers on it.
     magpie: {
       speaker: 'magpie',
       highlight: 'magpie',
-      narration: 'The bird cocks its head and squawks at you. In the corner of its cage, something glints gold.',
-      latin: 'Salve! Salve! Anulus! Anulus!',
-      translation: 'Hello! Hello! Ring! Ring!',
-      vocab: [['pica', 'magpie'], ['anulus', 'ring']],
-      variants: [{ if: { visited: 'domus-garden.magpie' }, narration: 'The magpie guards the glinting ring.' }],
-      choices: [
-        { action: 'Offer the magpie a shiny coin', if: { hasItems: 'denarii' }, effects: { removeItems: 'denarii' }, next: 'trade_coin' },
-        { action: 'Offer the magpie an apple', if: { hasItems: 'poma' }, effects: { removeItems: 'poma' }, next: 'trade_apple' },
-        { say: 'Da mihi anulum!', once: true, next: 'parrot' },
-        { action: 'Reach into the cage', next: 'pecked' },
-        { action: 'Leave the bird alone', next: 'garden' },
+      narration: 'The bird cocks its head and squawks at you. Just a noisy pet. Maybe someone in the house knows something about that ring.',
+      latin: 'Salve! Salve!',
+      translation: 'Hello! Hello!',
+      vocab: [['salve', 'hello']],
+      variants: [
+        {
+          if: { flags: 'suspectMagpie' },
+          narration: 'A thieving bird… You look closer. In the corner of its cage, half hidden under straw, something glints gold.',
+          latin: 'Salve! Salve! Anulus! Anulus!',
+          translation: 'Hello! Hello! Ring! Ring!',
+          vocab: [['anulus', 'ring']],
+          choices: [
+            { action: 'Offer the magpie a shiny coin', if: { hasItems: 'denarii' }, effects: { removeItems: 'denarii' }, next: 'trade_coin' },
+            { action: 'Offer the magpie an apple', if: { hasItems: 'poma' }, effects: { removeItems: 'poma' }, next: 'trade_apple' },
+            { say: 'Da mihi anulum!', once: true, next: 'parrot' },
+            { action: 'Reach into the cage', next: 'pecked' },
+            { action: 'Leave the bird alone', next: 'garden' },
+          ],
+        },
       ],
+      choices: [{ action: 'Leave the bird alone', next: 'garden' }],
     },
 
     parrot: {
