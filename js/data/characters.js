@@ -156,4 +156,16 @@ export const characters = {
     },
   },
 
+  // Two grumbling guards overheard at the palace gate. They speak but aren't drawn.
+  praetorians: {
+    name: 'Praetoriani',
+    role: 'two soaked guards',
+  },
+
+  headCook: {
+    name: 'Archimagirus',
+    role: 'the palace head cook',
+    images: { default: 'assets/characters/palace-cook.webp' },
+  },
+
 };

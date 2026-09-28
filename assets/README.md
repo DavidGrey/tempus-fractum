@@ -19,7 +19,11 @@ Style: historically grounded Ancient Rome, painted illustration, warm natural co
 | `atrium.webp` | Chapter V. Inside the atrium of a wealthy Roman house: an opening in the roof above a shallow rectangular pool (impluvium), painted walls, marble busts. Right third fairly clear. |
 | `garden.webp` | Chapter V. A peristyle garden: columns around a sunny garden, a fountain, a marble table. Keep the lower-left fairly plain (the magpie cage hangs there). |
 | `curia.webp` | Chapter VI. The steps of the Curia (Senate House) in the Roman Forum: a tall brick-and-marble building with great bronze doors, senators in togas on the steps. Right third fairly clear. |
-| `palatium.webp` | Chapter VII. The gate of the emperor's palace on the Palatine Hill: marble walls, gilded roof tiles, a grand gateway, a statue of Augustus nearby. Right third fairly clear (the Praetorian officer stands there). |
+| `palatium.webp` | No longer used (Chapter VII is now stormy; see `palatium-storm.webp`). The gate of the emperor's palace on the Palatine Hill: marble walls, gilded roof tiles, a grand gateway, a statue of Augustus nearby. Right third fairly clear (the Praetorian officer stands there). |
+| `palatium-storm.webp` | Chapter VII. The same palace gate as `palatium.webp`, but in a thunderstorm: dark sky, driving rain, wet marble, the great bronze doors shut. Right third fairly clear (the Praetorian officer stands there). |
+| `palace-doors.webp` | Chapter VII. A narrow side street along the palace wall in the pouring rain, with three plain doors in a row. The door names (HORTUS, STABULUM, CULINA) appear in the dialogue box, so leave the stone above each door blank. |
+| `palace-kitchen.webp` | Chapter VII. The emperor's huge, steamy kitchen: fires, bubbling pots, cooks and servants rushing with silver trays. Right third fairly clear (the head cook stands there). |
+| `palace-corridor.webp` | Chapter VII. Inside the palace: a marble corridor with a staircase leading up to tall doors hung with purple curtains, lamplight. Right third fairly clear (the Praetorian officer stands there). |
 | `aula.webp` | Chapter VIII. The emperor's throne room: coloured marble, gilded ceiling, towering purple curtains, a raised throne at the far end. Right third fairly clear (the emperor stands there). |
 | `carcer.webp` | Game over, Chapters II–VII. A dark Roman prison cell: rough stone walls, a small barred window high up, straw on the floor, a clay water jug, chains on the wall. Gloomy but not gory. Right third fairly clear. |
 | `colosseum.webp` | Game over, Chapter VIII. The Colosseum seen from the arena floor: sand, towering tiers packed with a roaring crowd, the emperor's box. Harsh sunlight. Right third fairly clear (the lion stands there). |
@@ -55,6 +59,7 @@ Characters stand on the right side of the screen, bottom-aligned.
 | `praetorian.webp` | default: a Praetorian Guard officer: polished breastplate, crested helmet, cloak, stern |
 | `praetorian-suspicious.webp` | narrowed eyes, hand on his sword hilt |
 | `praetorian-approving.webp` | a slight nod, stepping aside |
+| `palace-cook.webp` | default: the palace head cook (Archimagirus), big and bossy, apron, sleeves rolled up, pointing |
 | `emperor.webp` | default: Trajan, about 50, broad-shouldered with short grey hair and a soldier's face; purple and gold toga, laurel wreath; dignified |
 | `emperor-curious.webp` | leaning forward, fascinated |
 | `emperor-laughing.webp` | laughing heartily |
