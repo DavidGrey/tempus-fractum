@@ -22,8 +22,11 @@
 //   steal an apple       → Iulia bans you from her stall, reputation −1
 //   ask "Unum!" (one)    → you get a single coin: not enough for apples
 //   ask "Viginti!" (20)  → the merchant is offended and later offers only three
-//   count coins openly   → Marcus snatches them; "Siste, fur!" gets them back,
+//   count coins openly   → Marcus snatches them; "Siste, fur!" gets him caught,
 //                          English or chasing him does not
+//   the caught thief     → a dilemma: hand him to the soldiers (coins back, but Marcus
+//                          is bitter: no free guide, no palace vouching, a cool goodbye)
+//                          or "Ignosco tibi" (lose the coins, gain a loyal friend)
 //   Subura alone         → one warning, then a failure ending
 
 /** @type {import('../schema.js').Scene} */
@@ -385,8 +388,62 @@ export default {
       latin: 'Ignosce! Ignosce! Cibum valde cupio!',
       translation: 'Forgive me! Forgive me! I really want food!',
       vocab: [['ignosce', 'forgive me!'], ['cibum valde cupio', 'I really want food']],
-      onEnter: { addItems: 'denarii', setFlags: ['caughtMarcus', 'knowsMarcusName'] },
-      next: 'boy',
+      onEnter: { setFlags: ['caughtMarcus', 'knowsMarcusName'] },
+      next: 'baker',
+    },
+
+    // The dilemma: your coins, or the boy.
+    baker: {
+      character: 'boy',
+      speaker: 'baker',
+      narration: 'The baker holds the squirming boy by the collar in one hand and your coins in the other. The boy is skin and bone. He looks at the coins, then at you.',
+      latin: 'Fur parvus! Ecce, denarii tui. Ad milites eum duco?',
+      translation: 'A little thief! Here are your denarii. Shall I take him to the soldiers?',
+      vocab: [['fur parvus', 'a little thief'], ['denarii tui', 'your coins'], ['ad milites', 'to the soldiers'], ['eum duco', 'I take him']],
+      choices: [
+        {
+          say: 'Ita! Ad milites!',
+          effects: { addItems: 'denarii', setFlags: 'handedOverMarcus' },
+          next: 'handed_over',
+        },
+        {
+          say: 'Ignosco tibi. Denarios tene!',
+          effects: { setFlags: 'forgaveMarcus', helped: 'boy', recordChoice: { paidMarcusWith: 'forgiveness' } },
+          next: 'forgiven',
+        },
+      ],
+    },
+
+    handed_over: {
+      character: 'boy',
+      speaker: 'boy',
+      narration: 'The baker drops your coins into your hand and hauls the boy off toward two soldiers. Over his shoulder, the boy shouts back at you:',
+      latin: 'Minime! Quaeso! … Numquam tibi ignoscam!',
+      translation: 'No! Please! … I’ll never forgive you!',
+      vocab: [['quaeso', 'please'], ['numquam', 'never'], ['tibi ignoscam', 'I will forgive you (ignosco + dative)']],
+      next: 'hub',
+    },
+
+    forgiven: {
+      character: 'boy',
+      speaker: 'boy',
+      pose: 'grinning',
+      narration: 'The baker shrugs and lets go. The boy stares at the coins in his hand as if they might vanish.',
+      latin: 'Mihi ignoscis?! … Gratias! Marcus sum. Quid quaeris? Ego omnia scio!',
+      translation: 'You forgive me?! … Thank you! I’m Marcus. What are you looking for? I know everything!',
+      vocab: [['mihi ignoscis', 'you forgive me (ignosco + dative)'], ['quaeris', 'you are looking for'], ['omnia', 'everything'], ['scio', 'I know']],
+      choices: [{ say: 'Fabrum quaero.', next: 'forgiven_2' }],
+    },
+
+    forgiven_2: {
+      character: 'boy',
+      speaker: 'boy',
+      pose: 'grinning',
+      latin: 'Fabrum? Viam scio! Pro te, gratis! Veni, sequere me!',
+      translation: 'A smith? I know the way! For you, free! Come on, follow me!',
+      vocab: [['viam', 'the way'], ['pro te', 'for you'], ['gratis', 'for free'], ['sequere me', 'follow me!']],
+      continueText: 'Follow Marcus',
+      next: 'to_smith',
     },
 
     confessed: {
@@ -438,11 +495,11 @@ export default {
           ],
         },
         {
-          if: { flags: 'caughtMarcus', notVisited: 'forum.boy' },
-          narration: 'The baker lets go. The boy rubs his neck and looks at you sheepishly.',
-          latin: 'Marcus sum. Ignosce… Quid quaeris?',
-          translation: 'I’m Marcus. Sorry… What are you looking for?',
-          vocab: [['ignosce', 'forgive me, sorry'], ['quaeris', 'you are looking for']],
+          if: { flags: 'handedOverMarcus', notVisited: 'forum.boy' },
+          narration: 'The boy is back on the fountain, rubbing a sore ear. The soldiers let him go with a warning. He glares at you.',
+          latin: 'Tu! Milites me ceperunt… propter te! Quid quaeris?',
+          translation: 'You! The soldiers grabbed me… because of you! What are you looking for?',
+          vocab: [['milites', 'soldiers'], ['ceperunt', 'caught, grabbed (perfect)'], ['propter te', 'because of you'], ['quaeris', 'you are looking for']],
         },
         {
           if: { visited: 'forum.boy' },
@@ -490,6 +547,13 @@ export default {
       vocab: [['viam', 'the way'], ['scio', 'I know'], ['cupio', 'I want'], ['habesne?', 'do you have?']],
       variants: [
         {
+          if: { flags: 'handedOverMarcus', notVisited: 'forum.boy_deal' },
+          pose: 'default',
+          latin: 'Viam scio. Sed pro te nihil gratis facio! Cibum aut denarios da!',
+          translation: 'I know the way. But I do nothing for you for free! Give me food or coins!',
+          vocab: [['pro te', 'for you'], ['nihil gratis', 'nothing for free'], ['aut', 'or'], ['da', 'give!']],
+        },
+        {
           if: { visited: 'forum.boy_deal' },
           latin: 'Cibum habesne?',
           translation: 'Do you have any food?',
@@ -529,6 +593,17 @@ export default {
       translation: 'Mmm! Thanks! Come on, follow me!',
       vocab: [['veni', 'come!'], ['sequere me', 'follow me!']],
       onEnter: { setFlags: 'knowsMarcusName', helped: 'boy' },
+      variants: [
+        {
+          if: { flags: 'handedOverMarcus' },
+          pose: 'default',
+          narration: 'He wolfs it down without a word of thanks.',
+          latin: 'Hmph. Veni.',
+          translation: 'Hmph. Come on.',
+          vocab: [['veni', 'come!']],
+          onEnter: { setFlags: 'knowsMarcusName' },
+        },
+      ],
       continueText: 'Follow Marcus',
       next: 'to_smith',
     },

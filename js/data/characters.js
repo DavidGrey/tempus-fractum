@@ -51,6 +51,12 @@ export const characters = {
     },
   },
 
+  // Holds the pickpocket in the Forum. Speaks but isn't drawn (Marcus is on stage).
+  baker: {
+    name: 'Pistor',
+    role: 'a baker',
+  },
+
   boy: {
     name: 'Puer',
     role: 'a street boy',

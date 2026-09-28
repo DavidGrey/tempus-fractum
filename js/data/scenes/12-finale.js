@@ -5,8 +5,8 @@
 //
 // Who comes to say goodbye depends on the journey: the gate guard remembers how you got
 // into Rome (Chapter II); Iulia comes if you worked for her, or throws an apple if you stole
-// from her (Chapter III); Marcus's goodbye depends on whether you fed him, paid him, or he
-// robbed you.
+// from her (Chapter III); Marcus's goodbye depends on whether you fed or forgave him, paid
+// him, handed him to the soldiers, or he robbed you.
 //
 // Payoffs: Gaius remembers whether you said you were a dog; Titus turns out to be his
 // son ("Filius et filia mea in urbe habitant" in Chapter I, hinted at the forge); if you
@@ -210,6 +210,14 @@ export default {
       translation: 'Goodbye, friend! You’re our friend! Come back soon!',
       vocab: [['vale', 'goodbye (to one person)'], ['noster', 'our'], ['redi', 'come back!'], ['mox', 'soon']],
       variants: [
+        {
+          if: { flags: 'handedOverMarcus' },
+          pose: 'default',
+          narration: 'Marcus hangs back at first. Then he shuffles to the front, not quite looking at you. Behind him, Titus, Gaius, and the smiths wait to say goodbye.',
+          latin: 'Vale, peregrine. … Tibi ignosco.',
+          translation: 'Goodbye, stranger. … I forgive you.',
+          vocab: [['peregrine', 'stranger (speaking to someone)'], ['tibi ignosco', 'I forgive you (ignosco + dative)']],
+        },
         {
           if: { flags: 'robbedByMarcus' },
           narration: 'Marcus shuffles to the front, looking at his feet, and presses a single silver coin into your hand. Behind him, Titus, Gaius, and the smiths wait to say goodbye.',
