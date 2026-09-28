@@ -122,7 +122,8 @@ export default {
         { say: 'Quinque fabros petam.', effects: { trust: { senator: 1 } }, next: 'good_answer' },
         { say: 'Pecuniam petam.', meaning: 'I will ask for money.', once: true, strike: 'senator', next: 'ask_money' },
         { say: 'Nihil petam.', meaning: 'I will ask for nothing.', once: true, strike: 'senator', next: 'ask_nothing' },
-        { say: 'Palatium petam!', meaning: 'I will ask for the palace!', once: true, strike: 'senator', next: 'ask_palace' },
+        // Near miss: the right idea with the wrong case (fabri, not fabros).
+        { say: 'Quinque fabri petam.', meaning: 'wrong case: what you ask for needs the accusative, “fabros”', once: true, strike: 'senator', next: 'wrong_case' },
       ],
     },
 
@@ -143,13 +144,14 @@ export default {
       choicesFrom: 'machine',
     },
 
-    ask_palace: {
+    // The near miss: "fabri" names who does the asking, not what is asked for.
+    wrong_case: {
       speaker: 'senator',
-      pose: 'amused',
-      latin: 'Palatium? Ha! Imperator palatium suum amat!',
-      translation: 'The palace? Ha! The emperor loves his palace!',
-      vocab: [['palatium', 'palace'], ['suum', 'his (own)']],
-      onEnter: { trust: { senator: -1 } },
+      pose: 'shocked',
+      narration: 'He winces as if you had stepped on his toe. “Fabri” would be the smiths doing something. The thing you ask for needs the accusative: “fabros”.',
+      latin: 'Fabri?! Minime! Imperator hoc non intelleget.',
+      translation: '“Fabri”?! No! The emperor won’t understand that.',
+      vocab: [['fabri', 'smiths (subject: they do the action)'], ['fabros', 'smiths (accusative: what you ask for)'], ['intelleget', 'will understand (future)']],
       choicesFrom: 'machine',
     },
 

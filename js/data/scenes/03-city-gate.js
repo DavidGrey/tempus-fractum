@@ -12,13 +12,14 @@
 //
 // PATIENCE: 3 strikes (bad answers) and the guard has you thrown in prison, which is
 // game over for today. Strikes: an unconvincing "Romanus sum" (no cloak), "Mercator sum",
-// "Canis sum", "Romam eo", "Nescio". "Imperator sum!" is instant prison.
+// "Miles sum" (echoing the guard), "Romam eo", "Nescio". "Imperator sum!" is instant prison.
+// "Canis sum" is a free joke: it costs the guard's trust, not a strike.
 //
 // The guard lets you in when his trust reaches 2. Otherwise he refuses, and you can
 // use an item or hide in a cart, so there is no dead end.
 //
 // Guard trust: +1 wearing the cloak, +1 "Viator sum", +1/−1 "Romanus sum" (with/without
-// cloak), −1 "Mercator sum", −1 "Canis sum", +1 hinge or "Machina mea est fracta",
+// cloak), −1 "Mercator sum", −1 "Miles sum", −1 "Canis sum", +1 hinge or "Machina mea est fracta",
 // −1 "Nescio".
 
 /** @type {import('../schema.js').Scene} */
@@ -149,7 +150,8 @@ export default {
         { say: 'Romanus sum.', if: { hasItems: 'cloak' }, next: 'claims_roman' },
         { say: 'Romanus sum.', meaning: 'I am a Roman.', if: { lacksItems: 'cloak' }, strike: 'guard', next: 'claims_roman' },
         { say: 'Mercator sum.', meaning: 'I am a merchant.', if: { flags: 'overheardMerchant' }, strike: 'guard', next: 'claims_merchant' },
-        { say: 'Canis sum.', meaning: 'I am a dog.', if: { notFlags: 'toldGuardDog' }, strike: 'guard', next: 'claims_dog' },
+        { say: 'Miles sum.', meaning: 'I am a soldier.', once: true, strike: 'guard', next: 'claims_soldier' },
+        { say: 'Canis sum.', if: { notFlags: 'toldGuardDog' }, next: 'claims_dog' },
         { say: 'Imperator sum!', next: 'claims_emperor' },
       ],
     },
@@ -192,6 +194,18 @@ export default {
       vocab: [['sed', 'but'], ['carrum', 'cart (accusative)'], ['habes', 'you have']],
       onEnter: { trust: { guard: -1 } },
       next: 'quo_vadis',
+    },
+
+    // Echoing the guard's own words doesn't work either.
+    claims_soldier: {
+      speaker: 'guard',
+      pose: 'laughing',
+      narration: 'He looks you up and down: no helmet, no armour, no spear.',
+      latin: 'Miles? Ubi est galea tua? Ubi est gladius tuus?',
+      translation: 'A soldier? Where’s your helmet? Where’s your sword?',
+      vocab: [['miles', 'soldier'], ['galea', 'helmet'], ['gladius', 'sword'], ['tua / tuus', 'your']],
+      onEnter: { trust: { guard: -1 } },
+      next: 'claims_dog_2',
     },
 
     claims_dog: {

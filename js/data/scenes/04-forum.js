@@ -14,9 +14,9 @@
 //   pickpocket  if Marcus steals your coins and gets away, he feels guilty and guides you anyway
 //
 // PATIENCE: Iulia and Lucius share one "market" meter of 3 strikes. When it runs out,
-// Iulia calls the soldiers and it's prison: game over for today. Strikes: offering Iulia
-// the bone, stealing an apple, paying one coin when she said "duo", and "Unum!" or
-// "Viginti!" to Lucius.
+// Iulia calls the soldiers and it's prison: game over for today. Strikes: stealing an apple,
+// paying one coin when she said "duo", and "Unum!" or "Viginti!" to Lucius. Offering Iulia
+// the bone is a free joke.
 //
 // Consequences:
 //   steal an apple       → Iulia bans you from her stall, reputation −1
@@ -89,7 +89,7 @@ export default {
         { say: 'Poma cupio.', if: { lacksItems: 'poma' }, next: 'buy' },
         { say: 'Ubi est faber?', once: true, next: 'fruit_smith' },
         { say: 'Laborare volo.', if: { notFlags: 'workedForIulia' }, next: 'work' },
-        { action: 'Offer her your bone', if: { hasItems: 'bone' }, once: true, strike: 'market', next: 'fruit_bone' },
+        { action: 'Offer her your bone', if: { hasItems: 'bone' }, once: true, next: 'fruit_bone' },
         { action: 'Grab an apple and run', if: { lacksItems: 'poma' }, strike: 'market', next: 'steal' },
         { say: 'Vale!', next: 'hub' },
       ],

@@ -9,7 +9,7 @@
 //
 // PATIENCE: only 2 strikes with an emperor. Out of patience: "Ad leones!", the
 // Colosseum (14-arena.js), game over for today. Strikes: any rude greeting (even a
-// plain "Salve!"), "Canis sum", "Nihil accidit", offering money, "Nihil habeo", asking him
+// plain "Salve!"), "Nihil accidit", offering money, "Nihil habeo", asking him
 // to come to the future too early, and the wrong sentences at "Cur tibi credam?".
 // "Heus tu!" goes straight to the lions.
 //
@@ -17,7 +17,8 @@
 //   greeting      "Ave, Imperator!" +2, "Salve!" 0, "Salve, amice!" −1, silent bow −1,
 //                 "Heus tu!" → thrown out (comic ending)
 //   storm prophet +1 (predictedRain in Chapter VI)
-//   what happened +1 correct, 0 "Canis sum", −1 "Nihil accidit"
+//   what happened +1 correct, −1 "Nihil accidit"; "Canis sum" is a free joke, and +1 if
+//                 it's the running joke from Chapter I (saidDog)
 //   the hinge     +1
 //   what will you give me?  +2 story of the future, +1 the hinge as a gift, 0 thanks,
 //                 −1 money, −1 nothing
@@ -142,7 +143,8 @@ export default {
       vocab: [['narravit', 'told (perfect)'], ['de te', 'about you'], ['fabulam', 'story'], ['audire', 'to hear'], ['accidit', 'happened (perfect)']],
       choices: [
         { say: 'Machina mea fracta est, et Romam veni.', effects: { trust: { emperor: 1 } }, next: 'tell_story' },
-        { say: 'Canis sum.', meaning: 'I am a dog.', strike: 'emperor', next: 'dog_finale' },
+        // A free joke, never a strike; the running joke from Chapter I even earns favour.
+        { say: 'Canis sum.', next: 'dog_finale' },
         { say: 'Nihil accidit.', meaning: 'Nothing happened.', effects: { trust: { emperor: -1 } }, strike: 'emperor', next: 'nothing_happened' },
       ],
     },
@@ -168,6 +170,16 @@ export default {
       latin: 'Canis?! Ha! Mirum! Cornelius hoc non dixit!',
       translation: 'A dog?! Ha! Amazing! Cornelius didn’t mention that!',
       vocab: [['mirum', 'amazing, strange'], ['dixit', 'said (perfect)']],
+      variants: [
+        {
+          if: { flags: 'saidDog' },
+          narration: 'There is a stunned silence. Then the Emperor of Rome laughs so hard he has to wipe his eyes.',
+          latin: 'Canis?! Ha! Agricola in foro de “homine cane” narrabat! Tune eras?',
+          translation: 'A dog?! Ha! A farmer in the Forum was telling a story about a “dog-person”! Was that you?',
+          vocab: [['agricola', 'farmer'], ['de homine cane', 'about a dog-person'], ['narrabat', 'was telling (imperfect)'], ['tune eras?', 'was it you?']],
+          onEnter: { trust: { emperor: 1 } },
+        },
+      ],
       choices: [{ say: 'Machina mea fracta est, et Romam veni.', effects: { trust: { emperor: 1 } }, next: 'tell_story' }],
     },
 
@@ -318,8 +330,19 @@ export default {
         { action: 'Look to Senator Cornelius', if: { choice: { palaceAccess: 'sealed' } }, next: 'cornelius_vouches' },
         { say: 'Aurelius et Titus mihi credunt.', next: 'granted' },
         { say: 'Aurelius et Titus me oderunt.', meaning: 'Aurelius and Titus hate me.', strike: 'emperor', next: 'dismissed' },
-        { say: 'Aurelius et Titus pisces sunt.', meaning: 'Aurelius and Titus are fish.', strike: 'emperor', next: 'dismissed' },
+        // Near miss: sounds like the right answer, but the trust runs the wrong way.
+        { say: 'Ego Aurelio et Tito credo.', meaning: 'I trust Aurelius and Titus.', once: true, strike: 'emperor', next: 'you_trust_them' },
       ],
+    },
+
+    you_trust_them: {
+      speaker: 'emperor',
+      pose: 'stern',
+      narration: 'The emperor raises an eyebrow.',
+      latin: 'Tu illis credis? Bene. Sed illi tibi credunt? Et cur EGO tibi credam?',
+      translation: 'YOU trust THEM? Fine. But do they trust you? And why should I believe you?',
+      vocab: [['tu illis credis', 'you trust them (credo + dative)'], ['illi tibi credunt', 'they trust you'], ['credam', 'should I believe (subjunctive)']],
+      choicesFrom: 'decision',
     },
 
     cornelius_vouches: {
@@ -348,7 +371,7 @@ export default {
       narration: 'The emperor frowns, then waves a hand. The audience is over.',
       latin: 'Hmm. Tibi non credo. Ad leones!',
       translation: 'Hmm. I don’t believe you. To the lions!',
-      vocab: [['oderunt', 'they hate'], ['pisces', 'fish (plural)'], ['credo', 'I believe']],
+      vocab: [['oderunt', 'they hate'], ['tibi non credo', 'I don’t believe you']],
       continueText: 'Get dragged away',
       next: { scene: 'arena' },
     },
