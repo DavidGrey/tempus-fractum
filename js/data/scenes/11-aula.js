@@ -335,7 +335,7 @@ export default {
       choices: [
         { action: 'Look to Senator Cornelius', if: { choice: { palaceAccess: 'sealed' } }, next: 'cornelius_vouches' },
         { say: 'Aurelius et Titus mihi credunt.', next: 'granted' },
-        { say: 'Aurelius et Titus me oderunt.', meaning: 'Aurelius and Titus hate me.', strike: 'emperor', next: 'dismissed' },
+        { say: 'Aurelius et Titus me oderunt.', meaning: 'Aurelius and Titus hate me.', once: true, strike: 'emperor', next: 'they_hate_you' },
         // Near miss: sounds like the right answer, but the trust runs the wrong way.
         { say: 'Ego Aurelio et Tito credo.', meaning: 'I trust Aurelius and Titus.', once: true, strike: 'emperor', next: 'you_trust_them' },
       ],
@@ -371,15 +371,15 @@ export default {
       next: { scene: 'finale' },
     },
 
-    dismissed: {
+    // A wrong answer costs a seal like any other; the meter decides when it's the lions.
+    they_hate_you: {
       speaker: 'emperor',
       pose: 'stern',
-      narration: 'The emperor frowns, then waves a hand. The audience is over.',
-      latin: 'Hmm. Tibi non credo. Ad leones!',
-      translation: 'Hmm. I don’t believe you. To the lions!',
-      vocab: [['oderunt', 'they hate'], ['tibi non credo', 'I don’t believe you']],
-      continueText: 'Get dragged away',
-      next: { scene: 'arena' },
+      narration: 'The emperor raises an eyebrow. Somewhere, Cornelius puts his head in his hands.',
+      latin: 'Te oderunt?! Et cur ego tibi credam?',
+      translation: 'They hate you?! Then why should I believe you?',
+      vocab: [['oderunt', 'they hate'], ['credam', 'should I believe (subjunctive)']],
+      choicesFrom: 'decision',
     },
 
     // Out of patience: game over for today.

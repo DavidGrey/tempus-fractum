@@ -11,8 +11,9 @@ const KICKERS = {
   defeat: ['Finis… hodie.', 'Game over, for today.'],
 };
 
-// The review list on a defeat card: the lines the class got wrong this chapter.
-function review(mistakes) {
+// The review list: the lines the class got wrong this chapter. Shown on defeat cards,
+// and on chapter-end cards when the class survived with some mistakes.
+function review(mistakes, label = 'Before next class, review') {
   if (!mistakes.length) {
     return el('p', { class: 'review__none' }, 'No Latin mistakes this time: just a very bad decision!');
   }
@@ -20,7 +21,7 @@ function review(mistakes) {
   const words = new Map();
   for (const m of recent) for (const [la, en] of m.vocab) if (!words.has(la)) words.set(la, en);
   return el('div', { class: 'review' },
-    el('p', { class: 'ending__label' }, 'Before next class, review'),
+    el('p', { class: 'ending__label' }, label),
     el('ol', { class: 'review__list' }, ...recent.map((m) =>
       el('li', { class: 'review__item' },
         m.latin && el('p', { class: 'review__latin', lang: 'la' }, m.latin),
@@ -73,6 +74,7 @@ export function createEnding(root, { onRetry, onNewGame, onTitle, onContinue }) 
         ending.subtitle && el('p', { class: 'ending__subtitle' }, ending.subtitle),
         el('div', { class: 'ending__text' }, ...toArray(ending.text).map((t) => el('p', {}, t))),
         isDefeat && review(view.mistakes),
+        type === 'chapter' && view.mistakes.length > 0 && review(view.mistakes, 'You made it, but review these'),
         !isDefeat && view.inventory.length > 0 && el('div', { class: 'ending__bag' },
           el('p', { class: 'ending__label' }, 'In your bag'),
           el('ul', { class: 'chips' }, ...view.inventory.map((item) =>
