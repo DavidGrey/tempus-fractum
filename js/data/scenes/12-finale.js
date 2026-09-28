@@ -3,9 +3,10 @@
 // imperial smiths repair the machine, old friends come to say goodbye, and the player
 // learns one last thing: "valete" is the goodbye for more than one person.
 //
-// Payoffs: Gaius remembers whether you said you were a dog; if you gave the hinge to
-// the emperor, Titus has to work from memory; telling Trajan about his column changes
-// the final line.
+// Payoffs: Gaius remembers whether you said you were a dog; Titus turns out to be his
+// son ("Filius et filia mea in urbe habitant" in Chapter I, hinted at the forge); if you
+// gave the hinge to the emperor, Titus has to work from memory; telling Trajan about his
+// column changes the final line.
 //
 // Endings: home (success), stay in Rome after all (success), and, reached from the
 // throne room, the emperor coming with you (comic).
@@ -72,6 +73,34 @@ export default {
       latin: 'Di immortales! Nemo mihi credet!',
       translation: 'Immortal gods! Nobody will believe me!',
       vocab: [['misit', 'sent (perfect)'], ['reficimus', 'we are repairing'], ['di immortales', 'immortal gods! (an exclamation)'], ['nemo', 'nobody'], ['credet', 'will believe (future)']],
+      next: 'reunion',
+    },
+
+    // Titus is Gaius's son ("Filius et filia mea in urbe habitant", Chapter I).
+    reunion: {
+      character: 'farmer',
+      speaker: 'farmer',
+      narration: 'Then he sees who is leading the smiths, and his mouth falls open all over again.',
+      latin: 'Tite?! Fili mi! Quid hic facis?',
+      translation: 'Titus?! My son! What are you doing here?',
+      vocab: [['fili mi', 'my son (speaking to him)'], ['quid facis?', 'what are you doing?']],
+      variants: [
+        {
+          if: { flags: 'knowsFarmerName' },
+          narration: 'Then he sees who is leading the smiths, and his mouth falls open all over again. So this is the son who lives in the city!',
+        },
+      ],
+      next: 'reunion_2',
+    },
+
+    reunion_2: {
+      character: 'smith',
+      speaker: 'smith',
+      pose: 'laughing',
+      narration: 'Titus hugs his father so hard that the old man’s feet leave the ground.',
+      latin: 'Pater! Imperator nos misit! Hic peregrinus me ex officina liberavit.',
+      translation: 'Father! The emperor sent us! This stranger got me out of the workshop.',
+      vocab: [['pater', 'father'], ['misit', 'sent (perfect)'], ['ex officina', 'out of the workshop'], ['liberavit', 'set free (perfect)']],
       next: 'repair',
     },
 

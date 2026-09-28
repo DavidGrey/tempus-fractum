@@ -219,7 +219,8 @@ export default {
 
     verdict: {
       speaker: 'smith',
-      narration: 'He sets the hinge down gently and wipes his hands on his leather apron.',
+      // Sets up the finale: Titus is Gaius the farmer's son.
+      narration: 'He sets the hinge down gently. “Extra urbem… pater meus ibi agricola est,” he mutters, half to himself. Then he wipes his hands on his leather apron.',
       latin: 'Opus magnum et difficile est! Unus faber non satis est. Quinque fabri necessarii sunt.',
       translation: 'It’s a big, difficult job! One smith isn’t enough. Five smiths are needed.',
       vocab: [['opus', 'job, work'], ['difficile', 'difficult'], ['unus', 'one'], ['satis', 'enough'], ['quinque', 'five'], ['necessarii sunt', 'are needed, are necessary']],
