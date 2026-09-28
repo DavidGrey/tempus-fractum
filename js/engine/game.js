@@ -84,8 +84,10 @@ export class Game {
     if (next) this.goTo(next);
   }
 
-  useHint() {
-    this.state.stats.hintsUsed++;
+  /** The class opened a hint on this line: 'words' (vocabulary) or 'translation'. */
+  useHint(step = 'words') {
+    if (step === 'translation') this.state.stats.translationsShown++;
+    else this.state.stats.hintsUsed++;
     saveGame(this.state);
   }
 

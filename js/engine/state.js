@@ -30,7 +30,7 @@ export function createInitialState() {
     chapterId: null,      // chapter currently being played (for "resume next class")
     strikes: {},          // bad answers this chapter, per patience meter, e.g. { guard: 2 }
     mistakes: [],         // the lines the player got wrong this chapter (for the review list)
-    stats: { choicesMade: 0, hintsUsed: 0 },
+    stats: { choicesMade: 0, hintsUsed: 0, translationsShown: 0 },
   };
 }
 

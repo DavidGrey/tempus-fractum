@@ -18,7 +18,7 @@ export function createApp(game, { config, problems }) {
   const params = new URLSearchParams(config.authoringTools ? location.search : '');
 
   const stage = createStage($('stage'));
-  const dialogue = createDialogue($('dialogue'), { onHint: () => game.useHint() });
+  const dialogue = createDialogue($('dialogue'), { onHint: (step) => game.useHint(step) });
   const choices = createChoices($('choices'), { onChoose: (i) => game.choose(i) });
   const inventory = createInventory($('inventory'), $('drawer-backdrop'));
   const toasts = createToasts($('toasts'));

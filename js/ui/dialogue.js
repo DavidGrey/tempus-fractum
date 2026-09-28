@@ -1,31 +1,53 @@
 // The dialogue panel's text column: nameplate, "You: …" echo, narration,
-// the Latin line, and the Hint toggle (translation + vocabulary).
+// the Latin line, and the Hint toggle.
+//
+// The hint opens in two steps, so the class works from the words before reaching
+// for the English: the first click shows the vocabulary, the second adds the
+// translation, and the third closes it. A line with only one of the two opens it
+// in one step.
 
 import { el, refs, replayAnimation } from './dom.js';
 
+// Button label for each step: what the NEXT click will do.
+const LABELS = {
+  words: ['Quid significat?', 'Hint (H)'],
+  translation: ['Anglice?', 'Translation (H)'],
+  close: ['Satis', 'Hide (H)'],
+};
+
 export function createDialogue(root, { onHint }) {
   const r = refs(root);
-  let hintOpen = false;
-  let hintCounted = false;
+  let steps = [];       // what each click reveals on this line, e.g. ['words', 'translation']
+  let shown = 0;        // how many of those steps are showing (0 = closed)
+  let counted = new Set();
   let lastPatience = null; // { npc, left } shown last time, to animate a lost seal
 
   r.hintToggle.addEventListener('click', toggleHint);
 
-  function setHint(open) {
-    hintOpen = open;
+  function setShown(n) {
+    shown = n;
+    const open = n > 0;
+    const showing = steps.slice(0, n);
     r.hint.hidden = !open;
+    r.vocab.hidden = !showing.includes('words');
+    r.translation.hidden = !showing.includes('translation');
     r.hintToggle.setAttribute('aria-expanded', String(open));
     r.hintToggle.classList.toggle('is-open', open);
     root.classList.toggle('is-hint-open', open);
-    if (open && !hintCounted) {
-      hintCounted = true;
-      onHint();
+    const [la, en] = LABELS[steps[n] ?? 'close'];
+    r.hintToggle.replaceChildren(el('span', { lang: 'la' }, la), ' ', el('span', { class: 'hint-toggle__en' }, en));
+    // Count each kind of help once per line (the ending card reports both).
+    for (const step of showing) {
+      if (!counted.has(step)) {
+        counted.add(step);
+        onHint(step);
+      }
     }
   }
 
   function toggleHint() {
     if (r.hintToggle.hidden) return;
-    setHint(!hintOpen);
+    setShown(shown < steps.length ? shown + 1 : 0);
   }
 
   function render(view) {
@@ -51,19 +73,17 @@ export function createDialogue(root, { onHint }) {
     r.latin.textContent = view.latin ?? '';
     r.latin.classList.toggle('latin--inscription', view.latinStyle === 'inscription');
 
-    const hasHint = Boolean(view.translation || view.vocab.length);
-    r.hintToggle.hidden = !hasHint;
+    steps = [...(view.vocab.length ? ['words'] : []), ...(view.translation ? ['translation'] : [])];
+    r.hintToggle.hidden = steps.length === 0;
     r.translation.textContent = view.translation ?? '';
-    r.translation.hidden = !view.translation;
     r.vocab.replaceChildren(
       ...view.vocab.map(([latin, english]) =>
         el('div', { class: 'vocab-item' }, el('dt', { lang: 'la' }, latin), el('dd', {}, english)),
       ),
     );
-    r.vocab.hidden = view.vocab.length === 0;
 
-    hintCounted = false;
-    setHint(false);
+    counted = new Set();
+    setShown(0);
     r.text.scrollTop = 0;
     replayAnimation(r.text, 'is-entering');
   }
