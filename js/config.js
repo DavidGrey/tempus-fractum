@@ -19,8 +19,8 @@ export const config = {
   //   translations  whether the hint can go on to show the English translation
   //   simplified    use the easier Latin written in scenes' `intro` fields (see js/data/schema.js)
   difficulties: {
-    tiro: { latin: 'Tiro', english: 'Intro', patience: +1, translations: true, simplified: true,
-      description: 'For a first class: simpler Latin with far fewer words to learn, and one extra seal of patience.' },
+    tiro: { latin: 'Tiro', english: 'Intro', patience: 0, translations: true, simplified: true,
+      description: 'Simpler Latin with reduced vocabulary.' },
     media: { latin: 'Media', english: 'Normal', patience: 0, translations: true,
       description: 'The game as written.' },
     difficilis: { latin: 'Difficilis', english: 'Hard', patience: -1, translations: false,
