@@ -88,6 +88,11 @@ export default {
           latin: 'TU! Os! Canis meus totum diem cucurrit!',
           translation: 'YOU! The bone! My dog ran around all day!',
           vocab: [['os', 'bone'], ['canis meus', 'my dog'], ['totum diem', 'all day'], ['cucurrit', 'ran (perfect)']],
+          intro: {
+            latin: 'TU! Os! Canis meus multum cucurrit!',
+            translation: 'YOU! The bone! My dog ran and ran!',
+            vocab: [['os', 'bone'], ['canis meus', 'my dog'], ['multum', 'a lot'], ['cucurrit', 'ran (perfect)']],
+          },
         },
         {
           if: { choice: { enteredBy: 'cart' } },
@@ -160,6 +165,11 @@ export default {
       latin: 'Pater! Imperator nos misit! Hic peregrinus me ex officina liberavit.',
       translation: 'Father! The emperor sent us! This stranger got me out of the workshop.',
       vocab: [['pater', 'father'], ['misit', 'sent (perfect)'], ['ex officina', 'out of the workshop'], ['liberavit', 'set free (perfect)']],
+      intro: {
+        latin: 'Pater! Imperator nos misit! Hic peregrinus mihi auxilium dedit.',
+        translation: 'Father! The emperor sent us! This stranger helped me.',
+        vocab: [['pater', 'father'], ['misit', 'sent (perfect)'], ['mihi auxilium dedit', 'gave me help (perfect)']],
+      },
       next: 'repair',
     },
 
@@ -186,12 +196,22 @@ export default {
       latin: 'Ecce! Cardo novus. Ianua clauditur. Machina refecta est! Iter tuum longum et difficile erat.',
       translation: 'Look! A new hinge. The door closes. The machine is repaired! Your journey was long and difficult.',
       vocab: [['iter tuum', 'your journey'], ['longum et difficile', 'long and difficult'], ['cardo novus', 'a new hinge'], ['ianua', 'door'], ['clauditur', 'closes, is closed (passive)'], ['refecta est', 'has been repaired (perfect passive)']],
+      intro: {
+        latin: 'Ecce! Cardo novus. Machinam refecimus! Iter tuum longum et difficile erat.',
+        translation: 'Look! A new hinge. We have repaired the machine! Your journey was long and difficult.',
+        vocab: [['cardo novus', 'a new hinge'], ['refecimus', 'we repaired (perfect)'], ['iter tuum', 'your journey'], ['longum et difficile', 'long and difficult']],
+      },
       variants: [
         {
           if: { choice: { giftToEmperor: 'hinge' } },
           latin: 'Ecce! Cardo novus… non perfectus, sed ianua clauditur. Fortasse. Iter tuum longum et difficile erat.',
           translation: 'Look! A new hinge… not perfect, but the door closes. Probably. Your journey was long and difficult.',
           vocab: [['cardo novus', 'a new hinge'], ['non perfectus', 'not perfect'], ['ianua', 'door'], ['clauditur', 'closes, is closed (passive)'], ['fortasse', 'probably, perhaps']],
+          intro: {
+            latin: 'Ecce! Cardo novus… non perfectus. Machinam refecimus… fortasse. Iter tuum longum et difficile erat.',
+            translation: 'Look! A new hinge… not perfect. We have repaired the machine… probably. Your journey was long and difficult.',
+            vocab: [['cardo novus', 'a new hinge'], ['non perfectus', 'not perfect'], ['refecimus', 'we repaired (perfect)'], ['fortasse', 'probably, perhaps']],
+          },
         },
       ],
       next: 'iulia',
@@ -227,6 +247,11 @@ export default {
       latin: 'Vale, amice! Amicus noster es! Redi mox!',
       translation: 'Goodbye, friend! You’re our friend! Come back soon!',
       vocab: [['vale', 'goodbye (to one person)'], ['noster', 'our'], ['redi', 'come back!'], ['mox', 'soon']],
+      intro: {
+        latin: 'Vale, amice! Amicus noster es! Redi!',
+        translation: 'Goodbye, friend! You are our friend! Come back!',
+        vocab: [['vale', 'goodbye (to one person)'], ['noster', 'our'], ['redi', 'come back!']],
+      },
       variants: [
         {
           if: { flags: 'handedOverMarcus' },
@@ -242,6 +267,11 @@ export default {
           latin: 'Ecce, denarius tuus! Ceteros… comedi. Vale, amice!',
           translation: 'Here’s your denarius! The others… I ate. Bye, friend!',
           vocab: [['denarius tuus', 'your silver coin'], ['ceteros', 'the others'], ['comedi', 'I ate (up) (perfect)'], ['vale', 'goodbye (to one person)']],
+          intro: {
+            latin: 'Ecce, denarius tuus! Alios… non habeo. Vale, amice!',
+            translation: 'Here’s your coin! The others… I don’t have them. Goodbye, friend!',
+            vocab: [['denarius tuus', 'your silver coin'], ['alios', 'the others'], ['non habeo', 'I don’t have'], ['vale', 'goodbye (to one person)']],
+          },
         },
         {
           if: { choice: { paidMarcusWith: 'coins' } },

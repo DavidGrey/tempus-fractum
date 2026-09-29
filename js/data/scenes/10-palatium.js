@@ -77,6 +77,11 @@ export default {
           latin: 'Tu… tu es vates! Cornelius nobis dixit: “Vates tempestatem praedixit!” Sed porta clausa est. Imperator dixit: “Hodie nemo intrat.”',
           translation: 'You… you’re the prophet! Cornelius told us: “The prophet predicted the storm!” But the gate is shut. The emperor said: “Today nobody goes in.”',
           vocab: [['vates', 'prophet'], ['nobis', 'to us'], ['tempestatem', 'storm (accusative)'], ['praedixit', 'predicted (perfect)'], ['clausa est', 'is shut'], ['nemo', 'nobody']],
+          intro: {
+            latin: 'Tu… tu es vates! Cornelius nobis dixit: “Vates tempestatem praedixit!” Sed porta clausa est. Hodie nemo intrat.',
+            translation: 'You… you’re the prophet! Cornelius told us: “The prophet predicted the storm!” But the gate is shut. Today nobody goes in.',
+            vocab: [['vates', 'prophet'], ['nobis', 'to us'], ['tempestatem', 'storm (accusative)'], ['praedixit', 'predicted (perfect)'], ['clausa est', 'is shut'], ['nemo', 'nobody']],
+          },
         },
         {
           if: { visited: 'palatium.gate' },
@@ -219,6 +224,11 @@ export default {
       latin: 'Tu! Cur tarde venisti? Novus servus es?',
       translation: 'You! Why did you come late? Are you the new servant?',
       vocab: [['cur?', 'why?'], ['tarde', 'late'], ['venisti', 'you came (perfect)'], ['novus', 'new'], ['servus', 'servant, slave']],
+      intro: {
+        latin: 'Tu! Novus servus es?',
+        translation: 'You! Are you the new servant?',
+        vocab: [['novus', 'new'], ['servus', 'servant, slave']],
+      },
       variants: [
         {
           if: { helped: 'boy', notVisited: 'palatium.kitchen' },
@@ -266,6 +276,11 @@ export default {
       latin: 'Bene. Imperator vinum rogavit. Hoc vinum ad aulam porta! Cave: noli vinum effundere!',
       translation: 'Good. The emperor asked for wine. Carry this wine to the throne room! Careful: don’t spill the wine!',
       vocab: [['rogavit', 'asked for (perfect)'], ['vinum', 'wine'], ['ad aulam', 'to the throne room'], ['porta', 'carry!'], ['cave', 'careful!'], ['noli effundere', 'don’t spill!']],
+      intro: {
+        latin: 'Bene. Imperator vinum rogavit. Hoc vinum ad aulam porta! Cave!',
+        translation: 'Good. The emperor asked for wine. Carry this wine to the throne room! Careful!',
+        vocab: [['rogavit', 'asked for (perfect)'], ['vinum', 'wine'], ['ad aulam', 'to the throne room'], ['porta', 'carry!'], ['cave', 'careful!']],
+      },
       next: 'job_2',
     },
 
@@ -277,6 +292,11 @@ export default {
       latin: 'Aula est supra. Scalas ascende! Festina!',
       translation: 'The throne room is upstairs. Climb the stairs! Hurry!',
       vocab: [['supra', 'above, upstairs'], ['scalas', 'stairs'], ['ascende', 'climb! go up!'], ['festina', 'hurry!']],
+      intro: {
+        latin: 'Aula est supra. Festina!',
+        translation: 'The throne room is upstairs. Hurry!',
+        vocab: [['aula', 'throne room'], ['supra', 'above, upstairs'], ['festina', 'hurry!']],
+      },
       continueText: 'Hurry out with the jug',
       next: 'stairs',
     },
@@ -295,6 +315,13 @@ export default {
             latin: 'Aula est supra. Scalas ascende!',
             translation: 'The throne room is upstairs. Climb the stairs!',
             vocab: [['supra', 'above, upstairs'], ['ascende', 'climb! go up!']],
+          },
+          intro: {
+            review: {
+              latin: 'Aula est supra. Festina!',
+              translation: 'The throne room is upstairs. Hurry!',
+              vocab: [['supra', 'above, upstairs']],
+            },
           },
           next: 'barracks',
         },
@@ -339,6 +366,11 @@ export default {
       latin: 'Signum Cornelii… et vinum imperatoris! Ha! Audax es. Sed signa falsa multa sunt. Unum rogo:',
       translation: 'Cornelius’s seal… and the emperor’s wine! Ha! You’re bold. But there are lots of fake seals. I’ll ask one thing:',
       vocab: [['signum', 'seal'], ['audax', 'bold'], ['signa falsa', 'fake seals'], ['unum rogo', 'I ask one thing']],
+      intro: {
+        latin: 'Signum Cornelii… et vinum imperatoris! Ha! Audax es. Sed multi homines mendaces sunt. Unum rogo:',
+        translation: 'Cornelius’s seal… and the emperor’s wine! Ha! You’re bold. But lots of people are liars. I’ll ask one thing:',
+        vocab: [['signum', 'seal'], ['audax', 'bold'], ['mendaces', 'liars'], ['unum rogo', 'I ask one thing']],
+      },
       next: 'ring_question',
     },
 
@@ -350,6 +382,11 @@ export default {
       latin: 'Vere vates es! Tempestatem praedixisti, et nunc hic es! … Sed vates multi mendaces sunt. Unum rogo:',
       translation: 'You really are a prophet! You predicted the storm, and now here you are! … But lots of prophets are liars. I’ll ask one thing:',
       vocab: [['vere', 'truly, really'], ['praedixisti', 'you predicted (perfect)'], ['nunc', 'now'], ['mendaces', 'liars'], ['unum rogo', 'I ask one thing']],
+      intro: {
+        latin: 'Vates es! Tempestatem praedixisti, et nunc hic es! … Sed multi vates mendaces sunt. Unum rogo:',
+        translation: 'You are a prophet! You predicted the storm, and now here you are! … But lots of prophets are liars. I’ll ask one thing:',
+        vocab: [['praedixisti', 'you predicted (perfect)'], ['nunc', 'now'], ['mendaces', 'liars'], ['unum rogo', 'I ask one thing']],
+      },
       next: 'ring_question',
     },
 
@@ -415,6 +452,11 @@ export default {
       latin: 'Hmm. Cornelius mihi indicem dedit. Hic scriptum est: “Peregrinus mirus, hospes Aurelii.” Tune es?',
       translation: 'Hmm. Cornelius gave me a list. It says here: “A strange foreigner, Aurelius’s guest.” Is that you?',
       vocab: [['indicem', 'list'], ['dedit', 'gave (perfect)'], ['scriptum est', 'it is written'], ['mirus', 'strange'], ['hospes', 'guest'], ['tune es?', 'is it you?']],
+      intro: {
+        latin: 'Hmm. Cornelius nomina mihi dedit. Cornelius scripsit: “Peregrinus mirus, hospes Aurelii.” Tune es?',
+        translation: 'Hmm. Cornelius gave me names. Cornelius wrote: “A strange foreigner, Aurelius’s guest.” Is that you?',
+        vocab: [['nomina', 'names'], ['dedit', 'gave (perfect)'], ['scripsit', 'wrote (perfect)'], ['mirus', 'strange'], ['hospes', 'guest'], ['tune es?', 'is it you?']],
+      },
       choices: [
         { say: 'Ita, ego sum.', next: 'ring_question' },
         { say: 'Minime!', meaning: 'Not at all! (No!)', once: true, strike: 'palace', next: 'not_me' },
@@ -428,6 +470,11 @@ export default {
       latin: 'Minime? Ergo quis es?!',
       translation: 'No? Then who are you?!',
       vocab: [['ergo', 'then, so']],
+      intro: {
+        latin: 'Minime? Quis es?!',
+        translation: 'No? Then who are you?!',
+        vocab: [['quis?', 'who?']],
+      },
       choicesFrom: 'list',
     },
 
@@ -482,6 +529,11 @@ export default {
       latin: 'Hic peregrinus amicus meus est! Homo bonus est! Ego testis sum!',
       translation: 'This stranger is my friend! A good person! I’m a witness!',
       vocab: [['amicus meus', 'my friend'], ['homo bonus', 'a good person'], ['testis', 'witness']],
+      intro: {
+        latin: 'Hic peregrinus amicus meus est! Homo bonus est!',
+        translation: 'This stranger is my friend! A good person!',
+        vocab: [['amicus meus', 'my friend'], ['homo bonus', 'a good person']],
+      },
       next: 'marcus_2',
     },
 
@@ -543,6 +595,11 @@ export default {
       latin: 'Satis! Suspectus es. In Tullianum!',
       translation: 'Enough! You’re suspicious. To the Tullianum!',
       vocab: [['satis', 'enough'], ['suspectus', 'suspicious'], ['Tullianum', 'Rome’s deepest prison cell']],
+      intro: {
+        latin: 'Satis! Tibi non credo. In Tullianum!',
+        translation: 'Enough! I don’t believe you. To the Tullianum!',
+        vocab: [['satis', 'enough'], ['tibi non credo', 'I don’t believe you'], ['Tullianum', 'Rome’s deepest prison cell']],
+      },
       onEnter: { recordChoice: { jailedFrom: 'palace' } },
       continueText: 'Get dragged away',
       next: { scene: 'carcer' },
@@ -558,6 +615,11 @@ export default {
       latin: 'Tace et audi: ante imperatorem genua flecte, et “Ave, Imperator” dic!',
       translation: 'Be quiet and listen: in front of the emperor, bend your knee, and say “Ave, Imperator”!',
       vocab: [['tace', 'be quiet!'], ['audi', 'listen!'], ['ante', 'in front of'], ['genua flecte', 'bend your knee!'], ['dic', 'say!']],
+      intro: {
+        latin: 'Tace et audi: ante imperatorem “Ave, Imperator” dic!',
+        translation: 'Be quiet and listen: in front of the emperor, say “Ave, Imperator”!',
+        vocab: [['tace', 'be quiet!'], ['audi', 'listen!'], ['ante', 'in front of'], ['dic', 'say!']],
+      },
       choices: [
         { say: 'Scio!', if: { flags: 'knowsAve' }, next: 'already_know' },
         { say: 'Gratias!', next: 'end' },
@@ -571,6 +633,11 @@ export default {
       latin: 'Bene. Cornelius te bene docuit.',
       translation: 'Good. Cornelius taught you well.',
       vocab: [['docuit', 'taught (perfect)']],
+      intro: {
+        latin: 'Scis? Bene!',
+        translation: 'You know? Good!',
+        vocab: [['scis', 'you know']],
+      },
       next: 'end',
     },
 

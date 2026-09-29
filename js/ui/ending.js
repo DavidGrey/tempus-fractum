@@ -82,7 +82,7 @@ export function createEnding(root, { onRetry, onNewGame, onTitle, onContinue }) 
             el('li', { class: 'chip' }, el('span', { lang: 'la' }, item.latin), ` · ${item.english}`))),
         ),
         !isDefeat && el('p', { class: 'ending__stats' },
-          `Choices made: ${view.stats.choicesMade} · Hints used: ${view.stats.hintsUsed} · Translations: ${view.stats.translationsShown}`),
+          `Choices made: ${view.stats.choicesMade} · Hints used: ${view.stats.hintsUsed} · Translations: ${view.stats.translationsShown} · Difficulty: ${view.difficulty.english}`),
         ending.teaser && el('p', { class: 'ending__teaser' }, ending.teaser),
         el('div', { class: 'ending__actions' }, ...actions),
       ),

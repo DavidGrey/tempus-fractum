@@ -8,6 +8,7 @@ import { createInventory } from './inventory.js';
 import { createEnding } from './ending.js';
 import { createMenu } from './menu.js';
 import { createTitle } from './title.js';
+import { createSettings } from './settings.js';
 import { createToasts } from './toasts.js';
 import { createDebug } from './debug.js';
 import { el } from './dom.js';
@@ -43,7 +44,17 @@ export function createApp(game, { config, problems }) {
     config,
     onNewGame: startPlaying(() => game.newGame()),
     onContinue: startPlaying(() => game.continueGame() || game.newGame()),
+    onSettings: () => settings.open(),
   });
+  const settings = createSettings($('settings'), {
+    difficulties: config.difficulties,
+    getDifficulty: () => game.difficulty.id,
+    onDifficulty: (id) => {
+      game.setDifficulty(id);
+      title.setDifficulty(game.difficulty);
+    },
+  });
+  title.setDifficulty(game.difficulty);
 
   function showTitle() {
     menu.close();
@@ -83,13 +94,14 @@ export function createApp(game, { config, problems }) {
     const key = e.key.toLowerCase();
 
     if (key === 'escape') {
-      if (inventory.isOpen) inventory.close();
+      if (settings.isOpen) settings.close();
+      else if (inventory.isOpen) inventory.close();
       else if (menu.isOpen) menu.close();
       else if (!title.isOpen && !ending.isOpen) menu.open();
       return;
     }
     if (key === '`') return debug.toggle();
-    if (title.isOpen || ending.isOpen || menu.isOpen) return;
+    if (title.isOpen || ending.isOpen || menu.isOpen || settings.isOpen) return;
     if (key === 'i') return inventory.toggle();
     if (inventory.isOpen) return;
 

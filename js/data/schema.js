@@ -94,6 +94,10 @@
  * @property {string} [continueText] Label for that button (default "Continue").
  * @property {Ending} [ending]       Entering this node ends the game or chapter.
  *
+ * @property {Intro} [intro]        Easier Latin for Tiro (intro) mode: these fields replace the
+ *                                   node's own, e.g. { latin, translation, vocab }. A variant can
+ *                                   have its own `intro`. Lines without one are used as written.
+ *
  * @property {Variant[]} [variants]  Alternate versions of this node. When the node is
  *                                   entered, the FIRST variant whose `if` holds is merged
  *                                   over the node's fields (fields it doesn't list stay).
@@ -126,6 +130,20 @@
  *                                   meter runs out, the game goes to the meter's `fail` target
  *                                   instead of this choice's `next`.
  * @property {string} [id]           Stable id for `once` tracking (defaults to the text).
+ * @property {{say?: string, meaning?: string, review?: Object}} [intro]
+ *   Easier Latin for Tiro mode, e.g. { say: 'Poma volo.' } for 'Poma cupio.'
+ */
+
+/**
+ * Tiro mode's easier version of a node: a first class meets far fewer words. Keep the same
+ * meaning and the same right and wrong answers; swap rare words for ones the game already uses.
+ *
+ * @typedef {Object} Intro
+ * @property {string} [latin]
+ * @property {string} [translation]
+ * @property {Array<[string, string]>} [vocab]
+ * @property {string|string[]} [narration]  Only when the narration quotes the Latin being replaced.
+ * @property {Ending} [ending]
  */
 
 /**

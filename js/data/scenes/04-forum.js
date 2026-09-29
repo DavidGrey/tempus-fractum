@@ -71,6 +71,11 @@ export default {
       latin: 'Salve! Poma bona vendo! Cupisne poma?',
       translation: 'Hello! I sell good apples! Do you want apples?',
       vocab: [['poma', 'apples'], ['bona', 'good'], ['vendo', 'I sell'], ['cupisne?', 'do you want?']],
+      intro: {
+        latin: 'Salve! Poma bona vendo! Visne poma?',
+        translation: 'Hello! I sell good apples! Do you want apples?',
+        vocab: [['poma', 'apples'], ['bona', 'good'], ['vendo', 'I sell'], ['visne?', 'do you want?']],
+      },
       variants: [
         {
           if: { flags: 'stoleFromIulia' },
@@ -90,7 +95,7 @@ export default {
         },
       ],
       choices: [
-        { say: 'Poma cupio.', if: { lacksItems: 'poma' }, next: 'buy' },
+        { say: 'Poma cupio.', intro: { say: 'Poma volo.' }, if: { lacksItems: 'poma' }, next: 'buy' },
         { say: 'Ubi est faber?', once: true, next: 'fruit_smith' },
         { say: 'Laborare volo.', if: { notFlags: 'workedForIulia' }, next: 'work' },
         { action: 'Offer her your bone', if: { hasItems: 'bone' }, once: true, next: 'fruit_bone' },
@@ -122,7 +127,7 @@ export default {
           next: 'wrong_price',
         },
         { say: 'Pecuniam non habeo.', if: { lacksItems: 'denarii' }, next: 'no_money' },
-        { say: 'Nimis est!', next: 'too_much' },
+        { say: 'Nimis est!', intro: { say: 'Multum est!' }, next: 'too_much' },
       ],
     },
 
@@ -174,6 +179,11 @@ export default {
       latin: 'Nimis? Poma mea sunt optima!',
       translation: 'Too much? My apples are the best!',
       vocab: [['nimis', 'too much'], ['mea', 'my'], ['optima', 'the best']],
+      intro: {
+        latin: 'Multum? Poma mea sunt optima!',
+        translation: 'A lot? My apples are the best!',
+        vocab: [['multum', 'a lot'], ['mea', 'my'], ['optima', 'the best']],
+      },
       next: 'fruit',
     },
 
@@ -195,6 +205,11 @@ export default {
       latin: 'Laborare? Bene! Porta cistas!',
       translation: 'Work? Good! Carry the baskets!',
       vocab: [['laborare', 'to work'], ['porta', 'carry!'], ['cistas', 'baskets']],
+      intro: {
+        latin: 'Laborare? Bene! Porta poma!',
+        translation: 'Work? Good! Carry the fruit!',
+        vocab: [['laborare', 'to work'], ['porta', 'carry!'], ['poma', 'fruit, apples']],
+      },
       next: 'work_2',
     },
 
@@ -239,6 +254,11 @@ export default {
       latin: 'Ha! Cadis!',
       translation: 'Ha! Down you go!',
       vocab: [['cadis', 'you fall']],
+      intro: {
+        latin: 'Ha! Malus fur es!',
+        translation: 'Ha! You’re a bad thief!',
+        vocab: [['malus', 'bad'], ['fur', 'thief']],
+      },
       onEnter: { setFlags: 'stoleFromIulia', reputation: -1 },
       next: 'hub',
     },
@@ -252,6 +272,11 @@ export default {
       latin: 'Salve! Mercator sum. Multa vendo! Quid cupis?',
       translation: 'Hello! I’m a merchant. I sell many things! What do you want?',
       vocab: [['mercator', 'merchant'], ['multa', 'many things'], ['vendo', 'I sell'], ['cupis', 'you want']],
+      intro: {
+        latin: 'Salve! Mercator sum. Multa vendo! Quid vis?',
+        translation: 'Hello! I’m a merchant. I sell many things! What do you want?',
+        vocab: [['mercator', 'merchant'], ['multa', 'many things'], ['vendo', 'I sell'], ['vis', 'you want']],
+      },
       variants: [{ if: { visited: 'forum.merchant' }, narration: 'The merchant looks up hopefully.' }],
       choices: [
         { say: 'Pecuniam non habeo.', if: { lacksItems: 'denarii', notFlags: 'soldWatch' }, next: 'merchant_watch' },
@@ -372,6 +397,11 @@ export default {
       latin: 'Fur fugit! Celeriter currit!',
       translation: 'The thief is getting away! He’s running fast!',
       vocab: [['fur', 'thief'], ['fugit', 'flees, is getting away'], ['celeriter', 'quickly, fast'], ['currit', 'runs']],
+      intro: {
+        latin: 'Ecce, fur! Fur currit!',
+        translation: 'Look, a thief! The thief is running!',
+        vocab: [['ecce', 'look!'], ['fur', 'thief'], ['currit', 'runs, is running']],
+      },
       onEnter: { removeItems: 'denarii', setFlags: 'pickpocketed' },
       choices: [
         { say: 'Siste, fur!', next: 'caught' },
@@ -389,6 +419,11 @@ export default {
       latin: 'Ignosce! Ignosce! Cibum valde cupio!',
       translation: 'Forgive me! Forgive me! I really want food!',
       vocab: [['ignosce', 'forgive me!'], ['cibum valde cupio', 'I really want food']],
+      intro: {
+        latin: 'Ignosce! Ignosce! Cibum non habeo!',
+        translation: 'Forgive me! Forgive me! I have no food!',
+        vocab: [['ignosce', 'forgive me!'], ['cibum non habeo', 'I have no food']],
+      },
       onEnter: { setFlags: ['caughtMarcus', 'knowsMarcusName'] },
       next: 'baker',
     },
@@ -401,6 +436,11 @@ export default {
       latin: 'Fur parvus! Ecce, denarii tui. Ad milites eum ducam? Si ita, panem tibi do!',
       translation: 'A little thief! Here are your denarii. Shall I take him to the soldiers? If so, I’ll give you a loaf!',
       vocab: [['fur parvus', 'a little thief'], ['denarii tui', 'your coins'], ['ad milites', 'to the soldiers'], ['eum ducam?', 'shall I take him? (subjunctive)'], ['si ita', 'if so, if yes'], ['panem tibi do', 'I give you bread']],
+      intro: {
+        latin: 'Fur parvus! Ecce, denarii tui. Eum ad milites duco? Si ita, panem tibi do!',
+        translation: 'A little thief! Here are your denarii. Do I take him to the soldiers? If so, I’ll give you a loaf!',
+        vocab: [['fur parvus', 'a little thief'], ['denarii tui', 'your coins'], ['eum', 'him'], ['ad milites duco', 'I take to the soldiers'], ['si ita', 'if so, if yes'], ['panem tibi do', 'I give you bread']],
+      },
       choices: [
         {
           say: 'Ita! Ad milites!',
@@ -444,6 +484,11 @@ export default {
       latin: 'Fabrum? Viam scio! Pro te, gratis! Veni, sequere me!',
       translation: 'A smith? I know the way! For you, free! Come on, follow me!',
       vocab: [['viam', 'the way'], ['pro te', 'for you'], ['gratis', 'for free'], ['sequere me', 'follow me!']],
+      intro: {
+        latin: 'Fabrum? Viam scio! Veni mecum!',
+        translation: 'A smith? I know the way! Come with me!',
+        vocab: [['viam', 'the way'], ['scio', 'I know'], ['veni mecum', 'come with me!']],
+      },
       continueText: 'Follow Marcus',
       next: 'to_smith',
     },
@@ -491,6 +536,11 @@ export default {
           latin: 'Eheu… Salve. Denarios tuos… iam non habeo.',
           translation: 'Uh-oh… Hello. Your denarii… I don’t have them anymore.',
           vocab: [['eheu', 'uh-oh, alas'], ['tuos', 'your'], ['iam non', 'no longer, not anymore']],
+          intro: {
+            latin: 'Salve… Denarios tuos… non habeo.',
+            translation: 'Hello… Your denarii… I don’t have them.',
+            vocab: [['tuos', 'your'], ['non habeo', 'I don’t have']],
+          },
           choices: [
             { say: 'Fur es!', next: 'boy_guilty' },
             { say: 'Ubi est faber?', next: 'boy_guilty' },
@@ -503,6 +553,11 @@ export default {
           latin: 'Tu! Milites me ceperunt… propter te! Quid quaeris?',
           translation: 'You! The soldiers grabbed me… because of you! What are you looking for?',
           vocab: [['milites', 'soldiers'], ['ceperunt', 'caught, grabbed (perfect)'], ['propter te', 'because of you'], ['quaeris', 'you are looking for']],
+          intro: {
+            latin: 'Tu! Milites me ceperunt! Quid quaeris?',
+            translation: 'You! The soldiers grabbed me! What are you looking for?',
+            vocab: [['milites', 'soldiers'], ['ceperunt', 'caught, grabbed (perfect)'], ['quaeris', 'you are looking for']],
+          },
         },
         {
           if: { visited: 'forum.boy' },
@@ -525,6 +580,11 @@ export default {
       latin: 'Marcus sum. Pater meus nauta erat. Ego omnia scio!',
       translation: 'I’m Marcus. My father was a sailor. I know everything!',
       vocab: [['pater meus', 'my father'], ['nauta', 'sailor'], ['erat', 'was (imperfect)'], ['omnia', 'everything'], ['scio', 'I know']],
+      intro: {
+        latin: 'Marcus sum. Ego omnia scio!',
+        translation: 'I’m Marcus. I know everything!',
+        vocab: [['omnia', 'everything'], ['scio', 'I know']],
+      },
       onEnter: { setFlags: 'knowsMarcusName' },
       choicesFrom: 'boy',
     },
@@ -548,6 +608,11 @@ export default {
       latin: 'Fabrum? Viam scio! Sed cibum cupio. Habesne cibum?',
       translation: 'A smith? I know the way! But I want food. Do you have any food?',
       vocab: [['viam', 'the way'], ['scio', 'I know'], ['cupio', 'I want'], ['habesne?', 'do you have?']],
+      intro: {
+        latin: 'Fabrum? Viam scio! Sed cibum volo. Habesne cibum?',
+        translation: 'A smith? I know the way! But I want food. Do you have any food?',
+        vocab: [['viam', 'the way'], ['scio', 'I know'], ['volo', 'I want'], ['habesne?', 'do you have?']],
+      },
       variants: [
         {
           if: { flags: 'handedOverMarcus', notVisited: 'forum.boy_deal' },
@@ -555,6 +620,11 @@ export default {
           latin: 'Viam scio. Sed pro te nihil gratis facio! Cibum aut denarios da!',
           translation: 'I know the way. But I do nothing for you for free! Give me food or coins!',
           vocab: [['pro te', 'for you'], ['nihil gratis', 'nothing for free'], ['aut', 'or'], ['da', 'give!']],
+          intro: {
+            latin: 'Viam scio. Sed cibum aut denarios da!',
+            translation: 'I know the way. But give me food or coins!',
+            vocab: [['viam', 'the way'], ['aut', 'or'], ['da', 'give!']],
+          },
         },
         {
           if: { visited: 'forum.boy_deal' },
@@ -595,6 +665,11 @@ export default {
       latin: 'Mmm! Gratias! Veni, sequere me!',
       translation: 'Mmm! Thanks! Come on, follow me!',
       vocab: [['veni', 'come!'], ['sequere me', 'follow me!']],
+      intro: {
+        latin: 'Mmm! Gratias! Veni mecum!',
+        translation: 'Mmm! Thanks! Come with me!',
+        vocab: [['veni mecum', 'come with me!']],
+      },
       onEnter: { setFlags: 'knowsMarcusName', helped: 'boy' },
       variants: [
         {
@@ -619,6 +694,11 @@ export default {
       latin: 'Denarii?! Etiam melius! Veni, sequere me!',
       translation: 'Denarii?! Even better! Come on, follow me!',
       vocab: [['etiam melius', 'even better'], ['veni', 'come!'], ['sequere me', 'follow me!']],
+      intro: {
+        latin: 'Denarii?! Optime! Veni mecum!',
+        translation: 'Denarii?! Excellent! Come with me!',
+        vocab: [['optime', 'excellent! very good!'], ['veni mecum', 'come with me!']],
+      },
       onEnter: { setFlags: 'knowsMarcusName' },
       continueText: 'Follow Marcus',
       next: 'to_smith',

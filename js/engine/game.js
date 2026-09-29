@@ -12,7 +12,10 @@ import {
   saveChapterCheckpoint,
   loadChapterCheckpoint,
   clearSaves,
+  loadSettings,
+  saveSettings,
 } from './state.js';
+import { config } from '../config.js';
 import { check, toArray } from './conditions.js';
 import { applyEffects } from './effects.js';
 
@@ -21,7 +24,21 @@ export class Game {
     this.content = content;
     this.startScene = startScene;
     this.state = createInitialState();
+    this.settings = loadSettings();
     this.listeners = new Set();
+  }
+
+  // ── Settings ─────────────────────────────────────────────────────────────
+
+  get difficulty() {
+    const id = config.difficulties[this.settings.difficulty] ? this.settings.difficulty : config.defaultDifficulty;
+    return { id, ...config.difficulties[id] };
+  }
+
+  setDifficulty(id) {
+    if (!config.difficulties[id]) return;
+    this.settings = { ...this.settings, difficulty: id };
+    saveSettings(this.settings);
   }
 
   // ── Subscriptions ────────────────────────────────────────────────────────
@@ -111,9 +128,19 @@ export class Game {
     const node = this.content.scenes[sceneId]?.nodes?.[nodeId];
     if (!node) return null;
     const variant = node.variants?.[variantIndex];
-    if (!variant) return node;
+    if (!variant) return this.simplify(node);
     const { if: _condition, ...overrides } = variant;
-    return { ...node, ...overrides };
+    return { ...this.simplify(node), ...this.simplify(overrides) };
+  }
+
+  /**
+   * In a simplified difficulty (Tiro), a node, variant or choice's `intro` fields
+   * replace its own: the same beat, in easier Latin. Anything without one is used as written.
+   */
+  simplify(part) {
+    if (!part.intro || !this.difficulty.simplified) return part;
+    const { intro, ...rest } = part;
+    return { ...rest, ...intro };
   }
 
   enterScene(sceneId, nodeId, notes = []) {
@@ -186,7 +213,8 @@ export class Game {
       : node;
 
     const available = this.orderChoices(source?.choices ?? [], `${sceneId}.${sourceId}`)
-      .map((choice) => ({ ...choice, key: `${sceneId}.${sourceId}.${choice.id || choice.say || choice.action}` }))
+      // The key comes from the written line, so `once` holds even if the difficulty changes.
+      .map((choice) => ({ ...this.simplify(choice), key: `${sceneId}.${sourceId}.${choice.id || choice.say || choice.action}` }))
       .filter((choice) => check(choice.if, this.state))
       .filter((choice) => !(choice.once && this.state.chosen.includes(choice.key)));
 
@@ -239,6 +267,11 @@ export class Game {
     return (this.scene?.patience ?? []).find((rule) => rule.npc === npc) ?? null;
   }
 
+  /** A meter's strikes after the difficulty's adjustment (never fewer than one). */
+  patienceMax(rule) {
+    return Math.max(1, rule.max + this.difficulty.patience);
+  }
+
   /**
    * A choice with `strike: 'guard'` is a bad answer: it uses up one of that meter's
    * strikes and is remembered for the review list. Returns the scene's failure target
@@ -257,7 +290,7 @@ export class Game {
       saidMeaning: choice.say ? choice.meaning ?? null : null,
     });
     const rule = this.patienceRule(choice.strike);
-    return rule && state.strikes[choice.strike] >= rule.max ? rule.fail : null;
+    return rule && state.strikes[choice.strike] >= this.patienceMax(rule) ? rule.fail : null;
   }
 
   /** The patience meter to show beside whoever is speaking, if any. */
@@ -265,7 +298,8 @@ export class Game {
     if (!speakerId) return null;
     const rule = (this.scene?.patience ?? []).find((r) => (r.speakers ?? [r.npc]).includes(speakerId));
     if (!rule) return null;
-    return { npc: rule.npc, max: rule.max, left: Math.max(0, rule.max - (this.state.strikes[rule.npc] ?? 0)) };
+    const max = this.patienceMax(rule);
+    return { npc: rule.npc, max, left: Math.max(0, max - (this.state.strikes[rule.npc] ?? 0)) };
   }
 
   // ── View model for the UI ────────────────────────────────────────────────
@@ -307,7 +341,7 @@ export class Game {
       narration: toArray(node.narration),
       latin: node.latin ?? null,
       latinStyle: node.latinStyle ?? null,
-      translation: node.translation ?? null,
+      translation: this.difficulty.translations ? node.translation ?? null : null,
       vocab: node.vocab ?? [],
       choices: this.getChoices().map((c) => ({
         type: c.isContinue ? 'continue' : c.say ? 'say' : 'action',
@@ -317,6 +351,7 @@ export class Game {
       inventory: state.inventory.map((id) => ({ id, ...content.items[id] })),
       stats: state.stats,
       mistakes: state.mistakes,
+      difficulty: this.difficulty,
     };
   }
 }

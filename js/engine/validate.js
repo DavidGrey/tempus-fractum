@@ -4,6 +4,10 @@
 
 import { toArray } from './conditions.js';
 
+// What a Tiro-mode `intro` may replace: the words, never where a choice leads.
+const NODE_INTRO = ['latin', 'translation', 'vocab', 'narration', 'ending'];
+const CHOICE_INTRO = ['say', 'meaning', 'review'];
+
 export function validateContent({ scenes, characters, items, chapters }) {
   const problems = [];
 
@@ -30,8 +34,11 @@ export function validateContent({ scenes, characters, items, chapters }) {
         if (v.character && !characters[v.character]) problems.push(`${where}: unknown character "${v.character}"`);
         if (v.choicesFrom && !scene.nodes[v.choicesFrom]) problems.push(`${where}: choicesFrom "${v.choicesFrom}" does not exist`);
         checkEffects(v.onEnter, `${where} onEnter`);
+        checkIntro(v.intro, NODE_INTRO, where);
         for (const choice of v.choices ?? []) {
           const label = `${where} choice "${choice.say ?? choice.action ?? '?'}"`;
+          checkIntro(choice.intro, CHOICE_INTRO, label);
+          if (choice.intro?.say && !choice.say) problems.push(`${label}: intro "say" on a choice that isn't a "say"`);
           if (!choice.say && !choice.action) problems.push(`${label}: needs "say" or "action"`);
           if (!choice.next) problems.push(`${label}: missing "next"`);
           if (choice.strike && !(scene.patience ?? []).some((r) => r.npc === choice.strike)) {
@@ -53,6 +60,12 @@ export function validateContent({ scenes, characters, items, chapters }) {
       problems.push(`${where}: next scene "${target.scene}" does not exist`);
     } else if (target.node && !scenes[target.scene].nodes[target.node]) {
       problems.push(`${where}: node "${target.node}" does not exist in scene "${target.scene}"`);
+    }
+  }
+
+  function checkIntro(intro, allowed, where) {
+    for (const key of Object.keys(intro ?? {})) {
+      if (!allowed.includes(key)) problems.push(`${where}: intro can't change "${key}" (only ${allowed.join(', ')})`);
     }
   }
 

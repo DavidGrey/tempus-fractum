@@ -64,6 +64,13 @@ export default {
             translation: 'Stop! Wait! Other people are ahead of you.',
             vocab: [['exspecta', 'wait!'], ['alii', 'others'], ['ante te', 'ahead of you']],
           },
+          intro: {
+            review: {
+              latin: 'Siste! Alii ante te sunt.',
+              translation: 'Stop! Other people are ahead of you.',
+              vocab: [['siste', 'stop!'], ['alii', 'others'], ['ante te', 'ahead of you']],
+            },
+          },
           next: 'cut_line',
         },
         { action: 'Wait in line and listen', once: true, next: 'line' },
@@ -78,6 +85,11 @@ export default {
       latin: 'Siste! Exspecta! Alii ante te sunt.',
       translation: 'Stop! Wait! Other people are ahead of you.',
       vocab: [['siste', 'stop!'], ['exspecta', 'wait!'], ['alii', 'others'], ['ante te', 'ahead of you']],
+      intro: {
+        latin: 'Siste! Alii ante te sunt.',
+        translation: 'Stop! Other people are ahead of you.',
+        vocab: [['siste', 'stop!'], ['alii', 'others'], ['ante te', 'ahead of you']],
+      },
       continueText: 'Wait your turn, red-faced',
       next: 'halt',
     },
@@ -105,6 +117,11 @@ export default {
       latin: 'Siste! Quis es? Quo vadis?',
       translation: 'Stop! Who are you? Where are you going?',
       vocab: [['siste', 'stop!'], ['quis?', 'who?'], ['quo?', 'where to?'], ['vadis', 'you are going']],
+      intro: {
+        latin: 'Siste! Quis es? Quo is?',
+        translation: 'Stop! Who are you? Where are you going?',
+        vocab: [['siste', 'stop!'], ['quis?', 'who?'], ['quo?', 'where to?'], ['is', 'you go, you are going']],
+      },
       next: 'line_2',
     },
 
@@ -137,6 +154,11 @@ export default {
       latin: 'Siste! Miles sum; portam defendo. Quis es?',
       translation: 'Stop! I am a soldier; I guard the gate. Who are you?',
       vocab: [['siste', 'stop!'], ['miles', 'soldier'], ['portam defendo', 'I defend the gate'], ['quis?', 'who?']],
+      intro: {
+        latin: 'Siste! Miles sum. Quis es?',
+        translation: 'Stop! I am a soldier. Who are you?',
+        vocab: [['siste', 'stop!'], ['miles', 'soldier'], ['quis?', 'who?']],
+      },
       variants: [
         {
           if: { hasItems: 'cloak' },
@@ -192,6 +214,11 @@ export default {
       latin: 'Mercator? Sed carrum non habes!',
       translation: 'A merchant? But you don’t have a cart!',
       vocab: [['sed', 'but'], ['carrum', 'cart (accusative)'], ['habes', 'you have']],
+      intro: {
+        latin: 'Mercator? Sed nihil habes!',
+        translation: 'A merchant? But you have nothing!',
+        vocab: [['sed', 'but'], ['nihil', 'nothing'], ['habes', 'you have']],
+      },
       onEnter: { trust: { guard: -1 } },
       next: 'quo_vadis',
     },
@@ -204,6 +231,11 @@ export default {
       latin: 'Miles? Ubi est galea tua? Ubi est gladius tuus?',
       translation: 'A soldier? Where’s your helmet? Where’s your sword?',
       vocab: [['miles', 'soldier'], ['galea', 'helmet'], ['gladius', 'sword'], ['tua / tuus', 'your']],
+      intro: {
+        latin: 'Miles? Ubi est gladius tuus?',
+        translation: 'A soldier? Where’s your sword?',
+        vocab: [['miles', 'soldier'], ['ubi?', 'where?'], ['gladius', 'sword'], ['tuus', 'your']],
+      },
       onEnter: { trust: { guard: -1 } },
       next: 'claims_dog_2',
     },
@@ -259,6 +291,11 @@ export default {
       latin: 'Quo vadis?',
       translation: 'Where are you going?',
       vocab: [['quo?', 'where to?'], ['vadis', 'you are going']],
+      intro: {
+        latin: 'Quo is?',
+        translation: 'Where are you going?',
+        vocab: [['quo?', 'where to?'], ['is', 'you go, you are going']],
+      },
       variants: [{ if: { visited: 'city-gate.quo_vadis' }, narration: 'The soldier sighs.' }],
       choices: [
         { say: 'Ad forum eo.', effects: { recordChoice: { destination: 'forum' } }, next: 'why' },
@@ -409,6 +446,11 @@ export default {
       latin: 'Panis?! Gratias! Cibum valde cupio! … Intra, amice!',
       translation: 'Bread?! Thanks! I really want food! … Go in, friend!',
       vocab: [['gratias', 'thanks'], ['cibum valde cupio', 'I really want food'], ['intra', 'go in!'], ['amice', 'friend (speaking to someone)']],
+      intro: {
+        latin: 'Panis?! Gratias! … Intra, amice!',
+        translation: 'Bread?! Thanks! … Go in, friend!',
+        vocab: [['gratias', 'thanks'], ['intra', 'go in!'], ['amice', 'friend (speaking to someone)']],
+      },
       onEnter: { trust: { guard: 2 } },
       continueText: 'Walk through the gate',
       next: 'inside',

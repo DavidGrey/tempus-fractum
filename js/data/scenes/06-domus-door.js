@@ -27,6 +27,11 @@ export default {
       latin: 'Ecce, villa Aurelii! Feliciter!',
       translation: 'Here’s Aurelius’s house! Good luck!',
       vocab: [['villa', 'house'], ['Aurelii', 'of Aurelius'], ['feliciter', 'good luck!']],
+      intro: {
+        latin: 'Ecce, villa Aurelii! Vale!',
+        translation: 'Here’s Aurelius’s house! Bye!',
+        vocab: [['villa', 'house'], ['Aurelii', 'of Aurelius'], ['vale', 'goodbye']],
+      },
       continueText: 'Knock on the door',
       next: 'door',
     },
@@ -92,6 +97,11 @@ export default {
       latin: 'Titus te misit? Tesseram eius habes?',
       translation: 'Titus sent you? Do you have his token?',
       vocab: [['misit', 'sent (perfect tense)'], ['tesseram', 'token'], ['eius', 'his']],
+      intro: {
+        latin: 'Titus te misit? Tesseram Titi habes?',
+        translation: 'Titus sent you? Do you have Titus’s token?',
+        vocab: [['misit', 'sent (perfect tense)'], ['tesseram', 'token'], ['Titi', 'of Titus']],
+      },
       next: 'door',
     },
 

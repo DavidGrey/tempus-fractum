@@ -34,6 +34,11 @@ export default {
       latin: 'Leo te spectat! Timesne?',
       translation: 'The lion is watching you! Are you afraid?',
       vocab: [['leo', 'lion'], ['spectat', 'watches'], ['timesne?', 'are you afraid?']],
+      intro: {
+        latin: 'Leo te videt! Timesne?',
+        translation: 'The lion sees you! Are you afraid?',
+        vocab: [['leo', 'lion'], ['videt', 'sees'], ['timesne?', 'are you afraid?']],
+      },
       choices: [
         { action: 'Run!', next: 'roar' },
         { action: 'Stand perfectly still', next: 'roar' },
@@ -48,6 +53,11 @@ export default {
       latin: 'Leo te terret! … Subito omnes tacent.',
       translation: 'The lion terrifies you! … Suddenly, everyone falls silent.',
       vocab: [['terret', 'frightens, terrifies'], ['subito', 'suddenly'], ['omnes', 'everyone'], ['tacent', 'fall silent']],
+      intro: {
+        latin: 'Leo clamat! … Tum omnes tacent.',
+        translation: 'The lion roars! … Then everyone falls silent.',
+        vocab: [['clamat', 'shouts, roars'], ['tum', 'then'], ['omnes', 'everyone'], ['tacent', 'fall silent']],
+      },
       continueText: '…',
       next: 'end',
     },

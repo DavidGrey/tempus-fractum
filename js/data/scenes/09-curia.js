@@ -94,6 +94,11 @@ export default {
           latin: 'Aurelius de te scripsit! “Fidelis et sapiens est,” scribit.',
           translation: 'Aurelius has written about you! “Loyal and wise,” he writes.',
           vocab: [['scripsit', 'wrote (perfect)'], ['de te', 'about you'], ['fidelis', 'loyal'], ['sapiens', 'wise'], ['scribit', 'he writes']],
+          intro: {
+            latin: 'Aurelius de te scripsit! “Homo bonus est,” scribit.',
+            translation: 'Aurelius has written about you! “A good person,” he writes.',
+            vocab: [['scripsit', 'wrote (perfect)'], ['de te', 'about you'], ['homo bonus', 'a good person'], ['scribit', 'he writes']],
+          },
           onEnter: { removeItems: 'epistula', trust: { senator: 1 } },
         },
       ],
@@ -109,9 +114,9 @@ export default {
       vocab: [['dic mihi', 'tell me'], ['cur?', 'why?'], ['imperatorem', 'the emperor'], ['videre', 'to see']],
       choices: [
         { say: 'Machina mea fracta est.', next: 'machine' },
-        { say: 'Fabros imperatoris peto.', effects: { trust: { senator: 1 } }, next: 'bold' },
+        { say: 'Fabros imperatoris peto.', intro: { say: 'Fabros imperatoris rogo.' }, effects: { trust: { senator: 1 } }, next: 'bold' },
         { say: 'Imperator amicus meus est.', meaning: 'The emperor is my friend.', once: true, strike: 'senator', next: 'not_friend' },
-        { say: 'Imperium peto!', meaning: 'I am seeking supreme power!', strike: 'senator', fatal: true, next: 'treason' },
+        { say: 'Imperium peto!', intro: { say: 'Imperium volo!', meaning: 'I want supreme power!' }, meaning: 'I am seeking supreme power!', strike: 'senator', fatal: true, next: 'treason' },
       ],
     },
 
@@ -121,12 +126,17 @@ export default {
       latin: 'Machina fracta? Mirum. Et quid ab imperatore petes?',
       translation: 'A broken machine? Strange. And what will you ask the emperor for?',
       vocab: [['mirum', 'strange, amazing'], ['ab imperatore', 'from the emperor'], ['petes', 'you will ask for (future)']],
+      intro: {
+        latin: 'Machina fracta? Mirum. Et quid imperatorem rogabis?',
+        translation: 'A broken machine? Strange. And what will you ask the emperor for?',
+        vocab: [['mirum', 'strange, amazing'], ['imperatorem', 'the emperor'], ['rogabis', 'you will ask (for) (future)']],
+      },
       choices: [
-        { say: 'Quinque fabros petam.', effects: { trust: { senator: 1 } }, next: 'good_answer' },
-        { say: 'Pecuniam petam.', meaning: 'I will ask for money.', once: true, strike: 'senator', next: 'ask_money' },
-        { say: 'Nihil petam.', meaning: 'I will ask for nothing.', once: true, strike: 'senator', next: 'ask_nothing' },
+        { say: 'Quinque fabros petam.', intro: { say: 'Quinque fabros rogabo.' }, effects: { trust: { senator: 1 } }, next: 'good_answer' },
+        { say: 'Pecuniam petam.', intro: { say: 'Pecuniam rogabo.', meaning: 'I will ask for money.' }, meaning: 'I will ask for money.', once: true, strike: 'senator', next: 'ask_money' },
+        { say: 'Nihil petam.', intro: { say: 'Nihil rogabo.', meaning: 'I will ask for nothing.' }, meaning: 'I will ask for nothing.', once: true, strike: 'senator', next: 'ask_nothing' },
         // Near miss: the right idea with the wrong case (fabri, not fabros).
-        { say: 'Quinque fabri petam.', meaning: 'wrong case: what you ask for needs the accusative, “fabros”', once: true, strike: 'senator', next: 'wrong_case' },
+        { say: 'Quinque fabri petam.', intro: { say: 'Quinque fabri rogabo.', meaning: 'wrong case: what you ask for needs the accusative, “fabros”' }, meaning: 'wrong case: what you ask for needs the accusative, “fabros”', once: true, strike: 'senator', next: 'wrong_case' },
       ],
     },
 
@@ -144,6 +154,11 @@ export default {
       latin: 'Nihil? Cur ergo venis?',
       translation: 'Nothing? Then why are you coming?',
       vocab: [['nihil', 'nothing'], ['ergo', 'then, therefore']],
+      intro: {
+        latin: 'Nihil? Cur venis?',
+        translation: 'Nothing? Then why are you coming?',
+        vocab: [['nihil', 'nothing'], ['cur?', 'why?']],
+      },
       choicesFrom: 'machine',
     },
 
@@ -165,10 +180,15 @@ export default {
       latin: 'Fabros imperatoris? Audax es! Quot fabros petes?',
       translation: 'The emperor’s smiths? You’re bold! How many smiths will you ask for?',
       vocab: [['imperatoris', 'of the emperor'], ['audax', 'bold'], ['quot?', 'how many?'], ['petes', 'you will ask for (future)']],
+      intro: {
+        latin: 'Fabros imperatoris? Audax es! Quot fabros rogabis?',
+        translation: 'The emperor’s smiths? You’re bold! How many smiths will you ask for?',
+        vocab: [['imperatoris', 'of the emperor'], ['audax', 'bold'], ['quot?', 'how many?'], ['rogabis', 'you will ask (for) (future)']],
+      },
       choices: [
-        { say: 'Quinque fabros petam.', effects: { trust: { senator: 1 } }, next: 'good_answer' },
-        { say: 'Centum fabros petam!', meaning: 'I will ask for a hundred smiths!', once: true, strike: 'senator', next: 'hundred' },
-        { say: 'Unum fabrum petam.', meaning: 'I will ask for one smith.', once: true, strike: 'senator', next: 'one' },
+        { say: 'Quinque fabros petam.', intro: { say: 'Quinque fabros rogabo.' }, effects: { trust: { senator: 1 } }, next: 'good_answer' },
+        { say: 'Centum fabros petam!', intro: { say: 'Centum fabros rogabo!', meaning: 'I will ask for a hundred smiths!' }, meaning: 'I will ask for a hundred smiths!', once: true, strike: 'senator', next: 'hundred' },
+        { say: 'Unum fabrum petam.', intro: { say: 'Unum fabrum rogabo.', meaning: 'I will ask for one smith.' }, meaning: 'I will ask for one smith.', once: true, strike: 'senator', next: 'one' },
       ],
     },
 
@@ -208,6 +228,11 @@ export default {
       latin: 'Imperium?! Proditor! Milites!',
       translation: 'Supreme power?! Traitor! Soldiers!',
       vocab: [['imperium', 'supreme power, command (not “the emperor”!)'], ['proditor', 'traitor'], ['milites', 'soldiers']],
+      intro: {
+        latin: 'Imperium?! Insanus es! Milites!',
+        translation: 'Supreme power?! You’re mad! Soldiers!',
+        vocab: [['imperium', 'supreme power, command (not “the emperor”!)'], ['insanus', 'crazy, mad'], ['milites', 'soldiers']],
+      },
       onEnter: { recordChoice: { jailedFrom: 'treason' } },
       continueText: 'Get dragged away',
       next: { scene: 'carcer' },
@@ -242,6 +267,11 @@ export default {
       latin: 'Et unde venis? Ex Graecia? Ex Italia? Ex insula?',
       translation: 'And where do you come from? From Greece? From Italy? From an island?',
       vocab: [['unde?', 'from where?'], ['venis', 'you come'], ['ex', 'from, out of'], ['Graecia', 'Greece'], ['Italia', 'Italy'], ['insula', 'island']],
+      intro: {
+        latin: 'Et ubi est patria tua? In Graecia? In Italia?',
+        translation: 'And where is your homeland? In Greece? In Italy?',
+        vocab: [['ubi?', 'where?'], ['patria', 'homeland'], ['Graecia', 'Greece'], ['Italia', 'Italy']],
+      },
       choices: [
         { say: 'Longe, longe…', next: 'far' },
         { say: 'In futuro!', next: 'prophet' },
@@ -359,6 +389,11 @@ export default {
       latin: 'Tacere non potes! Imperator responsum exspectat.',
       translation: 'You can’t stay silent! The emperor expects an answer.',
       vocab: [['tacere', 'to be silent'], ['potes', 'you can'], ['responsum', 'answer'], ['exspectat', 'expects, waits for']],
+      intro: {
+        latin: 'Tacere non potes! Imperatori respondere debes!',
+        translation: 'You can’t stay silent! You must answer the emperor!',
+        vocab: [['tacere', 'to be silent'], ['potes', 'you can'], ['imperatori', 'to the emperor'], ['respondere debes', 'you must answer']],
+      },
       next: 'rehearsal',
     },
 
@@ -369,6 +404,11 @@ export default {
       latin: 'Optime! “Ave, Imperator!” Sic imperatorem salutare debes.',
       translation: 'Excellent! “Hail, Emperor!” That is how you must greet the emperor.',
       vocab: [['ave', 'hail! (a formal greeting)'], ['sic', 'so, like that'], ['salutare', 'to greet'], ['debes', 'you must']],
+      intro: {
+        latin: 'Optime! “Ave, Imperator!” Sic dicere debes.',
+        translation: 'Excellent! “Hail, Emperor!” That is what you must say.',
+        vocab: [['ave', 'hail! (a formal greeting)'], ['sic', 'so, like that'], ['dicere', 'to say'], ['debes', 'you must']],
+      },
       onEnter: { setFlags: 'knowsAve' },
       next: 'verdict',
     },
@@ -388,6 +428,11 @@ export default {
           latin: 'Cras ad Palatium veni. Ecce, tabula cum signo meo. Praetoriani te intrare sinent.',
           translation: 'Come to the Palatine tomorrow. Here is a tablet with my seal. The Praetorians will let you in.',
           vocab: [['tabula', 'writing tablet'], ['cum signo meo', 'with my seal'], ['intrare', 'to enter'], ['sinent', 'they will allow (future)']],
+          intro: {
+            latin: 'Cras ad Palatium veni. Ecce, tabula cum signo meo. Praetoriani signum videbunt.',
+            translation: 'Come to the Palatine tomorrow. Here is a tablet with my seal. The Praetorians will see the seal.',
+            vocab: [['tabula', 'writing tablet'], ['cum signo meo', 'with my seal'], ['videbunt', 'they will see (future)']],
+          },
           onEnter: {
             addItems: 'senator-tablet',
             grantAuthorizations: ['senator-list', 'senator-seal'],

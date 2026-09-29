@@ -50,6 +50,9 @@ export default {
         {
           if: { choice: { jailedFrom: 'treason' } },
           narration: '“Imperium peto” doesn’t mean “I’m looking for the emperor.” It means “I am seeking supreme power”, which is treason on the steps of the Senate House. The soldiers march you to the prison next door. Imperator = emperor. Imperium = power.',
+          intro: {
+            narration: '“Imperium volo” doesn’t mean “I want to see the emperor.” It means “I want supreme power”, which is treason on the steps of the Senate House. The soldiers march you to the prison next door. Imperator = emperor. Imperium = power.',
+          },
         },
         {
           if: { choice: { jailedFrom: 'palace' } },
@@ -73,6 +76,11 @@ export default {
           latin: 'Hic inimici Romae manent. Clama, si vis: nemo te servabit!',
           translation: 'The enemies of Rome stay here. Shout if you like: nobody will save you!',
           vocab: [['inimici', 'enemies'], ['manent', 'stay, remain'], ['clama', 'shout!'], ['nemo', 'nobody'], ['servabit', 'will save (future)']],
+          intro: {
+            latin: 'Hic homines mali manent. Clama, si vis: nemo te servabit!',
+            translation: 'Bad people stay here. Shout if you like: nobody will save you!',
+            vocab: [['homines mali', 'bad people'], ['manent', 'stay, remain'], ['clama', 'shout!'], ['nemo', 'nobody'], ['servabit', 'will save (future)']],
+          },
         },
       ],
       continueText: 'Sit down on the cold straw',

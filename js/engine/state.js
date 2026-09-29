@@ -67,6 +67,12 @@ export const loadCheckpoint = () => upgrade(read(CHECKPOINT_KEY));
 export const saveChapterCheckpoint = (state) => write(CHAPTER_KEY, state);
 export const loadChapterCheckpoint = () => upgrade(read(CHAPTER_KEY));
 
+// Settings (e.g. difficulty) belong to this computer, not to a playthrough, so a new
+// game keeps them.
+const SETTINGS_KEY = `${config.storageKey}:settings`;
+export const loadSettings = () => ({ difficulty: config.defaultDifficulty, ...read(SETTINGS_KEY) });
+export const saveSettings = (settings) => write(SETTINGS_KEY, settings);
+
 export function clearSaves() {
   try {
     localStorage.removeItem(SAVE_KEY);

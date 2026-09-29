@@ -71,6 +71,11 @@ export default {
       latin: 'Ego? Gaius sum. Agricola sum. Filius et filia mea in urbe habitant. Et tu? Quis es?',
       translation: 'Me? I am Gaius. I am a farmer. My son and daughter live in the city. And you? Who are you?',
       vocab: [['ego', 'I'], ['agricola', 'farmer'], ['filius et filia', 'son and daughter'], ['in urbe', 'in the city'], ['habitant', 'they live'], ['tu', 'you']],
+      intro: {
+        latin: 'Ego? Gaius sum. Agricola sum. Filius et filia mea in urbe laborant. Et tu? Quis es?',
+        translation: 'Me? I am Gaius. I am a farmer. My son and daughter work in the city. And you? Who are you?',
+        vocab: [['ego', 'I'], ['agricola', 'farmer'], ['filius et filia', 'son and daughter'], ['in urbe', 'in the city'], ['laborant', 'they work'], ['tu', 'you']],
+      },
       onEnter: { setFlags: 'knowsFarmerName', trust: { farmer: 1 } },
       choicesFrom: 'arrive',
     },
@@ -126,6 +131,11 @@ export default {
       latin: 'Heus! Quo vadis?! Periculum est!',
       translation: 'Hey! Where are you going?! It’s dangerous!',
       vocab: [['heus!', 'hey!'], ['quo?', 'where (to)?'], ['vadis', 'you are going'], ['periculum', 'danger']],
+      intro: {
+        latin: 'Heus! Quo is?! Periculum est!',
+        translation: 'Hey! Where are you going?! It’s dangerous!',
+        vocab: [['heus!', 'hey!'], ['quo?', 'where (to)?'], ['is', 'you go, you are going'], ['periculum', 'danger']],
+      },
       onEnter: { setFlags: 'walkedAway' },
       choices: [
         { action: 'Go back to the farmer', next: 'come_back' },
@@ -219,12 +229,22 @@ export default {
       latin: 'Cibum? Panem habeo… et pallium. Sed unum tantum tibi do: panem aut pallium?',
       translation: 'Food? I have bread… and a cloak. But I’ll only give you one: the bread or the cloak?',
       vocab: [['panem', 'bread (accusative)'], ['pallium', 'cloak'], ['unum tantum', 'only one'], ['tibi do', 'I give you'], ['aut', 'or']],
+      intro: {
+        latin: 'Cibum? Panem habeo… et pallium. Sed unum tibi do: panem aut pallium?',
+        translation: 'Food? I have bread… and a cloak. But I’ll give you one: the bread or the cloak?',
+        vocab: [['panem', 'bread (accusative)'], ['pallium', 'cloak'], ['unum', 'one'], ['tibi do', 'I give you'], ['aut', 'or']],
+      },
       variants: [
         {
           if: { flags: 'saidDog' },
           latin: 'Cibum? Canis cibum vult! Panem habeo… et pallium. Sed unum tantum tibi do: panem aut pallium?',
           translation: 'Food? The dog wants food! I have bread… and a cloak. But I’ll only give you one: the bread or the cloak?',
           vocab: [['canis', 'dog'], ['vult', 'wants'], ['panem', 'bread (accusative)'], ['pallium', 'cloak'], ['unum tantum', 'only one'], ['aut', 'or']],
+          intro: {
+            latin: 'Cibum? Canis cibum vult! Panem habeo… et pallium. Sed unum tibi do: panem aut pallium?',
+            translation: 'Food? The dog wants food! I have bread… and a cloak. But I’ll give you one: the bread or the cloak?',
+            vocab: [['canis', 'dog'], ['vult', 'wants'], ['panem', 'bread (accusative)'], ['pallium', 'cloak'], ['unum', 'one'], ['aut', 'or']],
+          },
         },
       ],
       onEnter: { setFlags: 'askedForFood' },
@@ -248,6 +268,11 @@ export default {
       latin: 'Ecce, pallium! Nunc paene Romanus es.',
       translation: 'Here, a cloak! Now you’re almost a Roman.',
       vocab: [['pallium', 'cloak'], ['nunc', 'now'], ['paene', 'almost']],
+      intro: {
+        latin: 'Ecce, pallium! Nunc tunica tua non est mira!',
+        translation: 'Here, a cloak! Now your tunic isn’t strange!',
+        vocab: [['pallium', 'cloak'], ['nunc', 'now'], ['mira', 'strange']],
+      },
       next: 'what_want',
     },
 

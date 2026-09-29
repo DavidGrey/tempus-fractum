@@ -122,6 +122,11 @@ export default {
       latin: 'Sed pica in culina volabat… et mel meum edebat!',
       translation: 'But the magpie was flying around the kitchen… and eating my honey!',
       vocab: [['pica', 'magpie'], ['volabat', 'was flying (imperfect)'], ['mel', 'honey'], ['edebat', 'was eating (imperfect)']],
+      intro: {
+        latin: 'Sed pica in culina erat… et cibum meum capiebat!',
+        translation: 'But the magpie was in the kitchen… and it was taking my food!',
+        vocab: [['pica', 'magpie'], ['erat', 'was (imperfect)'], ['cibum', 'food'], ['capiebat', 'was taking (imperfect)']],
+      },
       onEnter: { setFlags: 'suspectMagpie' },
       next: 'hub',
     },
@@ -151,6 +156,11 @@ export default {
       latin: 'Pica cantabat, et dominus ridebat. Tum dominus ad balnea ibat… sine anulo!',
       translation: 'The magpie was singing, and the master was laughing. Then the master went off to the baths… without his ring!',
       vocab: [['cantabat', 'was singing (imperfect)'], ['ridebat', 'was laughing (imperfect)'], ['ibat', 'was going (imperfect)'], ['sine anulo', 'without the ring']],
+      intro: {
+        latin: 'Pica in horto erat. Tum dominus ad balnea ibat… sine anulo!',
+        translation: 'The magpie was in the garden. Then the master went off to the baths… without his ring!',
+        vocab: [['pica', 'magpie'], ['erat', 'was (imperfect)'], ['ibat', 'was going (imperfect)'], ['sine anulo', 'without the ring']],
+      },
       onEnter: { setFlags: 'ringInGarden' },
       next: 'hub',
     },
@@ -188,6 +198,11 @@ export default {
       latin: 'Syra? Minime! Syra fidelis est. Semper laborat!',
       translation: 'Syra? No! Syra is loyal. She is always working!',
       vocab: [['fidelis', 'loyal'], ['semper', 'always'], ['laborat', 'works']],
+      intro: {
+        latin: 'Syra? Minime! Syra bona est. Semper laborat!',
+        translation: 'Syra? No! Syra is good. She is always working!',
+        vocab: [['bona', 'good'], ['semper', 'always'], ['laborat', 'works']],
+      },
       onEnter: { trust: { aurelius: -1 } },
       next: 'hub',
     },
@@ -276,6 +291,11 @@ export default {
       latin: 'Tu anulum invenisti? Fidelis et sapiens es!',
       translation: 'You found the ring? You’re loyal and wise!',
       vocab: [['invenisti', 'you found (perfect)'], ['fidelis', 'loyal'], ['sapiens', 'wise']],
+      intro: {
+        latin: 'Tu anulum invenisti? Homo bonus es!',
+        translation: 'You found the ring? You’re a good person!',
+        vocab: [['invenisti', 'you found (perfect)'], ['homo bonus', 'a good person']],
+      },
       next: 'cook_mutters',
     },
 
@@ -286,6 +306,11 @@ export default {
       latin: 'Hmm… sed quis anulum ceperat? Syra heri in horto erat…',
       translation: 'Hmm… but who had taken the ring? Syra was in the garden yesterday…',
       vocab: [['ceperat', 'had taken (pluperfect)'], ['heri', 'yesterday'], ['in horto', 'in the garden']],
+      intro: {
+        latin: 'Hmm… sed quis anulum cepit? Syra heri in horto erat…',
+        translation: 'Hmm… but who took the ring? Syra was in the garden yesterday…',
+        vocab: [['cepit', 'took (perfect)'], ['heri', 'yesterday'], ['in horto', 'in the garden']],
+      },
       next: 'syra_suspected',
     },
 
@@ -295,6 +320,11 @@ export default {
       latin: 'Syra? … Syra, veni huc!',
       translation: 'Syra? … Syra, come here!',
       vocab: [['veni huc', 'come here!']],
+      intro: {
+        latin: 'Syra? … Syra, veni!',
+        translation: 'Syra? … Syra, come!',
+        vocab: [['veni', 'come!']],
+      },
       choices: [
         { say: 'Syra innocens est! Pica anulum habebat.', effects: { trust: { aurelius: -1 } }, next: 'owned_up' },
         { action: 'Say nothing', next: 'syra_blamed' },
@@ -307,6 +337,11 @@ export default {
       latin: 'Pica?! … Ha! Pica mea! Bene: verum dixisti, tandem.',
       translation: 'The magpie?! … Ha! My magpie! Good: you told the truth, at last.',
       vocab: [['verum', 'the truth'], ['dixisti', 'you said, you told (perfect)'], ['tandem', 'at last']],
+      intro: {
+        latin: 'Pica?! … Ha! Pica mea! Bene: verum dixisti.',
+        translation: 'The magpie?! … Ha! My magpie! Good: you told the truth.',
+        vocab: [['verum', 'the truth'], ['dixisti', 'you said, you told (perfect)']],
+      },
       next: 'syra_thanks',
     },
 
@@ -328,6 +363,11 @@ export default {
       latin: 'Nunc: quid vis? Pete!',
       translation: 'Now: what do you want? Ask!',
       vocab: [['nunc', 'now'], ['pete', 'ask!']],
+      intro: {
+        latin: 'Nunc: quid vis? Dic!',
+        translation: 'Now: what do you want? Tell me!',
+        vocab: [['nunc', 'now'], ['dic', 'say! tell me!']],
+      },
       choices: [
         { say: 'Titum volo… et quinque fabros.', next: 'smiths' },
         { say: 'Pecuniam volo!', once: true, next: 'greedy' },
@@ -378,6 +418,11 @@ export default {
       latin: 'Ecce, epistula ad Cornelium. Signum meum habet. Cornelius eam leget.',
       translation: 'Here is a letter to Cornelius. It has my seal. Cornelius will read it.',
       vocab: [['epistula', 'letter'], ['signum', 'seal, mark'], ['eam', 'it (the letter)'], ['leget', 'will read (future)']],
+      intro: {
+        latin: 'Ecce, epistula ad Cornelium. Signum meum habet. Cornelius epistulam leget.',
+        translation: 'Here is a letter to Cornelius. It has my seal. Cornelius will read the letter.',
+        vocab: [['epistula', 'letter'], ['signum', 'seal, mark'], ['leget', 'will read (future)']],
+      },
       onEnter: { addItems: 'epistula', grantAuthorizations: 'aurelius-letter', recordChoice: { letterTone: 'plain' } },
       variants: [
         {

@@ -43,12 +43,22 @@ export default {
       latin: 'Ecce, officina fabri! Titus hic habitat. Cave: Titus semper laborat! Vale!',
       translation: 'Look, the smith’s workshop! Titus lives here. Careful: Titus is always working! Bye!',
       vocab: [['officina', 'workshop'], ['fabri', 'of the smith'], ['hic habitat', 'lives here'], ['semper', 'always'], ['laborat', 'works, is working']],
+      intro: {
+        latin: 'Ecce, officina fabri! Titus faber est. Cave: Titus semper laborat! Vale!',
+        translation: 'Look, the smith’s workshop! Titus is the smith. Careful: Titus is always working! Bye!',
+        vocab: [['officina', 'workshop'], ['fabri', 'of the smith'], ['cave', 'careful! beware!'], ['semper', 'always'], ['laborat', 'works, is working']],
+      },
       variants: [
         {
           if: { choice: { paidMarcusWith: 'stolen coins' } },
           latin: 'Ecce, officina fabri! Titus hic laborat. Nunc pares sumus! Vale!',
           translation: 'Look, the smith’s workshop! Titus works here. Now we’re even! Bye!',
           vocab: [['officina', 'workshop'], ['fabri', 'of the smith'], ['hic', 'here'], ['pares sumus', 'we are even']],
+          intro: {
+            latin: 'Ecce, officina fabri! Titus hic laborat. Nunc amici sumus? Vale!',
+            translation: 'Look, the smith’s workshop! Titus works here. Now we’re friends? Bye!',
+            vocab: [['officina', 'workshop'], ['fabri', 'of the smith'], ['hic', 'here'], ['amici sumus', 'we are friends']],
+          },
         },
       ],
       continueText: 'Step inside',
@@ -71,6 +81,11 @@ export default {
           latin: 'Adhuc laboro!',
           translation: 'I’m still working!',
           vocab: [['adhuc', 'still'], ['laboro', 'I am working']],
+          intro: {
+            latin: 'Laboro! Laboro!',
+            translation: 'I’m working! I’m working!',
+            vocab: [['laboro', 'I am working']],
+          },
         },
       ],
       choices: [
@@ -107,6 +122,11 @@ export default {
       latin: 'Adhuc hic es? … Bene. Patiens es.',
       translation: 'You’re still here? … All right. You’re patient.',
       vocab: [['adhuc', 'still'], ['hic', 'here'], ['patiens', 'patient']],
+      intro: {
+        latin: 'Semper hic es! … Bene.',
+        translation: 'You’re always here! … All right.',
+        vocab: [['semper', 'always'], ['hic', 'here'], ['bene', 'all right, good']],
+      },
       onEnter: { trust: { smith: 1 } },
       next: 'listen',
     },
@@ -117,6 +137,11 @@ export default {
       latin: 'Tam bene laboras!',
       translation: 'You work so well!',
       vocab: [['tam', 'so'], ['bene', 'well'], ['laboras', 'you work']],
+      intro: {
+        latin: 'Bene laboras!',
+        translation: 'You work well!',
+        vocab: [['bene', 'well'], ['laboras', 'you work']],
+      },
       onEnter: { trust: { smith: 1 } },
       next: 'listen',
     },
@@ -160,6 +185,11 @@ export default {
       latin: 'Mirum! Hoc metallum est durum… et leve. Quis hoc fecit?',
       translation: 'Amazing! This metal is hard… and light. Who made this?',
       vocab: [['mirum', 'amazing'], ['hoc', 'this'], ['durum', 'hard'], ['leve', 'light (not heavy)'], ['fecit', 'made (perfect tense of facere)']],
+      intro: {
+        latin: 'Mirum! Hoc metallum non cognosco. Quis hoc fecit?',
+        translation: 'Amazing! I don’t know this metal. Who made this?',
+        vocab: [['mirum', 'amazing'], ['hoc', 'this'], ['non cognosco', 'I don’t know, I don’t recognise'], ['fecit', 'made (perfect tense of facere)']],
+      },
       choices: [
         { say: 'Nescio.', next: 'where' },
         { say: 'Ego feci!', meaning: 'I made it!', strike: 'smith', next: 'lie' },
@@ -174,6 +204,11 @@ export default {
       latin: 'Tu? Ha! Manus tuae sunt mollissimae!',
       translation: 'You? Ha! Your hands are super soft!',
       vocab: [['feci', 'I made (perfect tense)'], ['manus tuae', 'your hands'], ['mollissimae', 'very soft']],
+      intro: {
+        latin: 'Tu? Ha! Faber non es!',
+        translation: 'You? Ha! You’re no smith!',
+        vocab: [['feci', 'I made (perfect tense)'], ['faber', 'smith']],
+      },
       onEnter: { trust: { smith: -1 } },
       next: 'where',
     },
@@ -185,6 +220,11 @@ export default {
       latin: 'Patria tua? Fabri ibi sunt mirabiles!',
       translation: 'Your homeland? The smiths there are amazing!',
       vocab: [['patria', 'homeland'], ['ibi', 'there'], ['mirabiles', 'amazing']],
+      intro: {
+        latin: 'Patria tua? Fabri ibi sunt optimi!',
+        translation: 'Your homeland? The smiths there are the best!',
+        vocab: [['patria', 'homeland'], ['ibi', 'there'], ['optimi', 'the best']],
+      },
       onEnter: { trust: { smith: 1 } },
       next: 'where',
     },
@@ -212,6 +252,11 @@ export default {
       latin: 'Tria milia passuum? Bene. Accuratus es.',
       translation: 'Three miles? Good. You’re precise.',
       vocab: [['tria milia passuum', 'three miles'], ['accuratus', 'precise, careful']],
+      intro: {
+        latin: 'Tria milia passuum? Optime!',
+        translation: 'Three miles? Excellent!',
+        vocab: [['tria milia passuum', 'three miles'], ['optime', 'excellent! very good!']],
+      },
       next: 'verdict',
     },
 
@@ -224,6 +269,11 @@ export default {
       latin: 'Opus magnum et difficile est! Unus faber non satis est. Quinque fabri necessarii sunt.',
       translation: 'It’s a big, difficult job! One smith isn’t enough. Five smiths are needed.',
       vocab: [['opus', 'job, work'], ['difficile', 'difficult'], ['unus', 'one'], ['satis', 'enough'], ['quinque', 'five'], ['necessarii sunt', 'are needed, are necessary']],
+      intro: {
+        latin: 'Machina magna est! Unus faber non satis est. Quinque fabri laborare debent.',
+        translation: 'The machine is big! One smith isn’t enough. Five smiths must work on it.',
+        vocab: [['magna', 'big'], ['unus', 'one'], ['satis', 'enough'], ['quinque', 'five'], ['laborare debent', 'must work']],
+      },
       next: 'cannot_leave',
     },
 
@@ -248,6 +298,11 @@ export default {
       latin: 'Aurelius, vir dives, portas aeneas vult. Ego portas facio!',
       translation: 'Aurelius, a rich man, wants bronze doors. I am making the doors!',
       vocab: [['vir dives', 'a rich man'], ['portas', 'doors (accusative plural)'], ['aeneas', 'bronze'], ['facio', 'I make']],
+      intro: {
+        latin: 'Aurelius novas portas vult. Ego portas facio!',
+        translation: 'Aurelius wants new doors. I am making the doors!',
+        vocab: [['novas', 'new'], ['portas', 'doors (accusative plural)'], ['vult', 'wants'], ['facio', 'I make']],
+      },
       onEnter: { setFlags: 'knowsAurelius' },
       choicesFrom: 'cannot_leave',
     },
@@ -257,6 +312,11 @@ export default {
       latin: 'Omnes fabri laborant: pro divitibus… aut pro imperatore.',
       translation: 'All the smiths are working: for the rich… or for the emperor.',
       vocab: [['omnes', 'all'], ['laborant', 'they work, are working'], ['pro', 'for'], ['divitibus', 'rich people'], ['imperatore', 'emperor']],
+      intro: {
+        latin: 'Omnes fabri laborant: pro senatoribus… aut pro imperatore.',
+        translation: 'All the smiths are working: for the senators… or for the emperor.',
+        vocab: [['omnes', 'all'], ['laborant', 'they work, are working'], ['pro', 'for'], ['senatoribus', 'senators'], ['imperatore', 'emperor']],
+      },
       onEnter: { setFlags: 'heardEmperorEmploysSmiths' },
       choicesFrom: 'cannot_leave',
     },
@@ -296,6 +356,11 @@ export default {
       latin: 'Villa Aurelii est in colle Esquilino.',
       translation: 'Aurelius’s house is on the Esquiline Hill.',
       vocab: [['villa', 'house'], ['Aurelii', 'of Aurelius'], ['in colle', 'on the hill']],
+      intro: {
+        latin: 'Villa Aurelii est in Esquilino.',
+        translation: 'Aurelius’s house is on the Esquiline.',
+        vocab: [['villa', 'house'], ['Aurelii', 'of Aurelius'], ['in Esquilino', 'on the Esquiline (one of Rome’s hills)']],
+      },
       variants: [{ if: { minTrust: { smith: 1 } }, next: 'token' }],
       next: 'keep_hinge',
     },
@@ -329,6 +394,11 @@ export default {
       latin: 'Fur! Foras!',
       translation: 'Thief! Out!',
       vocab: [['fur', 'thief'], ['foras', 'out!, outside!']],
+      intro: {
+        latin: 'Fur! Abi!',
+        translation: 'Thief! Go away!',
+        vocab: [['fur', 'thief'], ['abi', 'go away!']],
+      },
       next: 'thrown_out',
     },
 
@@ -353,6 +423,11 @@ export default {
       latin: 'Satis! Tace et abi! Foras!',
       translation: 'Enough! Be quiet and go away! Out!',
       vocab: [['satis', 'enough'], ['tace', 'be quiet!'], ['abi', 'go away!'], ['foras', 'out!']],
+      intro: {
+        latin: 'Satis! Tace et abi!',
+        translation: 'Enough! Be quiet and go away!',
+        vocab: [['satis', 'enough'], ['tace', 'be quiet!'], ['abi', 'go away!']],
+      },
       next: 'trough',
     },
 

@@ -110,6 +110,11 @@ export default {
       latin: 'Tacesne? Lingua tua ubi est?',
       translation: 'You say nothing? Where is your tongue?',
       vocab: [['taces', 'you are silent'], ['lingua', 'tongue, language']],
+      intro: {
+        latin: 'Tacesne? Responde!',
+        translation: 'You say nothing? Answer!',
+        vocab: [['taces', 'you are silent'], ['responde', 'answer!']],
+      },
       next: 'prophet_check',
     },
 
@@ -134,6 +139,11 @@ export default {
       latin: 'Tu es vates qui tempestatem praedixit? Cornelius mihi narravit!',
       translation: 'Are you the prophet who predicted the storm? Cornelius told me!',
       vocab: [['vates', 'prophet'], ['qui', 'who'], ['tempestatem', 'storm'], ['praedixit', 'predicted (perfect)'], ['narravit', 'told (perfect)']],
+      intro: {
+        latin: 'Tu es vates? Tu tempestatem praedixisti? Cornelius mihi narravit!',
+        translation: 'You are the prophet? You predicted the storm? Cornelius told me!',
+        vocab: [['vates', 'prophet'], ['tempestatem', 'storm'], ['praedixisti', 'you predicted (perfect)'], ['narravit', 'told (perfect)']],
+      },
       onEnter: { trust: { emperor: 1 } },
       next: 'what_happened',
     },
@@ -145,11 +155,16 @@ export default {
       latin: 'Cornelius mihi de te narravit. Fabulam tuam audire volo: quid tibi accidit?',
       translation: 'Cornelius has told me about you. I want to hear your story: what happened to you?',
       vocab: [['narravit', 'told (perfect)'], ['de te', 'about you'], ['fabulam', 'story'], ['audire', 'to hear'], ['accidit', 'happened (perfect)']],
+      intro: {
+        latin: 'Cornelius mihi de te narravit. Fabulam tuam audire volo: cur Romae es?',
+        translation: 'Cornelius has told me about you. I want to hear your story: why are you in Rome?',
+        vocab: [['narravit', 'told (perfect)'], ['de te', 'about you'], ['fabulam', 'story'], ['audire', 'to hear'], ['Romae', 'in Rome']],
+      },
       choices: [
         { say: 'Machina mea fracta est, et Romam veni.', effects: { trust: { emperor: 1 } }, next: 'tell_story' },
         // A free joke, never a strike; the running joke from Chapter I even earns favour.
         { say: 'Canis sum.', next: 'dog_finale' },
-        { say: 'Nihil accidit.', meaning: 'Nothing happened.', effects: { trust: { emperor: -1 } }, strike: 'emperor', next: 'nothing_happened' },
+        { say: 'Nihil accidit.', intro: { say: 'Nescio.', meaning: 'I don’t know.' }, meaning: 'Nothing happened.', effects: { trust: { emperor: -1 } }, strike: 'emperor', next: 'nothing_happened' },
       ],
     },
 
@@ -193,6 +208,11 @@ export default {
       latin: 'Nihil? Cur ergo hic es?',
       translation: 'Nothing? Then why are you here?',
       vocab: [['ergo', 'then, therefore']],
+      intro: {
+        latin: 'Nescis? Et cur hic es?',
+        translation: 'You don’t know? Then why are you here?',
+        vocab: [['nescis', 'you don’t know'], ['cur?', 'why?']],
+      },
       choices: [{ say: 'Machina mea fracta est, et Romam veni.', next: 'tell_story' }],
     },
 
@@ -249,7 +269,7 @@ export default {
       translation: 'Of the future? … Tell me!',
       vocab: [['futuri', 'of the future'], ['narrabo', 'I will tell (future)'], ['narra', 'tell!']],
       choices: [
-        { say: 'Nomen tuum semper memorabitur. Columna tua etiam post duo milia annorum stabit!', next: 'column' },
+        { say: 'Nomen tuum semper memorabitur. Columna tua etiam post duo milia annorum stabit!', intro: { say: 'Columna tua post duo milia annorum stabit!' }, next: 'column' },
       ],
     },
 
@@ -261,6 +281,11 @@ export default {
       latin: 'Duo milia annorum?! … Optime!',
       translation: 'Two thousand years?! … Excellent!',
       vocab: [['memorabitur', 'will be spoken of, remembered (future passive)'], ['columna', 'column'], ['post duo milia annorum', 'after two thousand years'], ['stabit', 'will stand (future)']],
+      intro: {
+        latin: 'Duo milia annorum?! … Optime!',
+        translation: 'Two thousand years?! … Excellent!',
+        vocab: [['columna', 'column'], ['post duo milia annorum', 'after two thousand years'], ['stabit', 'will stand (future)']],
+      },
       onEnter: { setFlags: 'toldColumn' },
       next: 'request',
     },
@@ -272,6 +297,11 @@ export default {
       latin: 'Donum mirum! Nemo Romae tale donum habet!',
       translation: 'A marvellous gift! Nobody in Rome has a gift like this!',
       vocab: [['donum', 'gift'], ['mirum', 'marvellous, strange'], ['Romae', 'in Rome (locative)'], ['tale', 'such, like this']],
+      intro: {
+        latin: 'Donum mirum! Nemo Romae hoc donum habet!',
+        translation: 'A marvellous gift! Nobody in Rome has this gift!',
+        vocab: [['donum', 'gift'], ['mirum', 'marvellous, strange'], ['Romae', 'in Rome (locative)'], ['nemo', 'nobody']],
+      },
       next: 'request',
     },
 
@@ -280,6 +310,11 @@ export default {
       latin: 'Gratias? Hmm. Parum est.',
       translation: 'Thanks? Hmm. That’s not much.',
       vocab: [['agam', 'I will give (future of ago)'], ['parum', 'too little']],
+      intro: {
+        latin: 'Gratias? Hmm. Non satis est.',
+        translation: 'Thanks? Hmm. That’s not enough.',
+        vocab: [['agam', 'I will give (future of ago)'], ['non satis', 'not enough']],
+      },
       next: 'request',
     },
 
@@ -307,8 +342,13 @@ export default {
       latin: 'Bene. Nunc: quid vis? Dic clare!',
       translation: 'All right. Now: what do you want? Say it clearly!',
       vocab: [['dic', 'say!'], ['clare', 'clearly']],
+      intro: {
+        latin: 'Bene. Nunc: quid vis? Dic!',
+        translation: 'All right. Now: what do you want? Say it!',
+        vocab: [['dic', 'say!']],
+      },
       choices: [
-        { say: 'Quinque fabros volo, ut machinam reficiant.', next: 'decision' },
+        { say: 'Quinque fabros volo, ut machinam reficiant.', intro: { say: 'Quinque fabros volo. Machinam reficient.' }, next: 'decision' },
         { say: 'Aurum volo!', next: 'gold' },
         { say: 'Romae manere volo.', next: 'stay' },
         // Only welcome once he likes you; before that it's a strike.
@@ -323,6 +363,11 @@ export default {
       latin: 'Quinque fabros… Cur tibi credam?',
       translation: 'Five smiths… Why should I believe you?',
       vocab: [['ut … reficiant', 'so that they may repair (subjunctive)'], ['cur?', 'why?'], ['credam', 'should I believe (subjunctive)']],
+      intro: {
+        latin: 'Quinque fabros… Cur tibi credere debeo?',
+        translation: 'Five smiths… Why should I believe you?',
+        vocab: [['reficient', 'they will repair (future)'], ['cur?', 'why?'], ['credere debeo', 'I should believe (credo + dative: tibi)']],
+      },
       variants: [
         {
           if: { minTrust: { emperor: 4 } },
@@ -332,7 +377,7 @@ export default {
       ],
       choices: [
         { say: 'Aurelius et Titus mihi credunt.', next: 'granted' },
-        { say: 'Aurelius et Titus me oderunt.', meaning: 'Aurelius and Titus hate me.', once: true, strike: 'emperor', next: 'they_hate_you' },
+        { say: 'Aurelius et Titus me oderunt.', intro: { say: 'Aurelius et Titus mihi non credunt.', meaning: 'Aurelius and Titus don’t trust me.' }, meaning: 'Aurelius and Titus hate me.', once: true, strike: 'emperor', next: 'they_hate_you' },
         // Near miss: sounds like the right answer, but the trust runs the wrong way.
         { say: 'Ego Aurelio et Tito credo.', meaning: 'I trust Aurelius and Titus.', once: true, strike: 'emperor', next: 'you_trust_them' },
       ],
@@ -346,6 +391,11 @@ export default {
       latin: 'Tu illis credis? Bene. Sed illi tibi credunt? Et cur EGO tibi credam?',
       translation: 'YOU trust THEM? Fine. But do they trust you? And why should I believe you?',
       vocab: [['tu illis credis', 'you trust them (credo + dative)'], ['illi tibi credunt', 'they trust you'], ['credam', 'should I believe (subjunctive)']],
+      intro: {
+        latin: 'Tu Aurelio et Tito credis? Bene. Sed Aurelius et Titus tibi credunt? Et cur EGO tibi credere debeo?',
+        translation: 'YOU trust Aurelius and Titus? Fine. But do Aurelius and Titus trust you? And why should I believe you?',
+        vocab: [['tu … credis', 'you trust (credo + dative)'], ['tibi credunt', 'they trust you'], ['credere debeo', 'I should believe']],
+      },
       choicesFrom: 'decision',
     },
 
@@ -358,6 +408,11 @@ export default {
       latin: 'Imperator, hic hospes verba confundit. Aurelius et Titus ei credunt. Et ego pro hospite spondeo.',
       translation: 'Emperor, this guest is mixing up the words. Aurelius and Titus trust them. And I vouch for the guest.',
       vocab: [['verba confundit', 'is mixing up the words'], ['ei credunt', 'trust him/her (credo + dative)'], ['pro hospite', 'for the guest'], ['spondeo', 'I vouch, I guarantee']],
+      intro: {
+        latin: 'Imperator, Aurelius et Titus hospiti credunt. Et ego hospiti credo.',
+        translation: 'Emperor, Aurelius and Titus trust the guest. And I trust the guest.',
+        vocab: [['hospiti', 'the guest (dative: credo + dative)'], ['credunt', 'they trust'], ['credo', 'I trust']],
+      },
       next: 'granted',
     },
 
@@ -375,6 +430,11 @@ export default {
           latin: 'Bene! Quinque fabros tibi dabo… immo decem! Ite, machinam reficite! Titus vos ducet!',
           translation: 'Good! I will give you five smiths… no, ten! Go, repair the machine! Titus will lead you!',
           vocab: [['dabo', 'I will give (future)'], ['immo', 'no, rather'], ['ite', 'go! (to several people)'], ['reficite', 'repair! (to several people)'], ['vos ducet', 'will lead you all (future)']],
+          intro: {
+            latin: 'Bene! Quinque fabros tibi dabo… minime, decem! Ite, machinam reficite! Titus vos ducet!',
+            translation: 'Good! I will give you five smiths… no, ten! Go, repair the machine! Titus will lead you!',
+            vocab: [['dabo', 'I will give (future)'], ['minime', 'no'], ['ite', 'go! (to several people)'], ['reficite', 'repair! (to several people)'], ['vos ducet', 'will lead you all (future)']],
+          },
           onEnter: { setFlags: 'tenSmiths' },
         },
       ],
@@ -391,6 +451,11 @@ export default {
       latin: 'Te oderunt?! Et cur ego tibi credam?',
       translation: 'They hate you?! Then why should I believe you?',
       vocab: [['oderunt', 'they hate'], ['credam', 'should I believe (subjunctive)']],
+      intro: {
+        latin: 'Tibi non credunt?! Et cur ego tibi credere debeo?',
+        translation: 'They don’t trust you?! Then why should I believe you?',
+        vocab: [['tibi non credunt', 'they don’t trust you'], ['credere debeo', 'I should believe']],
+      },
       choicesFrom: 'decision',
     },
 
